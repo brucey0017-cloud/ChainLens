@@ -249,14 +249,9 @@
   </div>
 
   <script>
-    const demoData = {
-      updatedAt: "2026-03-13 11:50 GMT+8",
-      stats: {
-        signals24h: 100,
-        topChain: "Solana",
-        avgRisk: 47,
-        criticalAlerts: 12
-      },
+    const fallbackData = {
+      updatedAt: "demo snapshot",
+      stats: { signals24h: 100, topChain: "Solana", avgRisk: 47, criticalAlerts: 12 },
       audits: [
         { token: "XPD", chain: "solana", level: "high", score: 55, finding: "Dev has 7 historical rug pulls" },
         { token: "SOS", chain: "solana", level: "medium", score: 44, finding: "Top 10 holders concentration above threshold" },
@@ -273,38 +268,47 @@
       ]
     };
 
-    document.getElementById('updatedAt').textContent = `Last update: ${demoData.updatedAt}`;
-    document.getElementById('signalsCount').textContent = demoData.stats.signals24h;
-    document.getElementById('topChain').textContent = demoData.stats.topChain;
-    document.getElementById('avgRisk').textContent = demoData.stats.avgRisk;
-    document.getElementById('criticalAlerts').textContent = demoData.stats.criticalAlerts;
+    function render(data) {
+      document.getElementById('updatedAt').textContent = `Last update: ${data.updatedAt}`;
+      document.getElementById('signalsCount').textContent = data.stats.signals24h;
+      document.getElementById('topChain').textContent = data.stats.topChain;
+      document.getElementById('avgRisk').textContent = data.stats.avgRisk;
+      document.getElementById('criticalAlerts').textContent = data.stats.criticalAlerts;
 
-    const auditRows = document.getElementById('auditRows');
-    demoData.audits.forEach(a => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${a.token}</td>
-        <td>${a.chain}</td>
-        <td><span class="risk ${a.level}">${a.level.toUpperCase()}</span></td>
-        <td>${a.score}</td>
-        <td>${a.finding}</td>
-      `;
-      auditRows.appendChild(tr);
-    });
+      const auditRows = document.getElementById('auditRows');
+      auditRows.innerHTML = '';
+      (data.audits || []).forEach(a => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${a.token}</td>
+          <td>${a.chain}</td>
+          <td><span class="risk ${a.level}">${a.level.toUpperCase()}</span></td>
+          <td>${a.score}</td>
+          <td>${a.finding}</td>
+        `;
+        auditRows.appendChild(tr);
+      });
 
-    const signalRows = document.getElementById('signalRows');
-    demoData.signals.forEach(s => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${s.t}</td>
-        <td>${s.chain}</td>
-        <td>${s.type}</td>
-        <td>${s.token}</td>
-        <td>$${s.usd}</td>
-        <td>${s.wallets}</td>
-      `;
-      signalRows.appendChild(tr);
-    });
+      const signalRows = document.getElementById('signalRows');
+      signalRows.innerHTML = '';
+      (data.signals || []).forEach(s => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${s.t}</td>
+          <td>${s.chain}</td>
+          <td>${s.type}</td>
+          <td>${s.token}</td>
+          <td>$${s.usd}</td>
+          <td>${s.wallets}</td>
+        `;
+        signalRows.appendChild(tr);
+      });
+    }
+
+    fetch('./data/latest.json', { cache: 'no-store' })
+      .then(r => r.ok ? r.json() : Promise.reject(new Error('No live JSON yet')))
+      .then(render)
+      .catch(() => render(fallbackData));
   </script>
 </body>
 </html>

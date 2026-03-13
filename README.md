@@ -183,6 +183,32 @@ Performs comprehensive due diligence across 8 risk dimensions:
 - **Language**: Python 3
 - **Output**: Markdown reports
 
+## Live Dashboard (Free)
+
+A static dashboard is now included and deployable for free via GitHub Pages:
+
+- URL (after Pages build): `https://brucey0017-cloud.github.io/ChainLens/`
+- Source: `docs/index.html`
+- Live data JSON: `docs/data/latest.json`
+- Auto-refresh: `.github/workflows/dashboard-data.yml` (every 30 minutes)
+
+## Real-time / Push Plans (Free-first)
+
+1. **GitHub Pages + GitHub Actions (already implemented)**
+   - Cost: **$0**
+   - User action: only GitHub account verification
+   - Best for: low-maintenance public dashboard + periodic updates
+
+2. **Cloudflare Pages + Worker + Telegram Bot push**
+   - Cost: **$0** (free tier)
+   - User action: one-time Cloudflare login + Telegram bot token
+   - Best for: near real-time push alerts and API proxying
+
+3. **Railway/Render free backend + SSE/WebSocket + static frontend**
+   - Cost: **$0** (free tier limits)
+   - User action: one-time platform auth
+   - Best for: full realtime UX, more moving parts
+
 ## Roadmap
 
 - [x] Signal monitoring (Smart Money / KOL / Whale)
