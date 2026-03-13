@@ -1,11 +1,175 @@
 {
-  "updatedAt": "2026-03-13 03:48 UTC",
+  "updatedAt": "2026-03-13 03:51 UTC",
   "stats": {
-    "signals24h": 0,
+    "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 0,
-    "criticalAlerts": 0
+    "avgRisk": 53.3,
+    "criticalAlerts": 2
   },
-  "audits": [],
-  "signals": []
+  "audits": [
+    {
+      "token": "XPD",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 24.0158%"
+    },
+    {
+      "token": "SOS",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 11.8264%"
+    },
+    {
+      "token": "WID",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 25.8712%"
+    },
+    {
+      "token": "LOS",
+      "chain": "solana",
+      "level": "high",
+      "score": 72,
+      "finding": "Top10 holders: 69.1679%"
+    },
+    {
+      "token": "LOS",
+      "chain": "solana",
+      "level": "high",
+      "score": 72,
+      "finding": "Top10 holders: 69.1679%"
+    },
+    {
+      "token": "HeavyPulp",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 23.1995%"
+    }
+  ],
+  "signals": [
+    {
+      "t": "02:19 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "XPD",
+      "usd": "1,281",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 24.0158%"
+    },
+    {
+      "t": "01:56 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "SOS",
+      "usd": "1,184",
+      "wallets": 3,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 11.8264%"
+    },
+    {
+      "t": "01:15 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "WID",
+      "usd": "1,244",
+      "wallets": 7,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 25.8712%"
+    },
+    {
+      "t": "00:27 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "LOS",
+      "usd": "2,981",
+      "wallets": 5,
+      "riskLevel": "high",
+      "finding": "Top10 holders: 69.1679%"
+    },
+    {
+      "t": "00:27 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "LOS",
+      "usd": "1,531",
+      "wallets": 3,
+      "riskLevel": "high",
+      "finding": "Top10 holders: 69.1679%"
+    },
+    {
+      "t": "23:33 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "HeavyPulp",
+      "usd": "1,085",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 23.1995%"
+    },
+    {
+      "t": "23:18 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Distorted",
+      "usd": "1,296",
+      "wallets": 3,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 14.2496%"
+    },
+    {
+      "t": "22:43 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "90S",
+      "usd": "1,623",
+      "wallets": 6,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.4898%"
+    },
+    {
+      "t": "22:19 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Hachimi",
+      "usd": "2,384",
+      "wallets": 4,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 25.1181%"
+    },
+    {
+      "t": "22:10 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Hachimi",
+      "usd": "1,374",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 25.1181%"
+    },
+    {
+      "t": "21:51 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Snorp",
+      "usd": "1,054",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 27.9738%"
+    },
+    {
+      "t": "21:17 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "shitcoin",
+      "usd": "3,279",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 21.5385%"
+    }
+  ]
 }

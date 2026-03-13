@@ -6,6 +6,7 @@ It is designed to run locally or in GitHub Actions.
 """
 
 import json
+import shlex
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -15,7 +16,10 @@ OUT = ROOT / "docs" / "data" / "latest.json"
 
 
 def run_json(cmd: str):
-    p = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    try:
+        p = subprocess.run(shlex.split(cmd), capture_output=True, text=True, timeout=20)
+    except Exception:
+        return None
     if p.returncode != 0:
         return None
     try:
@@ -71,6 +75,12 @@ def main():
             "riskLevel": level,
             "finding": f"Top10 holders: {token.get('top10HolderPercent', 'N/A')}%"
         })
+
+    # If live APIs are unavailable in CI (e.g., missing credentials/region limits),
+    # keep the previous snapshot instead of overwriting with empty data.
+    if not merged and OUT.exists():
+        print("No fresh signals; keeping previous dashboard snapshot")
+        return
 
     audits = []
     for row in merged[:6]:
