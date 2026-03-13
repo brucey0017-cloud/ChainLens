@@ -64,6 +64,9 @@ def run_cmd(args: list[str], timeout_sec: int = 40) -> dict[str, Any] | None:
             check=True,
             timeout=timeout_sec,
         )
+    except FileNotFoundError:
+        print("onchainos CLI not found in PATH.", file=sys.stderr)
+        return None
     except subprocess.TimeoutExpired:
         print(f"Command timed out after {timeout_sec}s: {' '.join(args)}", file=sys.stderr)
         return None
