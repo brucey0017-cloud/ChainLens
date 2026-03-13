@@ -16,34 +16,31 @@ ChainLens is an AI onchain intelligence agent built on OKX OnchainOS. It monitor
 Onchain Data Analysis / 链上数据分析
 
 ### Project X (Twitter) Handle / 项目 X 账号
-`@________` (official project account required)
+@Bruce017177023
 
 ### Personal Telegram Handle / 个人 Telegram
-`@________`
+@bruce6801
 
 ### Team members & X accounts / 核心成员与X账户
-- Commander (agent) — implementation lead
-- Maker (agent) — code audit lead
-- Human operator: @________
+- @Bruce017177023 — project lead
+- @Slerfsol — team member
 
 ### Project X Post URL / 项目官方 X 推文链接
-`https://x.com/________/status/________`
+(需要发布一条展示 ChainLens 的推文，然后填入链接)
 
 ### Additional Demo Screenshots or Video URL / 额外演示
 - Demo script: https://github.com/brucey0017-cloud/ChainLens/blob/main/DEMO.md
 - Dashboard: https://brucey0017-cloud.github.io/ChainLens/
-- Repo screenshots/video: `________`
+- Repo: https://github.com/brucey0017-cloud/ChainLens
 
 ### GitHub Repository URL / 仓库链接
 https://github.com/brucey0017-cloud/ChainLens
 
 ### X Layer Transaction Hash / X Layer 交易 Hash
-`0x________`
-
-(Need at least one mainnet tx hash proving real onchain activity)
+0x114679b4a56c7e52a029a0366984d26af4ed1d0fbf50ef42cb969784ff9eca9a
 
 ### X Layer Contract or Wallet Address / 合约或钱包地址
-`0x________`
+0xbbbc2ed45f2e51d804316593ecf2412a9abfa
 
 ### OnchainOS capabilities used / 使用的功能
 - [x] Market API
@@ -67,9 +64,9 @@ ChainLens uses a structured agent prompt: detect user intent (signal discovery v
 
 ## Submission Checklist
 
-- [ ] Official project X account set
-- [ ] Official X demo post published
-- [ ] Valid X Layer mainnet tx hash added
-- [ ] Wallet/contract address added
-- [ ] Demo video or screenshot URL added
-- [ ] Form submitted
+- [x] Official project X account set (@Bruce017177023)
+- [ ] Official X demo post published (need to post a tweet showcasing ChainLens)
+- [x] Valid X Layer mainnet tx hash added
+- [x] Wallet address added
+- [x] Demo dashboard URL added
+- [ ] Form submitted (Google Form requires browser)
