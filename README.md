@@ -57,16 +57,15 @@ User Request
 ### Prerequisites
 
 - [OpenClaw](https://github.com/openclaw/openclaw) installed and configured
-- OKX OnchainOS CLI (`onchainos`) installed:
-  ```bash
-  curl -sSL https://raw.githubusercontent.com/okx/onchainos-skills/main/install.sh | sh
-  ```
+- OKX OnchainOS CLI (`onchainos`) installed and available in `PATH`.
+  - Prefer official installation docs/managed package channels.
+  - If using a script installer, review script contents before execution.
 
 ### Installation
 
 1. Clone this repo:
    ```bash
-   git clone https://github.com/user/ChainLens.git
+   git clone https://github.com/brucey0017-cloud/ChainLens.git
    ```
 
 2. Copy skill to OpenClaw skills directory:
@@ -103,10 +102,8 @@ Monitors three types of on-chain buy signals:
 
 ### Filters
 
-- `--wallet-type`: Filter by signal source (1, 2, 3 or combinations)
-- `--min-amount-usd`: Minimum transaction amount
-- `--min-market-cap-usd`: Minimum token market cap
-- `--min-liquidity-usd`: Minimum token liquidity
+- `wallet_type` (positional, optional): signal source (`1`, `2`, `3`)
+- `min_amount_usd` (positional, optional): minimum transaction amount in USD
 
 ## Token Auditor
 

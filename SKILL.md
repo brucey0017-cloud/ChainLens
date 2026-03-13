@@ -1,66 +1,74 @@
 ---
 name: chainlens
-description: "ChainLens - An AI-powered on-chain intelligence agent built on OKX OnchainOS. It aggregates market signals, performs deep token due diligence (DD), assesses risks, and generates actionable research reports. Use this skill to identify alpha opportunities, audit new tokens, and get comprehensive market insights. Perfect for participating in the X Layer AI Hackathon."
+description: "ChainLens - AI-powered on-chain intelligence agent on OKX OnchainOS. Aggregates market signals, audits tokens with multi-factor risk scoring, and outputs actionable research reports."
 license: Apache-2.0
 metadata:
-  author: Commander
-  version: "0.1.0"
-  homepage: "https://github.com/CommanderAI/ChainLens" # Placeholder
+  author: Bruce Team
+  version: "0.1.1"
+  homepage: "https://github.com/brucey0017-cloud/ChainLens"
 ---
 
 # ChainLens - AI On-Chain Intelligence Agent
 
-ChainLens is designed to provide comprehensive on-chain intelligence by leveraging OKX OnchainOS capabilities.
+ChainLens provides on-chain intelligence using OKX OnchainOS APIs.
+
+## Security Rules (must-follow)
+
+- Never store or print private keys, seed phrases, or exchange/API secrets.
+- Never paste credentials into command args, code, logs, issues, or reports.
+- Use environment variables for credentials when needed.
+- Redact sensitive fields before sharing outputs.
 
 ## Commands
 
-### 1. `chainlens monitor-signals <chain>`
+### 1) `chainlens monitor-signals <chain> [wallet_type] [min_amount_usd]`
 
 Monitors Smart Money, KOL, and Whale buy signals on a specified chain.
 
-**Parameters:**
-- `<chain>`: Required. The blockchain name (e.g., `solana`, `ethereum`, `xlayer`).
+- `chain`: required, e.g. `solana`, `ethereum`, `xlayer`
+- `wallet_type`: optional (`1`=Smart Money, `2`=KOL, `3`=Whale)
+- `min_amount_usd`: optional minimum signal amount
 
-**Example Usage:**
-`chainlens monitor-signals solana`
+Example:
 
-### 2. `chainlens audit-token <address> --chain <chain>`
-
-Performs a deep due diligence audit on a given token contract address, including price info, holder distribution, and developer reputation.
-
-**Parameters:**
-- `<address>`: Required. The token contract address.
-- `--chain`: Required. The blockchain name.
-
-**Example Usage:**
-`chainlens audit-token 0x123...abc --chain ethereum`
-
-## Operation Flow
-
-### Intent Mapping
-
-- To discover alpha signals: `chainlens monitor-signals`
-- To research a specific token: `chainlens audit-token`
-
-### Data Flow
-
-- `monitor-signals` calls `okx-dex-market`'s `signal-list` command.
-- `audit-token` calls `okx-dex-token`'s `price-info`, `holders` and `okx-dex-market`'s `memepump-token-dev-info`.
-
-## Pre-flight Checks (inherited from OnchainOS skills)
-
-Ensure `onchainos` CLI is installed and up-to-date.
 ```bash
-which onchainos || curl -sSL https://raw.githubusercontent.com/okx/onchainos-skills/main/install.sh | sh
-curl -sSL https://raw.githubusercontent.com/okx/onchainos-skills/main/install.sh | sh # Check for updates
+chainlens monitor-signals solana 1 5000
 ```
 
-## Internal Workflow for `audit-token`
+### 2) `chainlens audit-token <address> --chain <chain>`
 
-1.  **Basic Info & Market Data**: Calls `onchainos token price-info <address> --chain <chain>`
-2.  **Holder Distribution**: Calls `onchainos token holders <address> --chain <chain>`
-3.  **Developer Reputation**: Calls `onchainos market memepump-token-dev-info <address> --chain <chain>`
-4.  **AI Analysis (future)**: Integrates with Claude Code to analyze the collected data and generate a risk score/recommendation.
+Performs deep DD audit for a token address, including market data, holder concentration, dev history, and bundle/sniper signals.
 
----
-This `SKILL.md` is designed to be self-explanatory and guide the AI in utilizing its capabilities effectively.
+Example:
+
+```bash
+chainlens audit-token 0x123...abc --chain ethereum
+```
+
+## Data Flow
+
+- `monitor-signals` -> `onchainos market signal-list`
+- `audit-token` ->
+  - `onchainos token price-info`
+  - `onchainos token holders`
+  - `onchainos market memepump-token-dev-info`
+  - `onchainos market memepump-token-details`
+  - `onchainos market memepump-token-bundle-info`
+
+## Pre-flight Checks
+
+Ensure `onchainos` CLI is installed and reachable before execution.
+
+```bash
+which onchainos
+onchainos --version
+```
+
+## Audit Output
+
+`audit-token` generates:
+
+- Composite risk score (0-100)
+- Risk factor breakdown
+- Recommendation tier (low/medium/high/extreme)
+- Markdown report file for handoff
