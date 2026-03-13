@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChainLens — Onchain Intelligence Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070a0f;
+      --panel: #0f1722;
+      --line: #233041;
+      --text: #dde6f5;
+      --muted: #8ba0bf;
+      --good: #22c55e;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --cyan: #0ff;
+      --pink: #ff3ea5;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(0,255,255,.07), transparent 35%),
+        radial-gradient(circle at 80% 0%, rgba(255,62,165,.08), transparent 40%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .scanline::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.015),
+        rgba(255,255,255,.015) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      mix-blend-mode: soft-light;
+      z-index: 9999;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .brand {
+      font-family: 'Archivo Black', sans-serif;
+      letter-spacing: .6px;
+      font-size: clamp(28px, 5vw, 54px);
+      line-height: .95;
+      text-transform: uppercase;
+      margin: 0;
+      text-shadow: 0 0 16px rgba(0,255,255,.25);
+    }
+
+    .sub {
+      margin-top: 8px;
+      color: var(--muted);
+      max-width: 780px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(15,23,34,.6);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(20,30,44,.75), rgba(12,18,28,.75));
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .8px; }
+    .value { font-family: 'Archivo Black', sans-serif; font-size: 28px; margin-top: 8px; }
+    .mono { font-size: 12px; color: var(--muted); }
+
+    .risk {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      border: 1px solid;
+    }
+    .risk.low { color: var(--good); border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.1); }
+    .risk.medium { color: var(--warn); border-color: rgba(245,158,11,.4); background: rgba(245,158,11,.1); }
+    .risk.high { color: var(--bad); border-color: rgba(239,68,68,.4); background: rgba(239,68,68,.1); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    th, td {
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      padding: 10px 6px;
+    }
+
+    th { color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .8px; }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .btn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    .small { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+    @media (max-width: 900px) {
+      .span-3, .span-4, .span-6, .span-8 { grid-column: span 12; }
+      .header { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="scanline">
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1 class="brand">ChainLens</h1>
+        <div class="sub">AI-native onchain intelligence built on OKX OnchainOS. Detect smart money flow, audit token risk, and compress hours of DD into seconds.</div>
+      </div>
+      <div class="chip" id="updatedAt">Last update: --</div>
+    </header>
+
+    <section class="grid">
+      <article class="card span-3">
+        <div class="label">Signals (24h)</div>
+        <div class="value" id="signalsCount">--</div>
+        <div class="mono">Smart Money / KOL / Whale triggers</div>
+      </article>
+      <article class="card span-3">
+        <div class="label">Top chain</div>
+        <div class="value" id="topChain">--</div>
+        <div class="mono">Highest active signal flow</div>
+      </article>
+      <article class="card span-3">
+        <div class="label">Avg risk score</div>
+        <div class="value" id="avgRisk">--</div>
+        <div class="mono">Across latest audited tokens</div>
+      </article>
+      <article class="card span-3">
+        <div class="label">Critical alerts</div>
+        <div class="value" id="criticalAlerts">--</div>
+        <div class="mono">Rug history / phishing / bundlers</div>
+      </article>
+
+      <article class="card span-8">
+        <div class="label">Latest audited tokens</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Chain</th>
+              <th>Risk</th>
+              <th>Score</th>
+              <th>Key finding</th>
+            </tr>
+          </thead>
+          <tbody id="auditRows"></tbody>
+        </table>
+      </article>
+
+      <article class="card span-4">
+        <div class="label">What this dashboard does</div>
+        <p class="small">• Monitor live onchain signals from Smart Money / KOL / Whales<br>
+        • Run token due diligence with 8-dimension risk model<br>
+        • Flag rug pull history, holder concentration, and suspicious wallet behavior<br>
+        • Generate structured reports for fast decision loops</p>
+        <div class="actions">
+          <a class="btn" href="https://github.com/brucey0017-cloud/ChainLens" target="_blank" rel="noreferrer">View GitHub</a>
+          <a class="btn" href="https://github.com/brucey0017-cloud/ChainLens/blob/main/DEMO.md" target="_blank" rel="noreferrer">Demo script</a>
+          <a class="btn" href="https://github.com/brucey0017-cloud/ChainLens/blob/main/README.md" target="_blank" rel="noreferrer">Docs</a>
+        </div>
+      </article>
+
+      <article class="card span-12">
+        <div class="label">Signal stream snapshot</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Chain</th>
+              <th>Type</th>
+              <th>Token</th>
+              <th>Amount (USD)</th>
+              <th>Trigger wallets</th>
+            </tr>
+          </thead>
+          <tbody id="signalRows"></tbody>
+        </table>
+      </article>
+    </section>
+  </div>
+
+  <script>
+    const demoData = {
+      updatedAt: "2026-03-13 11:50 GMT+8",
+      stats: {
+        signals24h: 100,
+        topChain: "Solana",
+        avgRisk: 47,
+        criticalAlerts: 12
+      },
+      audits: [
+        { token: "XPD", chain: "solana", level: "high", score: 55, finding: "Dev has 7 historical rug pulls" },
+        { token: "SOS", chain: "solana", level: "medium", score: 44, finding: "Top 10 holders concentration above threshold" },
+        { token: "WID", chain: "solana", level: "high", score: 61, finding: "Low liquidity + bundler activity" },
+        { token: "LOS", chain: "solana", level: "high", score: 72, finding: "Top 10 holders control >70%" }
+      ],
+      signals: [
+        { t: "11:19", chain: "solana", type: "Smart Money", token: "XPD", usd: "1,281", wallets: 3 },
+        { t: "10:56", chain: "solana", type: "Smart Money", token: "SOS", usd: "1,184", wallets: 3 },
+        { t: "10:15", chain: "solana", type: "Smart Money", token: "WID", usd: "1,243", wallets: 7 },
+        { t: "09:27", chain: "solana", type: "Smart Money", token: "LOS", usd: "2,981", wallets: 5 },
+        { t: "09:01", chain: "solana", type: "KOL", token: "HeavyPulp", usd: "5,422", wallets: 2 },
+        { t: "08:33", chain: "xlayer", type: "Whale", token: "OKB", usd: "14,900", wallets: 1 }
+      ]
+    };
+
+    document.getElementById('updatedAt').textContent = `Last update: ${demoData.updatedAt}`;
+    document.getElementById('signalsCount').textContent = demoData.stats.signals24h;
+    document.getElementById('topChain').textContent = demoData.stats.topChain;
+    document.getElementById('avgRisk').textContent = demoData.stats.avgRisk;
+    document.getElementById('criticalAlerts').textContent = demoData.stats.criticalAlerts;
+
+    const auditRows = document.getElementById('auditRows');
+    demoData.audits.forEach(a => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${a.token}</td>
+        <td>${a.chain}</td>
+        <td><span class="risk ${a.level}">${a.level.toUpperCase()}</span></td>
+        <td>${a.score}</td>
+        <td>${a.finding}</td>
+      `;
+      auditRows.appendChild(tr);
+    });
+
+    const signalRows = document.getElementById('signalRows');
+    demoData.signals.forEach(s => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${s.t}</td>
+        <td>${s.chain}</td>
+        <td>${s.type}</td>
+        <td>${s.token}</td>
+        <td>$${s.usd}</td>
+        <td>${s.wallets}</td>
+      `;
+      signalRows.appendChild(tr);
+    });
+  </script>
+</body>
+</html>
