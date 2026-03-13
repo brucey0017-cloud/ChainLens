@@ -67,8 +67,8 @@ def calculate_risk_score(price_data, holders_data, dev_data, details_data, bundl
     factors = []
 
     # --- Price & Market Analysis ---
-    if price_data and 'data' in price_data:
-        pd = price_data['data']
+    if price_data and 'data' in price_data and len(price_data['data']) > 0:
+        pd = price_data['data'][0]  # Take first element
         liquidity = float(pd.get('liquidity', 0) or 0)
         
         if liquidity < RISK_THRESHOLDS["liquidity_low"]:
@@ -89,6 +89,8 @@ def calculate_risk_score(price_data, holders_data, dev_data, details_data, bundl
     # --- Holder Concentration ---
     if details_data and 'data' in details_data:
         dd = details_data['data']
+        if isinstance(dd, list) and len(dd) > 0:
+            dd = dd[0]
         tags = dd.get('tags', {})
         
         top10 = float(tags.get('top10HoldingsPercent', 0) or 0)
@@ -127,6 +129,8 @@ def calculate_risk_score(price_data, holders_data, dev_data, details_data, bundl
     # --- Developer Reputation ---
     if dev_data and 'data' in dev_data:
         dv = dev_data['data']
+        if isinstance(dv, list) and len(dv) > 0:
+            dv = dv[0]
         launched = dv.get('devLaunchedInfo', {})
         
         rug_pulls = int(launched.get('rugPullCount', 0) or 0)
@@ -148,6 +152,8 @@ def calculate_risk_score(price_data, holders_data, dev_data, details_data, bundl
     # --- Bundle/Sniper Analysis ---
     if bundle_data and 'data' in bundle_data:
         bd = bundle_data['data']
+        if isinstance(bd, list) and len(bd) > 0:
+            bd = bd[0]
         bundler_pct = float(bd.get('bundlerAthPercent', 0) or 0)
         total_bundlers = int(bd.get('totalBundlers', 0) or 0)
         
@@ -191,8 +197,8 @@ def generate_report(address, chain, price_data, holders_data, dev_data, details_
     report.append("")
 
     # Basic Info
-    if price_data and 'data' in price_data:
-        pd = price_data['data']
+    if price_data and 'data' in price_data and len(price_data['data']) > 0:
+        pd = price_data['data'][0]
         report.append("📋 BASIC INFORMATION")
         report.append(f"   Address: {address}")
         report.append(f"   Chain: {chain}")
@@ -207,6 +213,8 @@ def generate_report(address, chain, price_data, holders_data, dev_data, details_
     # Token Details (meme pump)
     if details_data and 'data' in details_data:
         dd = details_data['data']
+        if isinstance(dd, list) and len(dd) > 0:
+            dd = dd[0]
         report.append("🏷️ TOKEN DETAILS")
         report.append(f"   Name: {dd.get('name', 'N/A')} ({dd.get('symbol', 'N/A')})")
         report.append(f"   Creator: {dd.get('creatorAddress', 'N/A')}")
@@ -244,6 +252,8 @@ def generate_report(address, chain, price_data, holders_data, dev_data, details_
     # Developer Info
     if dev_data and 'data' in dev_data:
         dv = dev_data['data']
+        if isinstance(dv, list) and len(dv) > 0:
+            dv = dv[0]
         launched = dv.get('devLaunchedInfo', {})
         holding = dv.get('devHoldingInfo', {})
         
