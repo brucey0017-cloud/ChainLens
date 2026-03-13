@@ -40,7 +40,7 @@ https://github.com/brucey0017-cloud/ChainLens
 0x114679b4a56c7e52a029a0366984d26af4ed1d0fbf50ef42cb969784ff9eca9a
 
 ### X Layer Contract or Wallet Address / 合约或钱包地址
-0xbbbc2ed45f2e51d804316593ecf2412a9abfa
+0xf40bbbc2ed45f2e51d804316593ecf2412a9abfa
 
 ### OnchainOS capabilities used / 使用的功能
 - [x] Market API
