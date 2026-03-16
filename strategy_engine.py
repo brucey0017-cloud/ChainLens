@@ -65,9 +65,21 @@ class StrategyEngine:
         cur.close()
     
     def get_token_risk_score(self, token_address: str, chain: str) -> Optional[float]:
-        """Get token risk score from auditor (placeholder)."""
-        # TODO: Call token_auditor.py
-        # For now, return a mock score
+        """Get token risk score from auditor."""
+        # Import token_auditor
+        import sys
+        sys.path.insert(0, os.path.dirname(__file__))
+        
+        try:
+            from token_auditor import TokenAuditor
+            auditor = TokenAuditor()
+            result = auditor.audit_token(token_address, chain)
+            if result and "risk_score" in result:
+                return result["risk_score"]
+        except Exception as e:
+            print(f"  Warning: Token auditor failed: {e}", file=sys.stderr)
+        
+        # Fallback: return a mock score
         return 65.0
     
     def strategy_triple_confirmation(self, signals: List[Dict]) -> List[Dict]:

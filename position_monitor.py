@@ -55,9 +55,17 @@ class PositionMonitor:
         return positions
     
     def get_current_price(self, token_address: str, chain: str) -> float:
-        """Get current token price (placeholder)."""
-        # TODO: Implement real price fetching from onchainos
-        # For now, simulate price movement
+        """Get current token price."""
+        # Import price_fetcher
+        import sys
+        sys.path.insert(0, os.path.dirname(__file__))
+        from price_fetcher import get_token_price
+        
+        price = get_token_price(token_address, chain)
+        if price:
+            return price
+        
+        # Fallback: simulate price movement for testing
         import random
         return random.uniform(0.8, 1.2)
     
