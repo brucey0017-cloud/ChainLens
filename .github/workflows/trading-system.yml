@@ -1,0 +1,82 @@
+name: ChainLens Trading System
+
+on:
+  schedule:
+    # Signal monitoring: Every 15 minutes
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Task to run'
+        required: true
+        default: 'monitor'
+        type: choice
+        options:
+          - monitor
+          - backtest
+          - report
+
+jobs:
+  trading-system:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: chainlens
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install psycopg2-binary python-dotenv web3
+      
+      - name: Initialize database
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          psql $DATABASE_URL -f schema.sql
+      
+      - name: Run signal monitor
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          python3 signal_monitor.py
+      
+      - name: Run strategy engine
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          python3 strategy_engine.py
+      
+      - name: Run position monitor
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          python3 position_monitor.py
+      
+      - name: Generate daily report
+        if: github.event.inputs.task == 'report'
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          python3 daily_report.py
