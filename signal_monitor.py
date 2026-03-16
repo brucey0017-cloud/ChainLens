@@ -33,9 +33,9 @@ def run_json(args: List[str]) -> Optional[Dict]:
         return None
 
 
-def fetch_smart_money_signals(chain: str = "solana", min_amount: int = 1000) -> List[Dict]:
+def fetch_smart_money_signals(chain: str = "solana", min_amount: int = 100) -> List[Dict]:
     """Fetch Smart Money signals from onchainos."""
-    print(f"Fetching Smart Money signals for {chain}...")
+    print(f"Fetching Smart Money signals for {chain} (min ${min_amount})...")
     
     data = run_json([
         "onchainos", "market", "signal-list",
@@ -74,6 +74,20 @@ def calculate_signal_score(signal: Dict) -> float:
         amount_score = min(signal.get("amount_usd", 0) / 10000, 1.0) * 0.4
         wallet_score = min(signal.get("wallet_count", 0) / 10, 1.0) * 0.3
         # TODO: Add historical win rate when available
+        base_score = 0.3
+        return amount_score + wallet_score + base_score
+    
+    elif source == "kol":
+        # KOL scoring (higher base score due to influence)
+        amount_score = min(signal.get("amount_usd", 0) / 5000, 1.0) * 0.3
+        wallet_score = min(signal.get("wallet_count", 0) / 5, 1.0) * 0.3
+        base_score = 0.4  # KOLs have higher influence
+        return amount_score + wallet_score + base_score
+    
+    elif source == "whale":
+        # Whale scoring (focus on amount)
+        amount_score = min(signal.get("amount_usd", 0) / 50000, 1.0) * 0.5
+        wallet_score = min(signal.get("wallet_count", 0) / 3, 1.0) * 0.2
         base_score = 0.3
         return amount_score + wallet_score + base_score
     
@@ -118,15 +132,85 @@ def store_signals(signals: List[Dict]):
     print(f"Stored {len(signals)} signals in database")
 
 
+def fetch_kol_signals(chain: str = "solana") -> List[Dict]:
+    """Fetch KOL signals from onchainos."""
+    print(f"Fetching KOL signals for {chain}...")
+    
+    data = run_json([
+        "onchainos", "market", "signal-list",
+        chain,
+        "--wallet-type", "2"  # KOL
+    ])
+    
+    if not data or not data.get("ok"):
+        return []
+    
+    signals = []
+    for item in data.get("data", []):
+        for sig in item.get("signalList", []):
+            signals.append({
+                "source": "kol",
+                "token_symbol": sig.get("tokenSymbol", ""),
+                "token_address": sig.get("tokenContractAddress", ""),
+                "chain": chain,
+                "amount_usd": float(sig.get("amountUsd", 0)),
+                "wallet_count": int(sig.get("triggerWalletCount", 0)),
+                "timestamp": sig.get("time", ""),
+                "raw_data": sig
+            })
+    
+    print(f"  Found {len(signals)} KOL signals")
+    return signals
+
+
+def fetch_whale_signals(chain: str = "solana") -> List[Dict]:
+    """Fetch Whale signals from onchainos."""
+    print(f"Fetching Whale signals for {chain}...")
+    
+    data = run_json([
+        "onchainos", "market", "signal-list",
+        chain,
+        "--wallet-type", "3"  # Whale
+    ])
+    
+    if not data or not data.get("ok"):
+        return []
+    
+    signals = []
+    for item in data.get("data", []):
+        for sig in item.get("signalList", []):
+            signals.append({
+                "source": "whale",
+                "token_symbol": sig.get("tokenSymbol", ""),
+                "token_address": sig.get("tokenContractAddress", ""),
+                "chain": chain,
+                "amount_usd": float(sig.get("amountUsd", 0)),
+                "wallet_count": int(sig.get("triggerWalletCount", 0)),
+                "timestamp": sig.get("time", ""),
+                "raw_data": sig
+            })
+    
+    print(f"  Found {len(signals)} Whale signals")
+    return signals
+
+
 def main():
     print(f"=== Signal Monitor - {datetime.now().isoformat()} ===")
     
     # Fetch signals from all sources
     all_signals = []
     
-    # 1. Smart Money signals
-    sm_signals = fetch_smart_money_signals("solana", min_amount=1000)
+    # 1. Smart Money signals (lowered threshold to $100)
+    sm_signals = fetch_smart_money_signals("solana", min_amount=100)
     all_signals.extend(sm_signals)
+    
+    # 2. KOL signals
+    kol_signals = fetch_kol_signals("solana")
+    all_signals.extend(kol_signals)
+    
+    # 3. Whale signals
+    whale_signals = fetch_whale_signals("solana")
+    all_signals.extend(whale_signals)
     
     # TODO: Add Twitter signals (opentwitter skill)
     # TODO: Add News signals (opennews skill)
@@ -135,6 +219,9 @@ def main():
     if all_signals:
         store_signals(all_signals)
         print(f"\nTotal signals collected: {len(all_signals)}")
+        print(f"  Smart Money: {len(sm_signals)}")
+        print(f"  KOL: {len(kol_signals)}")
+        print(f"  Whale: {len(whale_signals)}")
     else:
         print("\nNo signals collected")
 
