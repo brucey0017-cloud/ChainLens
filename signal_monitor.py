@@ -200,17 +200,25 @@ def main():
     # Fetch signals from all sources
     all_signals = []
     
-    # 1. Smart Money signals (lowered threshold to $100)
-    sm_signals = fetch_smart_money_signals("solana", min_amount=100)
-    all_signals.extend(sm_signals)
+    # 1. Solana signals
+    sm_signals_sol = fetch_smart_money_signals("solana", min_amount=100)
+    all_signals.extend(sm_signals_sol)
     
-    # 2. KOL signals
-    kol_signals = fetch_kol_signals("solana")
-    all_signals.extend(kol_signals)
+    kol_signals_sol = fetch_kol_signals("solana")
+    all_signals.extend(kol_signals_sol)
     
-    # 3. Whale signals
-    whale_signals = fetch_whale_signals("solana")
-    all_signals.extend(whale_signals)
+    whale_signals_sol = fetch_whale_signals("solana")
+    all_signals.extend(whale_signals_sol)
+    
+    # 2. X Layer signals
+    sm_signals_xlayer = fetch_smart_money_signals("xlayer", min_amount=100)
+    all_signals.extend(sm_signals_xlayer)
+    
+    kol_signals_xlayer = fetch_kol_signals("xlayer")
+    all_signals.extend(kol_signals_xlayer)
+    
+    whale_signals_xlayer = fetch_whale_signals("xlayer")
+    all_signals.extend(whale_signals_xlayer)
     
     # TODO: Add Twitter signals (opentwitter skill)
     # TODO: Add News signals (opennews skill)
@@ -219,9 +227,8 @@ def main():
     if all_signals:
         store_signals(all_signals)
         print(f"\nTotal signals collected: {len(all_signals)}")
-        print(f"  Smart Money: {len(sm_signals)}")
-        print(f"  KOL: {len(kol_signals)}")
-        print(f"  Whale: {len(whale_signals)}")
+        print(f"  Solana - Smart Money: {len(sm_signals_sol)}, KOL: {len(kol_signals_sol)}, Whale: {len(whale_signals_sol)}")
+        print(f"  X Layer - Smart Money: {len(sm_signals_xlayer)}, KOL: {len(kol_signals_xlayer)}, Whale: {len(whale_signals_xlayer)}")
     else:
         print("\nNo signals collected")
 
