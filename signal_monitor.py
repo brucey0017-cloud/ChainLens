@@ -38,8 +38,8 @@ def fetch_smart_money_signals(chain: str = "solana", min_amount: int = 100) -> L
     print(f"Fetching Smart Money signals for {chain} (min ${min_amount})...")
     
     data = run_json([
-        "onchainos", "market", "signal-list",
-        chain,
+        "onchainos", "signal", "list",
+        "--chain", chain,
         "--wallet-type", "1",  # Smart Money
         "--min-amount-usd", str(min_amount)
     ])
@@ -48,18 +48,18 @@ def fetch_smart_money_signals(chain: str = "solana", min_amount: int = 100) -> L
         return []
     
     signals = []
-    for item in data.get("data", []):
-        for sig in item.get("signalList", []):
-            signals.append({
-                "source": "smart_money",
-                "token_symbol": sig.get("tokenSymbol", ""),
-                "token_address": sig.get("tokenContractAddress", ""),
-                "chain": chain,
-                "amount_usd": float(sig.get("amountUsd", 0)),
-                "wallet_count": int(sig.get("triggerWalletCount", 0)),
-                "timestamp": sig.get("time", ""),
-                "raw_data": sig
-            })
+    for sig in data.get("data", []):
+        token = sig.get("token", {})
+        signals.append({
+            "source": "smart_money",
+            "token_symbol": token.get("symbol", ""),
+            "token_address": token.get("tokenAddress", ""),
+            "chain": chain,
+            "amount_usd": float(sig.get("amountUsd", 0)),
+            "wallet_count": int(sig.get("triggerWalletCount", 0)),
+            "timestamp": sig.get("timestamp", ""),
+            "raw_data": sig
+        })
     
     print(f"  Found {len(signals)} Smart Money signals")
     return signals
@@ -137,8 +137,8 @@ def fetch_kol_signals(chain: str = "solana") -> List[Dict]:
     print(f"Fetching KOL signals for {chain}...")
     
     data = run_json([
-        "onchainos", "market", "signal-list",
-        chain,
+        "onchainos", "signal", "list",
+        "--chain", chain,
         "--wallet-type", "2"  # KOL
     ])
     
@@ -146,18 +146,18 @@ def fetch_kol_signals(chain: str = "solana") -> List[Dict]:
         return []
     
     signals = []
-    for item in data.get("data", []):
-        for sig in item.get("signalList", []):
-            signals.append({
-                "source": "kol",
-                "token_symbol": sig.get("tokenSymbol", ""),
-                "token_address": sig.get("tokenContractAddress", ""),
-                "chain": chain,
-                "amount_usd": float(sig.get("amountUsd", 0)),
-                "wallet_count": int(sig.get("triggerWalletCount", 0)),
-                "timestamp": sig.get("time", ""),
-                "raw_data": sig
-            })
+    for sig in data.get("data", []):
+        token = sig.get("token", {})
+        signals.append({
+            "source": "kol",
+            "token_symbol": token.get("symbol", ""),
+            "token_address": token.get("tokenAddress", ""),
+            "chain": chain,
+            "amount_usd": float(sig.get("amountUsd", 0)),
+            "wallet_count": int(sig.get("triggerWalletCount", 0)),
+            "timestamp": sig.get("timestamp", ""),
+            "raw_data": sig
+        })
     
     print(f"  Found {len(signals)} KOL signals")
     return signals
@@ -168,8 +168,8 @@ def fetch_whale_signals(chain: str = "solana") -> List[Dict]:
     print(f"Fetching Whale signals for {chain}...")
     
     data = run_json([
-        "onchainos", "market", "signal-list",
-        chain,
+        "onchainos", "signal", "list",
+        "--chain", chain,
         "--wallet-type", "3"  # Whale
     ])
     
@@ -177,18 +177,18 @@ def fetch_whale_signals(chain: str = "solana") -> List[Dict]:
         return []
     
     signals = []
-    for item in data.get("data", []):
-        for sig in item.get("signalList", []):
-            signals.append({
-                "source": "whale",
-                "token_symbol": sig.get("tokenSymbol", ""),
-                "token_address": sig.get("tokenContractAddress", ""),
-                "chain": chain,
-                "amount_usd": float(sig.get("amountUsd", 0)),
-                "wallet_count": int(sig.get("triggerWalletCount", 0)),
-                "timestamp": sig.get("time", ""),
-                "raw_data": sig
-            })
+    for sig in data.get("data", []):
+        token = sig.get("token", {})
+        signals.append({
+            "source": "whale",
+            "token_symbol": token.get("symbol", ""),
+            "token_address": token.get("tokenAddress", ""),
+            "chain": chain,
+            "amount_usd": float(sig.get("amountUsd", 0)),
+            "wallet_count": int(sig.get("triggerWalletCount", 0)),
+            "timestamp": sig.get("timestamp", ""),
+            "raw_data": sig
+        })
     
     print(f"  Found {len(signals)} Whale signals")
     return signals
