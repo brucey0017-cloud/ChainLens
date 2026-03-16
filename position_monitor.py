@@ -79,7 +79,17 @@ class PositionMonitor:
     
     def check_time_stop(self, position: Dict, max_hours: int = 72) -> bool:
         """Check if position should be closed due to time limit."""
-        age = datetime.now() - position["opened_at"]
+        from datetime import timezone
+        
+        # Ensure both datetimes are timezone-aware
+        now = datetime.now(timezone.utc)
+        opened_at = position["opened_at"]
+        
+        # If opened_at is timezone-naive, assume UTC
+        if opened_at.tzinfo is None:
+            opened_at = opened_at.replace(tzinfo=timezone.utc)
+        
+        age = now - opened_at
         return age > timedelta(hours=max_hours)
     
     def close_position(self, position: Dict, exit_price: float, reason: str):
