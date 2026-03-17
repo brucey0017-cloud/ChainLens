@@ -31,11 +31,11 @@ def get_token_price(token_address: str, chain: str) -> Optional[float]:
     Returns:
         Price in USD, or None if failed
     """
-    # Use onchainos market token-price
+    # Use onchainos market price
     data = run_json([
-        "onchainos", "market", "token-price",
-        chain,
-        "--token", token_address
+        "onchainos", "market", "price",
+        "--address", token_address,
+        "--chain", chain
     ])
     
     if not data or not data.get("ok"):
@@ -61,9 +61,9 @@ def get_token_info(token_address: str, chain: str) -> Optional[dict]:
         Dict with token info, or None if failed
     """
     data = run_json([
-        "onchainos", "market", "token-price",
-        chain,
-        "--token", token_address
+        "onchainos", "market", "price",
+        "--address", token_address,
+        "--chain", chain
     ])
     
     if not data or not data.get("ok"):
