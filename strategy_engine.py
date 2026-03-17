@@ -82,6 +82,25 @@ class StrategyEngine:
         # Fallback: return a mock score
         return 65.0
     
+    def get_token_market_info(self, token_address: str, chain: str) -> Optional[Dict]:
+        """Get token market cap and liquidity from price_fetcher."""
+        try:
+            sys.path.insert(0, os.path.dirname(__file__))
+            from price_fetcher import get_token_info
+            
+            info = get_token_info(token_address, chain)
+            if info:
+                return {
+                    "market_cap": info.get("market_cap", 0),
+                    "liquidity": info.get("liquidity", 0),
+                    "volume_24h": info.get("volume_24h", 0),
+                    "price_change_24h": info.get("price_change_24h", 0)
+                }
+        except Exception as e:
+            print(f"  Warning: Failed to get market info: {e}", file=sys.stderr)
+        
+        return None
+    
     def strategy_triple_confirmation(self, signals: List[Dict]) -> List[Dict]:
         """
         Strategy 1: Triple Confirmation
@@ -103,6 +122,24 @@ class StrategyEngine:
             if token_addr.endswith("pump"):
                 print(f"  Skipped {sigs[0]['token_symbol']}: pump.fun token (high risk)", file=sys.stderr)
                 continue
+            
+            # FILTER 2: Check market cap and liquidity
+            token_info = self.get_token_market_info(token_addr, chain)
+            if token_info:
+                market_cap = token_info.get("market_cap", 0)
+                liquidity = token_info.get("liquidity", 0)
+                
+                # Minimum thresholds
+                MIN_MARKET_CAP = 100_000  # $100K
+                MIN_LIQUIDITY = 50_000    # $50K
+                
+                if market_cap < MIN_MARKET_CAP:
+                    print(f"  Skipped {sigs[0]['token_symbol']}: market cap ${market_cap:,.0f} < ${MIN_MARKET_CAP:,.0f}", file=sys.stderr)
+                    continue
+                
+                if liquidity < MIN_LIQUIDITY:
+                    print(f"  Skipped {sigs[0]['token_symbol']}: liquidity ${liquidity:,.0f} < ${MIN_LIQUIDITY:,.0f}", file=sys.stderr)
+                    continue
             
             sources = set(s["source"] for s in sigs)
             
