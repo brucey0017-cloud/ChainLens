@@ -99,6 +99,11 @@ class StrategyEngine:
         
         # Check for triple confirmation
         for (token_addr, chain), sigs in token_signals.items():
+            # FILTER 1: Skip pump.fun tokens (extremely high risk)
+            if token_addr.endswith("pump"):
+                print(f"  Skipped {sigs[0]['token_symbol']}: pump.fun token (high risk)", file=sys.stderr)
+                continue
+            
             sources = set(s["source"] for s in sigs)
             
             # Need at least smart_money signal
