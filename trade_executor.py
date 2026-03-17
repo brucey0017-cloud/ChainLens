@@ -2,15 +2,26 @@
 """ChainLens Trade Executor - Sign and broadcast swap transactions.
 
 Reads WALLET_PRIVATE_KEY from .env. Never logs or prints the key.
+Enhanced with security validations and EIP-1559 support.
 """
 
 import json
+import logging
 import os
-import shlex
 import subprocess
 import sys
-from eth_account import Account
+import urllib.request
+from typing import Any, Optional
+
 from dotenv import load_dotenv
+from eth_account import Account
+
+# Configure logging (never log sensitive data)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+logger = logging.getLogger(__name__)
 
 ENV_PATH = os.path.join(os.path.dirname(__file__), ".env")
 load_dotenv(ENV_PATH)
@@ -18,24 +29,64 @@ load_dotenv(ENV_PATH)
 PRIVATE_KEY = os.getenv("WALLET_PRIVATE_KEY", "")
 WALLET_ADDR = os.getenv("WALLET_ADDRESS", "")
 
+# EIP-1559 chain IDs (these chains support maxFeePerGas/maxPriorityFeePerGas)
+EIP1559_CHAINS = {1, 56, 137, 42161, 8453, 10, 43114, 196}
 
-def run_json(args: list[str]):
+
+def validate_private_key(key: str, expected_addr: str) -> tuple[bool, str]:
+    """
+    Validate private key format and check if it matches the expected address.
+    
+    Returns:
+        (is_valid, error_message)
+    """
+    if not key:
+        return False, "Private key is empty"
+    
+    if not key.startswith("0x"):
+        return False, "Private key must start with '0x'"
+    
+    if len(key) != 66:
+        return False, f"Private key must be 66 characters (0x + 64 hex), got {len(key)}"
+    
+    try:
+        # Validate hex characters
+        int(key[2:], 16)
+    except ValueError:
+        return False, "Private key contains invalid hex characters"
+    
+    # Verify address match
+    if expected_addr:
+        try:
+            acct = Account.from_key(key)
+            if acct.address.lower() != expected_addr.lower():
+                return False, f"Private key does not match address. Expected: {expected_addr}, Got: {acct.address}"
+        except Exception as e:
+            # Catch all exceptions to prevent stack trace leakage
+            return False, "Invalid private key (signing verification failed)"
+    
+    return True, ""
+
+
+def run_json(args: list[str]) -> Optional[dict[str, Any]]:
+    """Execute command and return JSON output."""
     try:
         p = subprocess.run(args, capture_output=True, text=True, timeout=30)
     except Exception as e:
-        print(f"Error running command: {e}", file=sys.stderr)
+        logger.error(f"Error running command: {e}")
         return None
     if p.returncode != 0:
-        print(f"Command failed: {p.stderr[:200]}", file=sys.stderr)
+        logger.error(f"Command failed: {p.stderr[:200]}")
         return None
     try:
         return json.loads(p.stdout)
     except Exception:
-        print(f"JSON parse error: {p.stdout[:200]}", file=sys.stderr)
+        logger.error(f"JSON parse error: {p.stdout[:200]}")
         return None
 
 
-def get_quote(chain, from_token, to_token, amount):
+def get_quote(chain: str, from_token: str, to_token: str, amount: str) -> Optional[dict]:
+    """Get swap quote from onchainos."""
     data = run_json([
         "onchainos", "swap", "quote",
         "--chain", chain,
@@ -48,7 +99,8 @@ def get_quote(chain, from_token, to_token, amount):
     return data["data"][0] if data.get("data") else None
 
 
-def get_swap_tx(chain, from_token, to_token, amount, slippage="1"):
+def get_swap_tx(chain: str, from_token: str, to_token: str, amount: str, slippage: str = "1") -> Optional[dict]:
+    """Get swap transaction data from onchainos."""
     data = run_json([
         "onchainos", "swap", "swap",
         "--chain", chain,
@@ -63,7 +115,8 @@ def get_swap_tx(chain, from_token, to_token, amount, slippage="1"):
     return data["data"][0] if data.get("data") else None
 
 
-def simulate_tx(chain, to_addr, data_hex, value="0"):
+def simulate_tx(chain: str, to_addr: str, data_hex: str, value: str = "0") -> Optional[dict]:
+    """Simulate transaction before signing."""
     result = run_json([
         "onchainos", "gateway", "simulate",
         "--chain", chain,
@@ -77,52 +130,8 @@ def simulate_tx(chain, to_addr, data_hex, value="0"):
     return result["data"][0] if result.get("data") else None
 
 
-def sign_and_broadcast(chain, tx_data):
-    """Sign a transaction locally and broadcast via onchainos gateway."""
-    tx = tx_data.get("tx", {})
-
-    # Build the transaction dict for signing
-    raw_tx = {
-        "to": tx["to"],
-        "value": int(tx.get("value", "0")),
-        "data": tx["data"],
-        "gas": int(tx.get("gas", "500000")),
-        "gasPrice": int(tx.get("gasPrice", "100000000")),
-        "chainId": _chain_id(chain),
-    }
-
-    # Get nonce
-    # For now we rely on web3 provider or estimate
-    # Use a simple RPC call to get nonce
-    nonce = _get_nonce(chain)
-    if nonce is None:
-        print("Failed to get nonce", file=sys.stderr)
-        return None
-    raw_tx["nonce"] = nonce
-
-    # Sign
-    acct = Account.from_key(PRIVATE_KEY)
-    signed = acct.sign_transaction(raw_tx)
-    signed_hex = signed.raw_transaction.hex()
-    if not signed_hex.startswith("0x"):
-        signed_hex = "0x" + signed_hex
-
-    print(f"Transaction signed. Broadcasting...")
-
-    # Broadcast
-    result = run_json([
-        "onchainos", "gateway", "broadcast",
-        "--chain", chain,
-        "--signed-tx", signed_hex,
-        "--address", WALLET_ADDR
-    ])
-    if not result or not result.get("ok"):
-        print(f"Broadcast failed: {result}", file=sys.stderr)
-        return None
-    return result["data"][0] if result.get("data") else result.get("data")
-
-
 def _chain_id(chain: str) -> int:
+    """Get chain ID for network."""
     mapping = {
         "xlayer": 196,
         "ethereum": 1,
@@ -136,7 +145,7 @@ def _chain_id(chain: str) -> int:
     return mapping.get(chain.lower(), 196)
 
 
-def _get_nonce(chain: str) -> int | None:
+def _get_nonce(chain: str) -> Optional[int]:
     """Get nonce via a public RPC endpoint."""
     rpc_urls = {
         "xlayer": "https://rpc.xlayer.tech",
@@ -150,7 +159,6 @@ def _get_nonce(chain: str) -> int | None:
     if not rpc:
         return 0
 
-    import urllib.request
     payload = json.dumps({
         "jsonrpc": "2.0",
         "method": "eth_getTransactionCount",
@@ -164,11 +172,173 @@ def _get_nonce(chain: str) -> int | None:
             data = json.loads(resp.read())
             return int(data["result"], 16)
     except Exception as e:
-        print(f"Nonce fetch error: {e}", file=sys.stderr)
+        logger.error(f"Nonce fetch error: {e}")
         return None
 
 
+def _get_gas_price(chain: str) -> tuple[Optional[int], Optional[int], Optional[int]]:
+    """
+    Get gas price for transaction.
+    
+    Returns:
+        (gas_price, max_fee_per_gas, max_priority_fee_per_gas)
+        For legacy: (gas_price, None, None)
+        For EIP-1559: (None, max_fee, priority_fee)
+    """
+    chain_id = _chain_id(chain)
+    
+    if chain_id not in EIP1559_CHAINS:
+        # Legacy gas price
+        rpc_urls = {
+            "xlayer": "https://rpc.xlayer.tech",
+            "ethereum": "https://eth.llamarpc.com",
+            "bsc": "https://bsc-dataseed.binance.org",
+            "polygon": "https://polygon-rpc.com",
+        }
+        rpc = rpc_urls.get(chain.lower())
+        if rpc:
+            try:
+                payload = json.dumps({
+                    "jsonrpc": "2.0",
+                    "method": "eth_gasPrice",
+                    "params": [],
+                    "id": 1
+                }).encode()
+                req = urllib.request.Request(rpc, data=payload, headers={"Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    data = json.loads(resp.read())
+                    return int(data["result"], 16), None, None
+            except Exception as e:
+                logger.warning(f"Gas price fetch failed: {e}")
+        return 100_000_000, None, None  # Default 0.1 gwei
+    
+    # EIP-1559 gas estimation
+    rpc_urls = {
+        1: "https://eth.llamarpc.com",
+        137: "https://polygon-rpc.com",
+        42161: "https://arb1.arbitrum.io/rpc",
+        8453: "https://mainnet.base.org",
+        10: "https://mainnet.optimism.io",
+        196: "https://rpc.xlayer.tech",
+    }
+    rpc = rpc_urls.get(chain_id)
+    if not rpc:
+        return None, 2_000_000_000, 1_000_000_000  # Default 2 gwei max, 1 gwei priority
+    
+    try:
+        payload = json.dumps({
+            "jsonrpc": "2.0",
+            "method": "eth_getBlockByNumber",
+            "params": ["latest", False],
+            "id": 1
+        }).encode()
+        req = urllib.request.Request(rpc, data=payload, headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read())
+            base_fee = int(data["result"]["baseFeePerGas"], 16)
+            # Max fee = base fee * 2 + priority fee (2 gwei)
+            max_priority = 1_000_000_000  # 1 gwei
+            max_fee = base_fee * 2 + max_priority
+            return None, max_fee, max_priority
+    except Exception as e:
+        logger.warning(f"EIP-1559 gas estimation failed: {e}")
+        return None, 2_000_000_000, 1_000_000_000
+
+
+def sign_and_broadcast(chain: str, tx_data: dict) -> Optional[dict]:
+    """
+    Sign a transaction locally and broadcast via onchainos gateway.
+    Supports both legacy and EIP-1559 transactions.
+    """
+    if not PRIVATE_KEY:
+        logger.error("Private key not configured")
+        return None
+    
+    # Validate private key before use
+    is_valid, error = validate_private_key(PRIVATE_KEY, WALLET_ADDR)
+    if not is_valid:
+        logger.error(f"Private key validation failed: {error}")
+        return None
+    
+    tx = tx_data.get("tx", {})
+    chain_id = _chain_id(chain)
+    
+    # Get nonce
+    nonce = _get_nonce(chain)
+    if nonce is None:
+        logger.error("Failed to get nonce")
+        return None
+    
+    # Get gas prices
+    gas_price, max_fee, max_priority = _get_gas_price(chain)
+    
+    # Build transaction
+    raw_tx: dict[str, Any] = {
+        "to": tx["to"],
+        "value": int(tx.get("value", "0")),
+        "data": tx["data"],
+        "gas": int(tx.get("gas", "500000")),
+        "chainId": chain_id,
+        "nonce": nonce,
+    }
+    
+    if chain_id in EIP1559_CHAINS and max_fee and max_priority:
+        # EIP-1559 transaction
+        raw_tx["maxFeePerGas"] = max_fee
+        raw_tx["maxPriorityFeePerGas"] = max_priority
+        raw_tx["type"] = 0x2  # EIP-1559
+        logger.info(f"Using EIP-1559: maxFee={max_fee}, priority={max_priority}")
+    elif gas_price:
+        # Legacy transaction
+        raw_tx["gasPrice"] = gas_price
+        logger.info(f"Using legacy gasPrice: {gas_price}")
+    else:
+        # Fallback
+        raw_tx["gasPrice"] = int(tx.get("gasPrice", "100000000"))
+        logger.warning("Using fallback gas price from API")
+    
+    # Sign with exception handling
+    try:
+        acct = Account.from_key(PRIVATE_KEY)
+        signed = acct.sign_transaction(raw_tx)
+    except Exception as e:
+        # Never log the actual error details for key-related operations
+        logger.error("Transaction signing failed (key error)")
+        return None
+    
+    signed_hex = signed.raw_transaction.hex()
+    if not signed_hex.startswith("0x"):
+        signed_hex = "0x" + signed_hex
+    
+    logger.info("Transaction signed. Broadcasting...")
+    
+    # Broadcast
+    result = run_json([
+        "onchainos", "gateway", "broadcast",
+        "--chain", chain,
+        "--signed-tx", signed_hex,
+        "--address", WALLET_ADDR
+    ])
+    
+    if not result or not result.get("ok"):
+        logger.error(f"Broadcast failed")
+        return None
+    
+    return result["data"][0] if result.get("data") else result.get("data")
+
+
 def main():
+    """Main entry point for trade executor CLI."""
+    # Validate credentials before any operation
+    if PRIVATE_KEY:
+        is_valid, error = validate_private_key(PRIVATE_KEY, WALLET_ADDR)
+        if not is_valid:
+            logger.error(f"Invalid credentials: {error}")
+            sys.exit(1)
+        logger.info("Credentials validated successfully")
+    else:
+        logger.warning("No private key configured - only quote/simulate available")
+    
     if len(sys.argv) < 2:
         print("Usage:")
         print("  trade_executor.py quote <chain> <from> <to> <amount>")
@@ -197,6 +367,10 @@ def main():
             print("Quote failed")
 
     elif cmd == "swap":
+        if not PRIVATE_KEY:
+            logger.error("Private key required for swap operations")
+            sys.exit(1)
+        
         chain = sys.argv[2]
         from_t, to_t, amount = sys.argv[3], sys.argv[4], sys.argv[5]
         slippage = sys.argv[6] if len(sys.argv) > 6 else "1"
