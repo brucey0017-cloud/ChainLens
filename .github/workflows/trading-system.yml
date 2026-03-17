@@ -60,7 +60,14 @@ jobs:
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
         run: |
-          psql $DATABASE_URL -f schema.sql
+          # Check if database already has tables
+          if psql $DATABASE_URL -c '\dt' | grep -q 'trades'; then
+            echo "Database exists, running migration..."
+            python3 migrate_db.py
+          else
+            echo "Fresh database, creating schema..."
+            psql $DATABASE_URL -f schema.sql
+          fi
       
       - name: Run signal monitor
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
