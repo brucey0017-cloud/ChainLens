@@ -76,6 +76,20 @@ jobs:
         run: |
           python3 signal_monitor.py
       
+      - name: Run Twitter KOL monitor
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          python3 twitter_kol_monitor.py || echo "Twitter monitor failed, continuing..."
+      
+      - name: Run news monitor
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          python3 news_monitor.py || echo "News monitor failed, continuing..."
+      
       - name: Run strategy engine
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         env:
