@@ -77,7 +77,7 @@ class DashboardGenerator:
         cur.execute("""
             SELECT 
                 token_symbol, strategy, entry_price, exit_price,
-                pnl_pct, status, exit_reason, opened_at, closed_at
+                pnl_pct, status, notes, opened_at, closed_at
             FROM trades
             ORDER BY opened_at DESC
             LIMIT %s
@@ -92,7 +92,7 @@ class DashboardGenerator:
                 "exit_price": float(row[3]) if row[3] else 0,
                 "pnl_pct": float(row[4]) if row[4] else 0,
                 "status": row[5],
-                "exit_reason": row[6],
+                "notes": row[6],
                 "opened_at": row[7].isoformat() if row[7] else "",
                 "closed_at": row[8].isoformat() if row[8] else ""
             })
@@ -396,7 +396,7 @@ class DashboardGenerator:
                         <td>${trade['exit_price']:.6f}</td>
                         <td><span class="badge {pnl_class}">{trade['pnl_pct']:+.2f}%</span></td>
                         <td><span class="badge {status_class}">{trade['status']}</span></td>
-                        <td>{trade['exit_reason'] or '-'}</td>
+                        <td>{trade['notes'] or '-'}</td>
                         <td class="timestamp">{trade['opened_at'][:16]}</td>
                     </tr>
 """

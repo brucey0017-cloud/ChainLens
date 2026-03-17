@@ -32,7 +32,7 @@ class AutoBacktester:
             SELECT 
                 id, strategy, token_symbol, token_address, chain,
                 entry_price, exit_price, quantity, position_size_pct,
-                opened_at, closed_at, pnl_pct, exit_reason
+                opened_at, closed_at, pnl_pct, notes
             FROM trades
             WHERE status = 'closed'
               AND opened_at >= %s
@@ -54,7 +54,7 @@ class AutoBacktester:
                 "opened_at": row[9],
                 "closed_at": row[10],
                 "pnl_pct": float(row[11]) if row[11] else 0,
-                "exit_reason": row[12]
+                "notes": row[12]
             })
         
         cur.close()
@@ -170,12 +170,12 @@ class AutoBacktester:
         
         return results
     
-    def analyze_by_exit_reason(self, trades: List[Dict]) -> Dict[str, Dict]:
+    def analyze_by_notes(self, trades: List[Dict]) -> Dict[str, Dict]:
         """Break down metrics by exit reason."""
         reasons = {}
         
         for trade in trades:
-            reason = trade["exit_reason"] or "unknown"
+            reason = trade["notes"] or "unknown"
             if reason not in reasons:
                 reasons[reason] = []
             reasons[reason].append(trade)
@@ -257,7 +257,7 @@ class AutoBacktester:
         print()
         
         # By exit reason
-        by_reason = self.analyze_by_exit_reason(trades)
+        by_reason = self.analyze_by_notes(trades)
         
         print("PERFORMANCE BY EXIT REASON")
         print(f"{'─'*70}")
