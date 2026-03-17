@@ -90,6 +90,27 @@ jobs:
         run: |
           python3 news_monitor.py || echo "News monitor failed, continuing..."
       
+      - name: Run on-chain monitor
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          python3 onchain_monitor.py || echo "On-chain monitor failed, continuing..."
+      
+      - name: Run technical indicators
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          python3 technical_indicators.py || echo "Technical indicators failed, continuing..."
+      
+      - name: Calculate multi-signal scores
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: |
+          python3 multi_signal_scorer.py || echo "Multi-signal scorer failed, continuing..."
+      
       - name: Run strategy engine
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         env:
