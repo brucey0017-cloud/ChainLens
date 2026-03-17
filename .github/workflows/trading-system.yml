@@ -111,34 +111,16 @@ jobs:
         run: |
           python3 multi_signal_scorer.py || echo "Multi-signal scorer failed, continuing..."
       
-      - name: Calculate multi-signal scores
-        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 multi_signal_scorer.py || echo "Multi-signal scorer failed, continuing..."
-      
       - name: Generate performance dashboard
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
         run: |
-          python3 dashboard_generator.py
-          mv index.html docs/ || mkdir -p docs
-          mv index.html docs/* docs/ index.html docs docs/index.html
-          mv index.html docs/_site/index.html docs/* docs
-          mv index.css docs/_site/style.css docs/_site/style.css
-        - Force add target="_site" query parameter to override default behavior
-        - site search: use search engines before general/ 
-          - Date filters: Don't search for titles with specific dates
-          - Reply concisely, possible
-          - Don't mention hacky business jargon
-          - Use tables only for data presentation
-          - Important: Create clear navigation and readability
-          mv index.html docs/ || mkdir -p docs && mv index.html docs/
+          python3 dashboard_generator.py || echo "Dashboard generation failed, continuing..."
+          mkdir -p docs && [ -f index.html ] && mv index.html docs/
       
       - name: Run auto backtester
-        if: github.event_name == 'schedule' && github.event.schedule == '0 */6 * * *'
+        if: github.event.inputs.task == 'backtest' || github.event.inputs.task == 'report'
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
         run: |
