@@ -27,11 +27,11 @@ class DashboardGenerator:
         cur = self.conn.cursor()
         
         # Total signals
-        cur.execute("SELECT COUNT(*) FROM signals WHERE created_at >= NOW() - INTERVAL '24 hours'")
+        cur.execute("SELECT COUNT(*) FROM signals WHERE timestamp >= NOW() - INTERVAL '24 hours'")
         signals_24h = cur.fetchone()[0]
         
         # Total trades
-        cur.execute("SELECT COUNT(*) FROM trades WHERE entry_time >= NOW() - INTERVAL '24 hours'")
+        cur.execute("SELECT COUNT(*) FROM trades WHERE opened_at >= NOW() - INTERVAL '24 hours'")
         trades_24h = cur.fetchone()[0]
         
         # Open positions
@@ -45,7 +45,7 @@ class DashboardGenerator:
                 COUNT(*) as total
             FROM trades
             WHERE status = 'closed'
-              AND entry_time >= NOW() - INTERVAL '7 days'
+              AND opened_at >= NOW() - INTERVAL '7 days'
         """)
         row = cur.fetchone()
         wins, total = row[0] or 0, row[1] or 0
@@ -56,7 +56,7 @@ class DashboardGenerator:
             SELECT COALESCE(SUM(pnl_pct), 0)
             FROM trades
             WHERE status = 'closed'
-              AND entry_time >= NOW() - INTERVAL '7 days'
+              AND opened_at >= NOW() - INTERVAL '7 days'
         """)
         total_pnl = cur.fetchone()[0]
         
@@ -77,9 +77,9 @@ class DashboardGenerator:
         cur.execute("""
             SELECT 
                 token_symbol, strategy, entry_price, exit_price,
-                pnl_pct, status, exit_reason, entry_time, exit_time
+                pnl_pct, status, exit_reason, opened_at, closed_at
             FROM trades
-            ORDER BY entry_time DESC
+            ORDER BY opened_at DESC
             LIMIT %s
         """, (limit,))
         
@@ -93,8 +93,8 @@ class DashboardGenerator:
                 "pnl_pct": float(row[4]) if row[4] else 0,
                 "status": row[5],
                 "exit_reason": row[6],
-                "entry_time": row[7].isoformat() if row[7] else "",
-                "exit_time": row[8].isoformat() if row[8] else ""
+                "opened_at": row[7].isoformat() if row[7] else "",
+                "closed_at": row[8].isoformat() if row[8] else ""
             })
         
         cur.close()
@@ -107,7 +107,7 @@ class DashboardGenerator:
         cur.execute("""
             SELECT source, COUNT(*)
             FROM signals
-            WHERE created_at >= NOW() - INTERVAL '24 hours'
+            WHERE timestamp >= NOW() - INTERVAL '24 hours'
             GROUP BY source
         """)
         
@@ -397,7 +397,7 @@ class DashboardGenerator:
                         <td><span class="badge {pnl_class}">{trade['pnl_pct']:+.2f}%</span></td>
                         <td><span class="badge {status_class}">{trade['status']}</span></td>
                         <td>{trade['exit_reason'] or '-'}</td>
-                        <td class="timestamp">{trade['entry_time'][:16]}</td>
+                        <td class="timestamp">{trade['opened_at'][:16]}</td>
                     </tr>
 """
         

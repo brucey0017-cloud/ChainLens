@@ -32,11 +32,11 @@ class AutoBacktester:
             SELECT 
                 id, strategy, token_symbol, token_address, chain,
                 entry_price, exit_price, quantity, position_size_pct,
-                entry_time, exit_time, pnl_pct, exit_reason
+                opened_at, closed_at, pnl_pct, exit_reason
             FROM trades
             WHERE status = 'closed'
-              AND entry_time >= %s
-            ORDER BY entry_time ASC
+              AND opened_at >= %s
+            ORDER BY opened_at ASC
         """, (since,))
         
         trades = []
@@ -51,8 +51,8 @@ class AutoBacktester:
                 "exit_price": float(row[6]) if row[6] else 0,
                 "quantity": float(row[7]) if row[7] else 0,
                 "position_size_pct": float(row[8]) if row[8] else 0,
-                "entry_time": row[9],
-                "exit_time": row[10],
+                "opened_at": row[9],
+                "closed_at": row[10],
                 "pnl_pct": float(row[11]) if row[11] else 0,
                 "exit_reason": row[12]
             })

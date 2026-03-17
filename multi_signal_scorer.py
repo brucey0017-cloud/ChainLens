@@ -42,12 +42,12 @@ class MultiSignalScorer:
         since = datetime.now() - timedelta(hours=hours)
         
         cur.execute("""
-            SELECT source, signal_score, raw_data, created_at
+            SELECT source, signal_score, raw_data, timestamp
             FROM signals
             WHERE token_address = %s
               AND chain = %s
-              AND created_at >= %s
-            ORDER BY created_at DESC
+              AND timestamp >= %s
+            ORDER BY timestamp DESC
         """, (token_address, chain, since))
         
         signals = []
@@ -56,7 +56,7 @@ class MultiSignalScorer:
                 "source": row[0],
                 "signal_score": float(row[1]),
                 "raw_data": row[2],
-                "created_at": row[3]
+                "timestamp": row[3]
             })
         
         cur.close()
@@ -79,7 +79,7 @@ class MultiSignalScorer:
         now = datetime.now()
         recency_weights = []
         for sig in source_signals:
-            age_hours = (now - sig["created_at"]).total_seconds() / 3600
+            age_hours = (now - sig["timestamp"]).total_seconds() / 3600
             recency = max(0.5, 1.0 - (age_hours / 24))  # Decay over 24h
             recency_weights.append(recency)
         
@@ -153,7 +153,7 @@ class MultiSignalScorer:
             SELECT DISTINCT token_address, token_symbol
             FROM signals
             WHERE chain = %s
-              AND created_at >= %s
+              AND timestamp >= %s
         """, (chain, since))
         
         tokens = cur.fetchall()

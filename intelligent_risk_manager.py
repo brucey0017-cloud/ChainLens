@@ -57,7 +57,7 @@ class IntelligentRiskManager:
             SELECT COALESCE(SUM(pnl_pct), 0)
             FROM trades
             WHERE status = 'closed'
-              AND exit_time >= CURRENT_DATE
+              AND closed_at >= CURRENT_DATE
         """)
         
         daily_pnl = cur.fetchone()[0] / 100
@@ -72,11 +72,11 @@ class IntelligentRiskManager:
         since = datetime.now() - timedelta(days=days)
         
         cur.execute("""
-            SELECT entry_time, pnl_pct
+            SELECT opened_at, pnl_pct
             FROM trades
             WHERE status = 'closed'
-              AND entry_time >= %s
-            ORDER BY entry_time ASC
+              AND opened_at >= %s
+            ORDER BY opened_at ASC
         """, (since,))
         
         trades = cur.fetchall()
@@ -136,7 +136,7 @@ class IntelligentRiskManager:
             FROM trades
             WHERE strategy = %s
               AND status = 'closed'
-              AND entry_time >= %s
+              AND opened_at >= %s
         """, (strategy, since))
         
         row = cur.fetchone()

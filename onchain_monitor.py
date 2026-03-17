@@ -230,7 +230,7 @@ class OnchainMonitor:
         cur.execute("""
             INSERT INTO signals (
                 source, token_symbol, token_address, chain,
-                signal_score, raw_data, created_at
+                signal_score, raw_data, timestamp
             ) VALUES (%s, %s, %s, %s, %s, %s, %s)
         """, (
             signal["source"],
@@ -255,7 +255,7 @@ class OnchainMonitor:
         cur.execute("""
             SELECT DISTINCT token_address, token_symbol, chain
             FROM signals
-            WHERE created_at >= NOW() - INTERVAL '2 hours'
+            WHERE timestamp >= NOW() - INTERVAL '2 hours'
               AND source != 'onchain'
         """)
         
