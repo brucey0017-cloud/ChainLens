@@ -46,9 +46,10 @@ def get_token_price(token_address: str, chain: str) -> Optional[float]:
     if not token_data:
         return None
     
-    price_usd = token_data[0].get("priceUsd")
-    if price_usd:
-        return float(price_usd)
+    # Try both field names (API inconsistency)
+    price = token_data[0].get("priceUsd") or token_data[0].get("price")
+    if price:
+        return float(price)
     
     return None
 
