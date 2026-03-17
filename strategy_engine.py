@@ -158,12 +158,21 @@ class StrategyEngine:
         if not trades:
             return
         
+        # Check trading mode
+        trading_mode = os.getenv("TRADING_MODE", "paper")
+        
         cur = self.conn.cursor()
         
         for trade in trades:
             # Get current price (placeholder)
             entry_price = 1.0  # TODO: Get real price from onchainos
             quantity = (trade["position_size_pct"] / 100) * 10000 / entry_price  # Assume $10k account
+            
+            # In live mode, create pending_approval trades
+            if trading_mode == "live":
+                status = "pending_approval"
+            else:
+                status = "open"
             
             cur.execute("""
                 INSERT INTO trades (
@@ -182,14 +191,17 @@ class StrategyEngine:
                 trade["position_size_pct"],
                 entry_price * (1 + trade["stop_loss_pct"] / 100),
                 entry_price * (1 + trade["take_profit_pct"] / 100),
-                True,  # Paper trade
-                "open"
+                trading_mode == "paper",  # is_paper
+                status
             ))
         
         self.conn.commit()
         cur.close()
         
-        print(f"Executed {len(trades)} paper trades")
+        if trading_mode == "live":
+            print(f"Created {len(trades)} trades pending approval")
+        else:
+            print(f"Executed {len(trades)} paper trades")
     
     def run(self):
         """Main execution loop."""
