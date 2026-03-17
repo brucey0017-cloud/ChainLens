@@ -118,27 +118,45 @@ class StrategyEngine:
         
         # Check for triple confirmation
         for (token_addr, chain), sigs in token_signals.items():
-            # FILTER 1: Skip pump.fun tokens (extremely high risk)
-            if token_addr.endswith("pump"):
-                print(f"  Skipped {sigs[0]['token_symbol']}: pump.fun token (high risk)", file=sys.stderr)
+            token_symbol = sigs[0]["token_symbol"]
+            
+            # FILTER 1: Check market cap and liquidity first
+            token_info = self.get_token_market_info(token_addr, chain)
+            if not token_info:
+                print(f"  Skipped {token_symbol}: cannot fetch market info", file=sys.stderr)
                 continue
             
-            # FILTER 2: Check market cap and liquidity
-            token_info = self.get_token_market_info(token_addr, chain)
-            if token_info:
-                market_cap = token_info.get("market_cap", 0)
-                liquidity = token_info.get("liquidity", 0)
-                
-                # Minimum thresholds
-                MIN_MARKET_CAP = 100_000  # $100K
-                MIN_LIQUIDITY = 50_000    # $50K
+            market_cap = token_info.get("market_cap", 0)
+            liquidity = token_info.get("liquidity", 0)
+            
+            # Different thresholds for pump.fun vs regular tokens
+            is_pumpfun = token_addr.endswith("pump")
+            
+            if is_pumpfun:
+                # Stricter requirements for pump.fun tokens
+                MIN_MARKET_CAP = 500_000   # $500K
+                MIN_LIQUIDITY = 100_000    # $100K
                 
                 if market_cap < MIN_MARKET_CAP:
-                    print(f"  Skipped {sigs[0]['token_symbol']}: market cap ${market_cap:,.0f} < ${MIN_MARKET_CAP:,.0f}", file=sys.stderr)
+                    print(f"  Skipped {token_symbol} (pump.fun): market cap ${market_cap:,.0f} < ${MIN_MARKET_CAP:,.0f}", file=sys.stderr)
                     continue
                 
                 if liquidity < MIN_LIQUIDITY:
-                    print(f"  Skipped {sigs[0]['token_symbol']}: liquidity ${liquidity:,.0f} < ${MIN_LIQUIDITY:,.0f}", file=sys.stderr)
+                    print(f"  Skipped {token_symbol} (pump.fun): liquidity ${liquidity:,.0f} < ${MIN_LIQUIDITY:,.0f}", file=sys.stderr)
+                    continue
+                
+                print(f"  ✓ {token_symbol} (pump.fun): market cap ${market_cap:,.0f}, liquidity ${liquidity:,.0f}", file=sys.stderr)
+            else:
+                # Regular tokens: lower thresholds
+                MIN_MARKET_CAP = 100_000   # $100K
+                MIN_LIQUIDITY = 50_000     # $50K
+                
+                if market_cap < MIN_MARKET_CAP:
+                    print(f"  Skipped {token_symbol}: market cap ${market_cap:,.0f} < ${MIN_MARKET_CAP:,.0f}", file=sys.stderr)
+                    continue
+                
+                if liquidity < MIN_LIQUIDITY:
+                    print(f"  Skipped {token_symbol}: liquidity ${liquidity:,.0f} < ${MIN_LIQUIDITY:,.0f}", file=sys.stderr)
                     continue
             
             sources = set(s["source"] for s in sigs)
@@ -159,7 +177,6 @@ class StrategyEngine:
                 continue
             
             # Generate trade signal
-            token_symbol = sigs[0]["token_symbol"]
             trades.append({
                 "strategy": "triple_confirmation",
                 "token_symbol": token_symbol,
