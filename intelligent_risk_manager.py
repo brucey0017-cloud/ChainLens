@@ -45,7 +45,7 @@ class IntelligentRiskManager:
             WHERE status = 'open'
         """)
         
-        total_exposure = cur.fetchone()[0] / 100  # Convert to decimal
+        total_exposure = float(cur.fetchone()[0]) / 100  # Convert to decimal
         cur.close()
         
         return total_exposure
@@ -61,7 +61,7 @@ class IntelligentRiskManager:
               AND closed_at >= CURRENT_DATE
         """)
         
-        daily_pnl = cur.fetchone()[0] / 100
+        daily_pnl = float(cur.fetchone()[0]) / 100
         cur.close()
         
         return daily_pnl

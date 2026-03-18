@@ -219,7 +219,7 @@ class TechnicalIndicators:
             return {
                 "token_address": token_address,
                 "chain": chain,
-                "score": 0.0,
+                "total_score": 0.0,
                 "signal": "no_data",
                 "reason": "Unable to fetch price data"
             }
