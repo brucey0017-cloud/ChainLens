@@ -354,6 +354,14 @@ def generate_report(
     return "\n".join(report)
 
 
+def build_report_filename(address: str, chain: str, timestamp: str | None = None) -> Path:
+    """Build a sanitized report filename to avoid path traversal/injection issues."""
+    safe_chain = re.sub(r"[^A-Za-z0-9_-]", "", chain)[:32] or "chain"
+    safe_addr = re.sub(r"[^A-Za-z0-9]", "", address)[:12] or "token"
+    ts = timestamp or datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    return Path(f"chainlens_report_{safe_chain}_{safe_addr}_{ts}.md")
+
+
 def audit_token(address: str, chain: str) -> int:
     """Run full audit on a token."""
     print(f"🔍 ChainLens Auditing: {address} on {chain.upper()}")
@@ -372,9 +380,7 @@ def audit_token(address: str, chain: str) -> int:
     report = generate_report(address, chain, price_data, holders_data, dev_data, details_data, bundle_data)
     print(report)
 
-    timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
-    safe_addr = re.sub(r"[^A-Za-z0-9]", "", address)[:12] or "token"
-    filename = Path(f"chainlens_report_{chain}_{safe_addr}_{timestamp}.md")
+    filename = build_report_filename(address, chain)
     filename.write_text(report, encoding="utf-8")
     print(f"\n📄 Report saved to: {filename}")
     return 0

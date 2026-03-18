@@ -8,7 +8,7 @@ import os
 import subprocess
 import sys
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 import psycopg2
 from dotenv import load_dotenv
@@ -251,7 +251,7 @@ class TechnicalIndicators:
         
         cur.execute("""
             INSERT INTO signals (
-                source, token_address, chain, signal_score, raw_data, created_at
+                source, token_address, chain, signal_score, raw_data, timestamp
             ) VALUES (%s, %s, %s, %s, %s, %s)
         """, (
             "technical",
@@ -295,7 +295,7 @@ def main():
     cur.execute("""
         SELECT DISTINCT token_address, chain
         FROM signals
-        WHERE created_at >= %s
+        WHERE timestamp >= %s
         LIMIT 20
     """, (since,))
     

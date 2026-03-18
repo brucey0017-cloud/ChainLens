@@ -9,13 +9,12 @@ Safety features:
 5. Dry-run mode by default
 """
 
-import json
 import logging
 import os
 import subprocess
 import sys
-from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional, Tuple
+from datetime import datetime
+from typing import Dict, List, Optional, Tuple
 
 import psycopg2
 from dotenv import load_dotenv
@@ -134,7 +133,7 @@ class LiveTradingManager:
                     "stop_loss": float(row[7]) if row[7] else 0.0,
                     "take_profit": float(row[8]) if row[8] else 0.0,
                     "signal_score": float(row[9]) if row[9] else 0.0,
-                    "created_at": row[10]
+                    "opened_at": row[10]
                 })
             
             return trades
@@ -204,7 +203,7 @@ class LiveTradingManager:
                     logger.info(f"    ✅ Success: {tx_hash}")
                 else:
                     self._mark_trade_failed(trade_id, "Execution failed")
-                    logger.error(f"    ❌ Failed")
+                    logger.error("    ❌ Failed")
     
     def _execute_real_trade(self, token_addr: str, chain: str, size_usd: float) -> Tuple[bool, Optional[str]]:
         """Execute a real on-chain trade."""

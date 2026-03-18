@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest ruff mypy bandit
+
+      - name: Ruff lint (core modules + tests)
+        run: |
+          ruff check \
+            token_auditor.py \
+            news_monitor.py \
+            price_fetcher.py \
+            strategy_engine.py \
+            position_monitor.py \
+            technical_indicators.py \
+            live_trading_manager.py \
+            tests
+
+      - name: Type check (mypy)
+        run: mypy --ignore-missing-imports token_auditor.py news_monitor.py price_fetcher.py
+
+      - name: Compile check
+        run: python -m compileall -q .
+
+      - name: Security scan (bandit, high severity)
+        run: |
+          bandit -q -r \
+            token_auditor.py \
+            news_monitor.py \
+            price_fetcher.py \
+            strategy_engine.py \
+            position_monitor.py \
+            technical_indicators.py \
+            live_trading_manager.py \
+            -lll
+
+      - name: Unit tests
+        run: pytest -q

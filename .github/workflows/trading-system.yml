@@ -2,7 +2,6 @@ name: ChainLens Trading System
 
 on:
   schedule:
-    # Signal monitoring: Every 15 minutes
     - cron: '*/15 * * * *'
   workflow_dispatch:
     inputs:
@@ -19,7 +18,7 @@ on:
 jobs:
   trading-system:
     runs-on: ubuntu-latest
-    
+
     services:
       postgres:
         image: postgres:15
@@ -33,123 +32,108 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
-    
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      
+
       - name: Install dependencies
         run: |
-          pip install psycopg2-binary python-dotenv web3
-          
-          # Install onchainos CLI
+          pip install psycopg2-binary python-dotenv web3 requests
+
+          # Install onchainos CLI (for Smart Money signals)
           curl -sSL https://raw.githubusercontent.com/okx/onchainos-skills/main/install.sh | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-      
-      - name: Verify onchainos installation
-        run: |
-          which onchainos
-          onchainos --version
-      
+
       - name: Initialize database
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
         run: |
-          # Check if database already has tables
-          if psql $DATABASE_URL -c '\dt' | grep -q 'trades'; then
+          if psql $DATABASE_URL -c '\dt' 2>/dev/null | grep -q 'trades'; then
             echo "Database exists, running migration..."
             python3 migrate_db.py
           else
             echo "Fresh database, creating schema..."
             psql $DATABASE_URL -f schema.sql
           fi
-      
-      - name: Run signal monitor
+
+      # ── Signal Collection ──────────────────────────────────────
+      - name: Collect Smart Money signals
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 signal_monitor.py
-      
-      - name: Run Twitter KOL monitor
+        run: python3 signal_monitor.py
+
+      - name: Collect news signals (RSS)
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 twitter_kol_monitor.py || echo "Twitter monitor failed, continuing..."
-      
-      - name: Run news monitor
+        run: python3 news_monitor.py
+
+      - name: Collect on-chain metrics
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 news_monitor.py || echo "News monitor failed, continuing..."
-      
-      - name: Run on-chain monitor
+        run: python3 onchain_monitor.py || echo "::warning::On-chain monitor failed"
+
+      - name: Calculate technical indicators
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 onchain_monitor.py || echo "On-chain monitor failed, continuing..."
-      
-      - name: Run technical indicators
-        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 technical_indicators.py || echo "Technical indicators failed, continuing..."
-      
+        run: python3 technical_indicators.py || echo "::warning::Technical indicators failed"
+
       - name: Calculate multi-signal scores
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 multi_signal_scorer.py || echo "Multi-signal scorer failed, continuing..."
-      
-      - name: Generate performance dashboard
+        run: python3 multi_signal_scorer.py || echo "::warning::Multi-signal scorer failed"
+
+      # ── Health Check ───────────────────────────────────────────
+      - name: Signal health report
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
         run: |
-          python3 dashboard_generator.py || echo "Dashboard generation failed, continuing..."
-          mkdir -p docs && [ -f index.html ] && mv index.html docs/
-      
-      - name: Run auto backtester
-        if: github.event.inputs.task == 'backtest' || github.event.inputs.task == 'report'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 auto_backtester.py || echo "Auto backtester failed, continuing..."
-      
+          psql $DATABASE_URL -t -A -c "
+            SELECT source,
+                   COUNT(*) AS total,
+                   COUNT(*) FILTER (WHERE signal_score > 0) AS nonzero
+            FROM signals
+            WHERE timestamp >= NOW() - INTERVAL '30 minutes'
+            GROUP BY source
+            ORDER BY source;
+          " | while IFS='|' read src total nonzero; do
+            echo "📊 $src: $total signals ($nonzero with score>0)"
+          done
+
+          TOTAL=$(psql $DATABASE_URL -t -A -c "SELECT COUNT(*) FROM signals WHERE timestamp >= NOW() - INTERVAL '30 minutes'")
+          echo ""
+          echo "Total signals this cycle: $TOTAL"
+
+          if [ "$TOTAL" -eq 0 ]; then
+            echo "::warning::No signals collected this cycle!"
+          fi
+
+      # ── Strategy & Risk ────────────────────────────────────────
       - name: Check risk limits
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 intelligent_risk_manager.py || echo "Risk manager check failed, continuing..."
-      
+        run: python3 intelligent_risk_manager.py || echo "::warning::Risk manager failed"
+
       - name: Run strategy engine
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 strategy_engine.py
-      
-      - name: Run position monitor
+        run: python3 strategy_engine.py
+
+      - name: Monitor positions
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+        run: python3 position_monitor.py
+
+      # ── Dashboard ──────────────────────────────────────────────
+      - name: Generate dashboard data
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         run: |
-          python3 position_monitor.py
-      
+          python3 dashboard_generator.py || echo "::warning::Dashboard generation failed"
+          mkdir -p docs
+          [ -f index.html ] && mv index.html docs/
+
+      # ── Backtest / Report ──────────────────────────────────────
+      - name: Run backtester
+        if: github.event.inputs.task == 'backtest' || github.event.inputs.task == 'report'
+        run: python3 auto_backtester.py || echo "::warning::Backtester failed"
+
       - name: Generate daily report
         if: github.event.inputs.task == 'report'
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
-        run: |
-          python3 daily_report.py
+        run: python3 daily_report.py

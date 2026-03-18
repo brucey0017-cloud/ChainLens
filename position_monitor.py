@@ -4,12 +4,11 @@ Position Monitor - Monitor open positions and execute stop-loss/take-profit
 Based on Jim Simons' strict risk management principles
 """
 
-import json
 import logging
 import os
 import sys
 from datetime import datetime, timedelta, timezone
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 import psycopg2
 from dotenv import load_dotenv
@@ -76,37 +75,32 @@ class PositionMonitor:
             
             return positions
     
-    def get_current_price(self, token_address: str, chain: str) -> float:
+    def get_current_price(self, token_symbol: str, token_address: str, chain: str) -> float:
         """
-        Get current token price from onchainos.
-        
+        Get current token price from CoinGecko (free API).
+
         Raises:
             RuntimeError: If price cannot be fetched
         """
-        # Import price_fetcher
         sys.path.insert(0, os.path.dirname(__file__))
-        
+
         try:
-            from price_fetcher import get_token_price
-            
+            from price_fetcher import get_price
+
             for attempt in range(Config.MAX_PRICE_RETRIES):
-                price = get_token_price(token_address, chain)
+                price = get_price(token_symbol)
                 if price and price > 0:
                     return price
-                
+
                 logger.warning(f"Price fetch attempt {attempt + 1} failed, retrying...")
-            
-            # All retries failed
+
             raise RuntimeError(
-                f"Cannot fetch price for {token_address} on {chain} after {Config.MAX_PRICE_RETRIES} attempts. "
-                "Cannot safely monitor position - manual intervention required."
+                f"Cannot fetch price for {token_symbol} after {Config.MAX_PRICE_RETRIES} attempts. "
+                "Manual intervention required."
             )
-            
+
         except ImportError:
-            raise RuntimeError(
-                "price_fetcher module not available. "
-                "Position monitoring requires real-time price data."
-            )
+            raise RuntimeError("price_fetcher module not available.")
     
     def check_stop_loss(self, position: Dict, current_price: float) -> bool:
         """Check if stop-loss is triggered."""
@@ -177,7 +171,7 @@ class PositionMonitor:
         
         for pos in positions:
             try:
-                current_price = self.get_current_price(pos["token_address"], pos["chain"])
+                current_price = self.get_current_price(pos["token_symbol"], pos["token_address"], pos["chain"])
             except RuntimeError as e:
                 logger.error(f"Cannot monitor {pos['token_symbol']}: {e}")
                 # Do NOT close position blindly - this requires manual intervention

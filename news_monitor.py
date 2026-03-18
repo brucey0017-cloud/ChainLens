@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """
-News Signal Monitor - Using opennews skill
-Tracks crypto news and extracts token mentions with sentiment
+News Signal Monitor - Uses free RSS feeds from major crypto outlets.
+No API keys required. Sources: CoinTelegraph, CoinDesk, Decrypt, TheBlock.
 """
 
 import json
 import os
-import subprocess
+import re
 import sys
+import urllib.request
+import xml.etree.ElementTree as ET
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 import psycopg2
 from dotenv import load_dotenv
@@ -18,254 +20,159 @@ load_dotenv()
 
 DB_URL = os.getenv("DATABASE_URL", "postgresql://localhost/chainlens")
 
+# Free RSS feeds — no auth needed
+RSS_FEEDS = [
+    {"url": "https://cointelegraph.com/rss", "source": "cointelegraph", "weight": 1.0},
+    {"url": "https://www.coindesk.com/arc/outboundfeeds/rss/", "source": "coindesk", "weight": 1.0},
+    {"url": "https://decrypt.co/feed", "source": "decrypt", "weight": 0.8},
+    {"url": "https://www.theblock.co/rss.xml", "source": "theblock", "weight": 0.9},
+]
+
+# Known token symbols to look for (expand as needed)
+TRACKED_TOKENS = {
+    "SOL", "ETH", "BTC", "BNB", "XRP", "ADA", "AVAX", "DOT", "MATIC",
+    "LINK", "UNI", "AAVE", "ARB", "OP", "SUI", "APT", "SEI", "TIA",
+    "JUP", "PYTH", "WIF", "BONK", "PEPE", "DOGE", "SHIB", "FLOKI",
+    "RENDER", "FET", "TAO", "NEAR", "INJ", "TRX", "TON", "ATOM",
+    "FIL", "STX", "IMX", "MKR", "LDO", "RUNE", "PENDLE", "JTO",
+    "W", "ENA", "ONDO", "STRK", "ZK", "BLAST", "MODE", "MANTA",
+}
+
+# Words that look like tickers but aren't
+FALSE_POSITIVES = {
+    "CEO", "SEC", "ETF", "IPO", "ICO", "NFT", "DAO", "DeFi", "TVL",
+    "API", "USD", "EUR", "GBP", "JPY", "CNY", "AI", "RWA", "DEX",
+    "CEX", "AMM", "APR", "APY", "ATH", "ATL", "FUD", "FOMO", "KYC",
+    "AML", "OTC", "P2P", "PoS", "PoW", "TPS", "MEV", "EVM", "L1",
+    "L2", "L3", "ZKP", "THE", "AND", "FOR", "WITH", "FROM", "THIS",
+    "THAT", "WILL", "HAVE", "NOT", "ARE", "BUT", "ALL", "CAN", "HAS",
+}
+
+POSITIVE_WORDS = frozenset([
+    "surge", "rally", "gain", "profit", "bullish", "breakthrough",
+    "partnership", "adoption", "launch", "upgrade", "success",
+    "growth", "increase", "rise", "soar", "jump", "boom", "record",
+    "milestone", "approval", "integration", "listing", "fund",
+])
+
+NEGATIVE_WORDS = frozenset([
+    "crash", "dump", "loss", "bearish", "scam", "hack", "exploit",
+    "warning", "risk", "decline", "drop", "fall", "plunge", "collapse",
+    "fraud", "lawsuit", "investigation", "ban", "regulation", "fine",
+    "breach", "vulnerability", "rug", "ponzi", "indictment",
+])
+
 
 class NewsMonitor:
     def __init__(self):
         self.conn = psycopg2.connect(DB_URL)
-    
-    def search_crypto_news(self, keyword: str = "crypto", limit: int = 20) -> List[Dict]:
-        """Search crypto news using opennews skill."""
+
+    def fetch_rss(self, url: str, timeout: int = 15) -> List[Dict]:
+        """Fetch and parse an RSS feed."""
         try:
-            # Use opennews skill to search news
-            result = subprocess.run(
-                ["onchainos", "news", "search", keyword, "--limit", str(limit)],
-                capture_output=True,
-                text=True,
-                timeout=30
-            )
-            
-            if result.returncode != 0:
-                return []
-            
-            data = json.loads(result.stdout)
-            if not data.get("ok"):
-                return []
-            
-            articles = data.get("data", [])
-            return articles
-        
+            req = urllib.request.Request(url, headers={"User-Agent": "ChainLens/1.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                data = resp.read()
+            root = ET.fromstring(data)
         except Exception as e:
-            print(f"Error searching news: {e}", file=sys.stderr)
+            print(f"  RSS fetch failed ({url}): {e}", file=sys.stderr)
             return []
-    
-    def search_token_news(self, token_symbol: str) -> List[Dict]:
-        """Search news for specific token."""
-        try:
-            result = subprocess.run(
-                ["onchainos", "news", "search", token_symbol, "--limit", "10"],
-                capture_output=True,
-                text=True,
-                timeout=30
+
+        articles = []
+        # Handle both RSS 2.0 (<item>) and Atom (<entry>)
+        items = root.findall(".//item") or root.findall(".//{http://www.w3.org/2005/Atom}entry")
+        for item in items[:30]:  # cap per feed
+            title = self._text(item, "title") or self._text(item, "{http://www.w3.org/2005/Atom}title") or ""
+            desc = (
+                self._text(item, "description")
+                or self._text(item, "{http://www.w3.org/2005/Atom}summary")
+                or ""
             )
-            
-            if result.returncode != 0:
-                return []
-            
-            data = json.loads(result.stdout)
-            if not data.get("ok"):
-                return []
-            
-            articles = data.get("data", [])
-            return articles
-        
-        except Exception as e:
-            print(f"Error searching token news: {e}", file=sys.stderr)
-            return []
-    
-    def extract_token_mentions(self, text: str) -> List[str]:
-        """Extract token symbols from article text."""
-        import re
-        
-        # Match common token patterns
-        # $TOKEN, TOKEN/USD, TOKEN price, etc.
-        patterns = [
-            r'\$([A-Z]{2,10})\b',
-            r'\b([A-Z]{2,10})/USD\b',
-            r'\b([A-Z]{2,10})\s+price\b',
-            r'\b([A-Z]{2,10})\s+token\b',
-        ]
-        
-        tokens = set()
-        for pattern in patterns:
-            matches = re.findall(pattern, text, re.IGNORECASE)
-            tokens.update([m.upper() for m in matches])
-        
-        # Filter out common non-token words
-        exclude = {
-            'BTC', 'ETH', 'USD', 'USDT', 'USDC', 'NFT', 'DeFi', 'DAO', 
-            'CEO', 'AI', 'API', 'SEC', 'ETF', 'IPO', 'ICO', 'THE', 'AND',
-            'FOR', 'WITH', 'FROM', 'THIS', 'THAT', 'WILL', 'HAVE'
-        }
-        tokens = {t for t in tokens if t not in exclude and len(t) >= 2}
-        
-        return list(tokens)
-    
-    def analyze_sentiment(self, title: str, content: str) -> Dict:
-        """Analyze sentiment from article title and content."""
-        text = f"{title} {content}".lower()
-        
-        # Positive indicators
-        positive_words = [
-            'surge', 'rally', 'gain', 'profit', 'bullish', 'breakthrough',
-            'partnership', 'adoption', 'launch', 'upgrade', 'success',
-            'growth', 'increase', 'rise', 'soar', 'jump', 'boom'
-        ]
-        
-        # Negative indicators
-        negative_words = [
-            'crash', 'dump', 'loss', 'bearish', 'scam', 'hack', 'exploit',
-            'warning', 'risk', 'decline', 'drop', 'fall', 'plunge', 'collapse',
-            'fraud', 'lawsuit', 'investigation', 'ban', 'regulation'
-        ]
-        
-        # Neutral/informational
-        neutral_words = [
-            'analysis', 'report', 'update', 'announcement', 'release',
-            'interview', 'opinion', 'review', 'guide', 'explained'
-        ]
-        
-        pos_count = sum(1 for word in positive_words if word in text)
-        neg_count = sum(1 for word in negative_words if word in text)
-        neu_count = sum(1 for word in neutral_words if word in text)
-        
-        total = pos_count + neg_count + neu_count
-        
+            link = self._text(item, "link") or ""
+            if not link:
+                link_el = item.find("{http://www.w3.org/2005/Atom}link")
+                if link_el is not None:
+                    link = link_el.get("href", "")
+            articles.append({"title": title, "description": desc, "url": link})
+        return articles
+
+    @staticmethod
+    def _text(el, tag):
+        child = el.find(tag)
+        return child.text.strip() if child is not None and child.text else None
+
+    def extract_tokens(self, text: str) -> List[str]:
+        """Extract token symbols from text."""
+        # Match $TOKEN or standalone uppercase 2-6 letter words
+        dollar_matches = set(re.findall(r"\$([A-Z]{2,6})\b", text))
+        # Also match known tokens mentioned by name
+        upper_text = text.upper()
+        name_matches = {t for t in TRACKED_TOKENS if f" {t} " in f" {upper_text} "}
+        all_matches = dollar_matches | name_matches
+        return [t for t in all_matches if t not in FALSE_POSITIVES]
+
+    def analyze_sentiment(self, title: str, description: str) -> Dict:
+        """Keyword-based sentiment with confidence."""
+        text = f"{title} {description}".lower()
+        pos = sum(1 for w in POSITIVE_WORDS if w in text)
+        neg = sum(1 for w in NEGATIVE_WORDS if w in text)
+        total = pos + neg
         if total == 0:
-            return {"sentiment": "neutral", "score": 0.5, "confidence": 0.0}
-        
-        # Calculate sentiment score (0 = very negative, 1 = very positive)
-        if pos_count + neg_count == 0:
-            sentiment_score = 0.5
-            sentiment_label = "neutral"
-        else:
-            sentiment_score = pos_count / (pos_count + neg_count)
-            if sentiment_score > 0.6:
-                sentiment_label = "positive"
-            elif sentiment_score < 0.4:
-                sentiment_label = "negative"
-            else:
-                sentiment_label = "neutral"
-        
-        confidence = (pos_count + neg_count) / total
-        
-        return {
-            "sentiment": sentiment_label,
-            "score": sentiment_score,
-            "confidence": confidence,
-            "positive_count": pos_count,
-            "negative_count": neg_count
-        }
-    
-    def calculate_news_score(self, article: Dict, sentiment: Dict) -> float:
-        """Calculate signal score based on article quality and sentiment."""
-        # Base score from sentiment
-        base_score = sentiment["score"]
-        
-        # Adjust by confidence
-        confidence_factor = sentiment["confidence"]
-        
-        # Adjust by source credibility (if available)
-        source = article.get("source", "").lower()
-        credible_sources = ['coindesk', 'cointelegraph', 'theblock', 'decrypt', 'bloomberg']
-        source_factor = 1.2 if any(s in source for s in credible_sources) else 1.0
-        
-        # Adjust by recency (newer = better)
-        # Assume articles are recent if we just fetched them
-        recency_factor = 1.0
-        
-        final_score = base_score * confidence_factor * source_factor * recency_factor
-        
-        # Normalize to 0-1
-        return min(1.0, max(0.0, final_score))
-    
+            return {"label": "neutral", "score": 0.5, "confidence": 0.0}
+        score = pos / total
+        label = "positive" if score > 0.6 else ("negative" if score < 0.4 else "neutral")
+        return {"label": label, "score": score, "confidence": min(1.0, total / 5)}
+
     def monitor_news(self):
-        """Monitor crypto news and extract signals."""
-        print(f"=== News Monitor - {datetime.now().isoformat()} ===")
-        
-        # Search for general crypto news
-        articles = self.search_crypto_news("cryptocurrency", limit=30)
-        
-        print(f"Found {len(articles)} crypto news articles")
-        
+        """Fetch all RSS feeds and extract signals."""
+        print(f"=== News Monitor (RSS) - {datetime.now().isoformat()} ===")
         all_signals = []
-        
-        for article in articles:
-            title = article.get("title", "")
-            content = article.get("content", "") or article.get("description", "")
-            url = article.get("url", "")
-            source = article.get("source", "")
-            
-            # Extract token mentions
-            tokens = self.extract_token_mentions(f"{title} {content}")
-            
-            if not tokens:
-                continue
-            
-            # Analyze sentiment
-            sentiment = self.analyze_sentiment(title, content)
-            
-            for token in tokens:
-                signal_score = self.calculate_news_score(article, sentiment)
-                
-                signal = {
-                    "source": "news",
-                    "token_symbol": token,
-                    "article_title": title[:200],
-                    "article_url": url,
-                    "news_source": source,
-                    "sentiment": sentiment["sentiment"],
-                    "sentiment_score": sentiment["score"],
-                    "confidence": sentiment["confidence"],
-                    "signal_score": signal_score,
-                    "timestamp": datetime.now()
-                }
-                all_signals.append(signal)
-        
-        print(f"Extracted {len(all_signals)} token signals from news")
-        
-        # Save to database
+
+        for feed in RSS_FEEDS:
+            print(f"  Fetching {feed['source']}...")
+            articles = self.fetch_rss(feed["url"])
+            print(f"    Got {len(articles)} articles")
+
+            for art in articles:
+                tokens = self.extract_tokens(f"{art['title']} {art['description']}")
+                if not tokens:
+                    continue
+                sentiment = self.analyze_sentiment(art["title"], art["description"])
+                for token in tokens:
+                    signal_score = sentiment["score"] * sentiment["confidence"] * feed["weight"]
+                    all_signals.append({
+                        "source": "news",
+                        "token_symbol": token,
+                        "signal_score": round(min(1.0, max(0.0, signal_score)), 3),
+                        "raw_data": json.dumps({
+                            "title": art["title"][:200],
+                            "url": art["url"],
+                            "news_source": feed["source"],
+                            "sentiment": sentiment["label"],
+                            "sentiment_score": sentiment["score"],
+                        }),
+                    })
+
+        print(f"Total news signals: {len(all_signals)}")
         self.save_signals(all_signals)
-        
         return all_signals
-    
+
     def save_signals(self, signals: List[Dict]):
-        """Save signals to database."""
         if not signals:
             return
-        
         cur = self.conn.cursor()
-        
         for sig in signals:
-            raw_data = json.dumps({
-                "article_title": sig["article_title"],
-                "article_url": sig["article_url"],
-                "news_source": sig["news_source"],
-                "sentiment": sig["sentiment"],
-                "sentiment_score": sig["sentiment_score"],
-                "confidence": sig["confidence"]
-            })
-            
-            cur.execute("""
-                INSERT INTO signals (
-                    source, token_symbol, token_address, chain,
-                    signal_score, raw_data, timestamp, processed
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-            """, (
-                sig["source"],
-                sig["token_symbol"],
-                "",  # No address yet
-                "unknown",  # Will be resolved later
-                sig["signal_score"],
-                raw_data,
-                sig["timestamp"],
-                False
-            ))
-        
+            cur.execute(
+                """INSERT INTO signals (source, token_symbol, token_address, chain,
+                   signal_score, raw_data, timestamp, processed)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""",
+                (sig["source"], sig["token_symbol"], "", "unknown",
+                 sig["signal_score"], sig["raw_data"], datetime.now(), False),
+            )
         self.conn.commit()
         cur.close()
-        
         print(f"Saved {len(signals)} news signals to database")
-    
+
     def close(self):
         self.conn.close()
 

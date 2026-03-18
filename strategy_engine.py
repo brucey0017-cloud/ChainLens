@@ -4,10 +4,9 @@ Strategy Engine - Implement Jim Simons' multi-strategy approach
 Strategies: Triple Confirmation, Resonance, Contrarian, Arbitrage
 """
 
-import json
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Dict, List, Optional
 
 import psycopg2
@@ -82,23 +81,23 @@ class StrategyEngine:
         # Fallback: return a mock score
         return 65.0
     
-    def get_token_market_info(self, token_address: str, chain: str) -> Optional[Dict]:
-        """Get token market cap and liquidity from price_fetcher."""
+    def get_token_market_info(self, token_symbol: str, token_address: str, chain: str) -> Optional[Dict]:
+        """Get token market cap and liquidity via CoinGecko (free, no key)."""
         try:
             sys.path.insert(0, os.path.dirname(__file__))
-            from price_fetcher import get_token_info
-            
-            info = get_token_info(token_address, chain)
-            if info:
+            from price_fetcher import get_market_data
+
+            info = get_market_data(token_symbol)
+            if info and info.get("market_cap", 0) > 0:
                 return {
-                    "market_cap": info.get("market_cap", 0),
-                    "liquidity": info.get("liquidity", 0),
+                    "market_cap": info["market_cap"],
+                    "liquidity": info.get("volume_24h", 0),  # use 24h volume as liquidity proxy
                     "volume_24h": info.get("volume_24h", 0),
-                    "price_change_24h": info.get("price_change_24h", 0)
+                    "price_change_24h": info.get("change_24h", 0),
                 }
         except Exception as e:
             print(f"  Warning: Failed to get market info: {e}", file=sys.stderr)
-        
+
         return None
     
     def strategy_triple_confirmation(self, signals: List[Dict]) -> List[Dict]:
@@ -121,7 +120,7 @@ class StrategyEngine:
             token_symbol = sigs[0]["token_symbol"]
             
             # FILTER 1: Check market cap and liquidity first
-            token_info = self.get_token_market_info(token_addr, chain)
+            token_info = self.get_token_market_info(token_symbol, token_addr, chain)
             if not token_info:
                 print(f"  Skipped {token_symbol}: cannot fetch market info", file=sys.stderr)
                 continue
@@ -223,8 +222,17 @@ class StrategyEngine:
         cur = self.conn.cursor()
         
         for trade in trades:
-            # Get current price (placeholder)
-            entry_price = 1.0  # TODO: Get real price from onchainos
+            # Get current price from CoinGecko
+            try:
+                from price_fetcher import get_price
+                entry_price = get_price(trade["token_symbol"]) or 0.0
+            except Exception:
+                entry_price = 0.0
+
+            if entry_price <= 0:
+                print(f"  Skipped {trade['token_symbol']}: no price available", file=sys.stderr)
+                continue
+
             quantity = (trade["position_size_pct"] / 100) * 10000 / entry_price  # Assume $10k account
             
             # In live mode, create pending_approval trades
