@@ -2,121 +2,103 @@
 """
 Real-time Performance Dashboard Generator
 Creates HTML dashboard with live metrics
+
+Uses Supabase REST as single data plane.
 """
 
-import json
-import os
-import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Dict, List
 
-import db_patch  # noqa: F401, E402 — must import before psycopg2
-import psycopg2
-from dotenv import load_dotenv
+from supabase_client import is_available, select
 
-load_dotenv()
 
-DB_URL = os.getenv("DATABASE_URL", "postgresql://localhost/chainlens")
+def _to_float(v, default: float = 0.0) -> float:
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return default
 
 
 class DashboardGenerator:
     def __init__(self):
-        self.conn = psycopg2.connect(DB_URL)
-    
+        if not is_available():
+            raise RuntimeError("Supabase REST not configured. Set SUPABASE_URL and SUPABASE_SERVICE_KEY")
+
     def get_system_stats(self) -> Dict:
         """Get overall system statistics."""
-        cur = self.conn.cursor()
-        
-        # Total signals
-        cur.execute("SELECT COUNT(*) FROM signals WHERE timestamp >= NOW() - INTERVAL '24 hours'")
-        signals_24h = cur.fetchone()[0]
-        
-        # Total trades
-        cur.execute("SELECT COUNT(*) FROM trades WHERE opened_at >= NOW() - INTERVAL '24 hours'")
-        trades_24h = cur.fetchone()[0]
-        
+        cutoff_24h = (datetime.now(timezone.utc) - timedelta(hours=24)).isoformat()
+        cutoff_7d = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
+
+        # Signals in last 24h
+        sig_rows = select("signals", columns="id", filters={"timestamp": f"gte.{cutoff_24h}"}, limit=10000)
+        signals_24h = len(sig_rows)
+
+        # Trades in last 24h
+        trade_rows = select("trades", columns="id", filters={"opened_at": f"gte.{cutoff_24h}"}, limit=10000)
+        trades_24h = len(trade_rows)
+
         # Open positions
-        cur.execute("SELECT COUNT(*) FROM trades WHERE status = 'open'")
-        open_positions = cur.fetchone()[0]
-        
-        # Win rate (last 7 days)
-        cur.execute("""
-            SELECT 
-                COUNT(*) FILTER (WHERE pnl_pct > 0) as wins,
-                COUNT(*) as total
-            FROM trades
-            WHERE status = 'closed'
-              AND opened_at >= NOW() - INTERVAL '7 days'
-        """)
-        row = cur.fetchone()
-        wins, total = row[0] or 0, row[1] or 0
+        open_rows = select("trades", columns="id", filters={"status": "eq.open"}, limit=10000)
+        open_positions = len(open_rows)
+
+        # Win rate and PnL (last 7 days, closed trades)
+        closed_rows = select(
+            "trades",
+            columns="pnl_pct",
+            filters={"status": "eq.closed", "opened_at": f"gte.{cutoff_7d}"},
+            limit=10000,
+        )
+        total = len(closed_rows)
+        wins = sum(1 for r in closed_rows if _to_float(r.get("pnl_pct")) > 0)
         win_rate = (wins / total * 100) if total > 0 else 0
-        
-        # Total PnL (last 7 days)
-        cur.execute("""
-            SELECT COALESCE(SUM(pnl_pct), 0)
-            FROM trades
-            WHERE status = 'closed'
-              AND opened_at >= NOW() - INTERVAL '7 days'
-        """)
-        total_pnl = cur.fetchone()[0]
-        
-        cur.close()
-        
+        total_pnl = sum(_to_float(r.get("pnl_pct")) for r in closed_rows)
+
         return {
             "signals_24h": signals_24h,
             "trades_24h": trades_24h,
             "open_positions": open_positions,
             "win_rate_7d": win_rate,
-            "total_pnl_7d": total_pnl
+            "total_pnl_7d": total_pnl,
         }
-    
+
     def get_recent_trades(self, limit: int = 10) -> List[Dict]:
         """Get most recent trades."""
-        cur = self.conn.cursor()
-        
-        cur.execute("""
-            SELECT 
-                token_symbol, strategy, entry_price, exit_price,
-                pnl_pct, status, notes, opened_at, closed_at
-            FROM trades
-            ORDER BY opened_at DESC
-            LIMIT %s
-        """, (limit,))
-        
+        rows = select(
+            "trades",
+            columns="token_symbol,strategy,entry_price,exit_price,pnl_pct,status,notes,opened_at,closed_at",
+            order="opened_at.desc",
+            limit=limit,
+        )
+
         trades = []
-        for row in cur.fetchall():
+        for row in rows:
             trades.append({
-                "token_symbol": row[0],
-                "strategy": row[1],
-                "entry_price": float(row[2]) if row[2] else 0,
-                "exit_price": float(row[3]) if row[3] else 0,
-                "pnl_pct": float(row[4]) if row[4] else 0,
-                "status": row[5],
-                "notes": row[6],
-                "opened_at": row[7].isoformat() if row[7] else "",
-                "closed_at": row[8].isoformat() if row[8] else ""
+                "token_symbol": row.get("token_symbol", ""),
+                "strategy": row.get("strategy", ""),
+                "entry_price": _to_float(row.get("entry_price")),
+                "exit_price": _to_float(row.get("exit_price")),
+                "pnl_pct": _to_float(row.get("pnl_pct")),
+                "status": row.get("status", ""),
+                "notes": row.get("notes", ""),
+                "opened_at": row.get("opened_at", ""),
+                "closed_at": row.get("closed_at", ""),
             })
-        
-        cur.close()
         return trades
-    
+
     def get_signal_breakdown(self) -> Dict:
         """Get signal count by source."""
-        cur = self.conn.cursor()
-        
-        cur.execute("""
-            SELECT source, COUNT(*)
-            FROM signals
-            WHERE timestamp >= NOW() - INTERVAL '24 hours'
-            GROUP BY source
-        """)
-        
-        breakdown = {}
-        for row in cur.fetchall():
-            breakdown[row[0]] = row[1]
-        
-        cur.close()
+        cutoff_24h = (datetime.now(timezone.utc) - timedelta(hours=24)).isoformat()
+        rows = select(
+            "signals",
+            columns="source",
+            filters={"timestamp": f"gte.{cutoff_24h}"},
+            limit=10000,
+        )
+
+        breakdown: Dict[str, int] = {}
+        for row in rows:
+            src = row.get("source", "unknown")
+            breakdown[src] = breakdown.get(src, 0) + 1
         return breakdown
     
     def generate_html(self) -> str:
@@ -425,17 +407,11 @@ class DashboardGenerator:
             f.write(html)
         
         print(f"Dashboard saved to {output_path}")
-    
-    def close(self):
-        self.conn.close()
 
 
 def main():
     generator = DashboardGenerator()
-    try:
-        generator.save_dashboard()
-    finally:
-        generator.close()
+    generator.save_dashboard()
 
 
 if __name__ == "__main__":

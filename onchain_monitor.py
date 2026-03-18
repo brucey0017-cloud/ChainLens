@@ -8,6 +8,7 @@ Uses OKX onchainos token endpoints + Supabase REST only.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
@@ -25,6 +26,7 @@ class OnchainMonitor:
         self.whale_threshold = 100_000  # $100K+ transactions
         self.min_holders = 100
         self.max_top10_concentration = 0.5  # Top 10 holders < 50%
+        self.max_tokens_per_run = int(os.getenv("ONCHAIN_MONITOR_MAX_TOKENS", "60"))
 
     def _run_json(self, args: List[str], timeout: int = 30) -> Optional[Dict]:
         try:
@@ -260,6 +262,10 @@ class OnchainMonitor:
                 continue
             seen.add(key)
             tokens.append((addr, sym, chain))
+
+        if len(tokens) > self.max_tokens_per_run:
+            print(f"Token universe {len(tokens)} too large, capping to {self.max_tokens_per_run}")
+            tokens = tokens[: self.max_tokens_per_run]
 
         print(f"Monitoring {len(tokens)} tokens...")
 
