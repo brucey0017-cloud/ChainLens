@@ -8,11 +8,11 @@ import json
 import logging
 import os
 import subprocess
-import sys
 from contextlib import contextmanager
 from datetime import datetime
 from typing import Any, Dict, Generator, List, Optional
 
+import db_patch  # noqa: F401, E402 — must import before psycopg2
 import psycopg2
 from dotenv import load_dotenv
 
@@ -149,30 +149,44 @@ class SignalMonitor:
         return 0.0
     
     def store_signals(self, signals: List[Dict]):
-        """Store signals in database."""
+        """Store signals in database (Supabase REST preferred, psycopg2 fallback)."""
         if not signals:
             return
-        
+
+        rows = []
+        for sig in signals:
+            score = self.calculate_signal_score(sig)
+            rows.append({
+                "source": sig["source"],
+                "token_symbol": sig["token_symbol"],
+                "token_address": sig["token_address"],
+                "chain": sig["chain"],
+                "signal_score": round(score, 2),
+                "raw_data": json.dumps(sig.get("raw_data", {})),
+            })
+
+        # Try Supabase REST first
+        try:
+            from supabase_client import insert, is_available
+            if is_available():
+                insert("signals", rows)
+                logger.info(f"Stored {len(rows)} signals via Supabase REST")
+                return
+        except Exception as e:
+            logger.warning(f"Supabase REST insert failed: {e}, falling back to psycopg2")
+
+        # Fallback: psycopg2
         with self._get_connection() as conn:
             with conn.cursor() as cur:
-                for sig in signals:
-                    score = self.calculate_signal_score(sig)
-                    
+                for row in rows:
                     cur.execute("""
                         INSERT INTO signals (source, token_symbol, token_address, chain, signal_score, raw_data)
                         VALUES (%s, %s, %s, %s, %s, %s)
-                    """, (
-                        sig["source"],
-                        sig["token_symbol"],
-                        sig["token_address"],
-                        sig["chain"],
-                        score,
-                        json.dumps(sig.get("raw_data", {}))
-                    ))
-                
+                    """, (row["source"], row["token_symbol"], row["token_address"],
+                          row["chain"], row["signal_score"], row["raw_data"]))
                 conn.commit()
-        
-        logger.info(f"Stored {len(signals)} signals in database")
+
+        logger.info(f"Stored {len(rows)} signals via psycopg2")
     
     def fetch_kol_signals(self, chain: str = "solana") -> List[Dict]:
         """Fetch KOL signals from onchainos."""

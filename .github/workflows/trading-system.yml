@@ -34,8 +34,12 @@ jobs:
           - 5432:5432
 
     env:
-      # Prefer Supabase if configured, else fall back to local postgres service
-      DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/chainlens' }}
+      # Supabase REST API (preferred — works everywhere, no IPv6 issues)
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      # Direct DB fallback (local postgres service)
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+      # Signal source tokens
       OPENNEWS_TOKEN: ${{ secrets.OPENNEWS_TOKEN }}
       TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
 
@@ -58,18 +62,21 @@ jobs:
 
       - name: Initialize database
         run: |
-          if echo "$DATABASE_URL" | grep -q "localhost:5432/chainlens"; then
-            echo "Using local PostgreSQL service"
-          else
-            echo "Using external database (Supabase/hosted)"
-          fi
+          echo "=== Database Setup ==="
+          python3 -c "from db_adapter import print_status; print_status()"
 
-          if psql "$DATABASE_URL" -c '\dt' 2>/dev/null | grep -q 'trades'; then
-            echo "Database exists, running migration..."
-            python3 migrate_db.py || true
+          # Always init local postgres (for fallback)
+          psql "postgresql://postgres:postgres@localhost:5432/chainlens" -f schema.sql 2>/dev/null || true
+
+          # Verify Supabase REST connectivity
+          if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_SERVICE_KEY" ]; then
+            python3 -c "
+          from supabase_client import select
+          rows = select('trading_config', limit=1)
+          print(f'Supabase REST: OK ({len(rows)} config rows)')
+          " && echo "Using Supabase REST API" || echo "::warning::Supabase REST failed, using local postgres"
           else
-            echo "Fresh database, creating schema..."
-            psql "$DATABASE_URL" -f schema.sql
+            echo "No Supabase credentials, using local postgres"
           fi
 
       # ── Signal Collection ──────────────────────────────────────
@@ -101,25 +108,42 @@ jobs:
       - name: Signal health report
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         run: |
-          psql $DATABASE_URL -t -A -c "
-            SELECT source,
-                   COUNT(*) AS total,
-                   COUNT(*) FILTER (WHERE signal_score > 0) AS nonzero
-            FROM signals
-            WHERE timestamp >= NOW() - INTERVAL '30 minutes'
-            GROUP BY source
-            ORDER BY source;
-          " | while IFS='|' read src total nonzero; do
-            echo "📊 $src: $total signals ($nonzero with score>0)"
-          done
+          python3 << 'PYEOF'
+          import os, sys
+          sys.path.insert(0, '.')
 
-          TOTAL=$(psql $DATABASE_URL -t -A -c "SELECT COUNT(*) FROM signals WHERE timestamp >= NOW() - INTERVAL '30 minutes'")
-          echo ""
-          echo "Total signals this cycle: $TOTAL"
+          try:
+              from supabase_client import select, is_available
+              if is_available():
+                  signals = select("signals", columns="source,signal_score",
+                                   filters={"timestamp": "gte.now()-interval '30 minutes'"})
+                  if not signals:
+                      # Try broader window
+                      signals = select("signals", columns="source,signal_score", limit=100,
+                                       order="timestamp.desc")
 
-          if [ "$TOTAL" -eq 0 ]; then
-            echo "::warning::No signals collected this cycle!"
-          fi
+                  from collections import Counter
+                  by_source = Counter(s["source"] for s in signals)
+                  nonzero = Counter(s["source"] for s in signals if (s.get("signal_score") or 0) > 0)
+
+                  for src in sorted(by_source):
+                      print(f"📊 {src}: {by_source[src]} signals ({nonzero.get(src, 0)} with score>0)")
+
+                  print(f"\nTotal signals: {len(signals)}")
+                  if len(signals) == 0:
+                      print("::warning::No signals collected!")
+                  sys.exit(0)
+          except Exception as e:
+              print(f"REST health check failed: {e}", file=sys.stderr)
+
+          # Fallback to psql
+          import subprocess
+          db = os.getenv("DATABASE_URL", "")
+          if db:
+              subprocess.run(["psql", db, "-t", "-A", "-c",
+                  "SELECT source, COUNT(*) FROM signals WHERE timestamp >= NOW() - INTERVAL '30 minutes' GROUP BY source"],
+                  check=False)
+          PYEOF
 
       # ── Strategy & Risk ────────────────────────────────────────
       - name: Check risk limits

@@ -15,6 +15,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 from typing import Dict, List
 
+import db_patch  # noqa: F401, E402 — must import before psycopg2
 import psycopg2
 from dotenv import load_dotenv
 

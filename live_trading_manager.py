@@ -16,6 +16,7 @@ import sys
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 
+import db_patch  # noqa: F401, E402 — must import before psycopg2
 import psycopg2
 from dotenv import load_dotenv
 
