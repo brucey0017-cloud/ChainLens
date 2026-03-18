@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
-from typing import Dict, List, Tuple
+from typing import Dict, Tuple
 
 from supabase_client import is_available, select
 

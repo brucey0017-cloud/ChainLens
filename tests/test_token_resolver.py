@@ -1,5 +1,3 @@
-import json
-
 import token_resolver
 from token_resolver import resolve_symbol
 

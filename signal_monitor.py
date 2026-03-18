@@ -10,7 +10,6 @@ from __future__ import annotations
 import json
 import logging
 import subprocess
-import sys
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
@@ -91,6 +90,18 @@ class SignalMonitor:
 
         return 0.0
 
+    @staticmethod
+    def _normalize_timestamp(raw_ts) -> str:
+        """Convert onchainos millisecond epoch or ISO string to ISO 8601."""
+        if not raw_ts:
+            return datetime.now(timezone.utc).isoformat()
+        s = str(raw_ts).strip()
+        # Millisecond epoch (all digits, 13+ chars)
+        if s.isdigit() and len(s) >= 13:
+            return datetime.fromtimestamp(int(s) / 1000, tz=timezone.utc).isoformat()
+        # Already ISO-ish
+        return s or datetime.now(timezone.utc).isoformat()
+
     def store_signals(self, signals: List[Dict]):
         """Store signals in Supabase."""
         if not signals:
@@ -107,7 +118,7 @@ class SignalMonitor:
                     "chain": sig["chain"],
                     "signal_score": round(score, 3),
                     "raw_data": sig.get("raw_data", {}),
-                    "timestamp": sig.get("timestamp") or datetime.now(timezone.utc).isoformat(),
+                    "timestamp": self._normalize_timestamp(sig.get("timestamp")),
                     "processed": False,
                 }
             )

@@ -202,7 +202,7 @@ class MultiSignalScorer:
         print(f"Total Score: {score_data['total_score']:.3f} {'✅' if score_data['meets_threshold'] else '❌'}")
         print(f"Confidence: {score_data['confidence']:.2f}")
         print(f"Sources: {score_data['source_count']}")
-        print(f"\nSource Breakdown:")
+        print("\nSource Breakdown:")
 
         for source, data in score_data['source_scores'].items():
             weight = self.weights.get(source, 0)

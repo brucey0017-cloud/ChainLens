@@ -132,7 +132,21 @@ class StrategyEngine:
         for (token_addr, chain), sigs in token_signals.items():
             token_symbol = sigs[0]["token_symbol"]
 
-            # Market sanity filters first
+            sources = {s["source"] for s in sigs}
+
+            # Enforce real multi-source confirmation before expensive API calls.
+            if "smart_money" not in sources:
+                continue
+            if "twitter_kol" not in sources:
+                continue
+            if not ({"news", "onchain", "technical"} & sources):
+                continue
+
+            max_score = max(s["signal_score"] for s in sigs)
+            if max_score < 0.7:
+                continue
+
+            # Market sanity filters (after source/score gating to reduce API pressure)
             token_info = self.get_token_market_info(token_symbol, token_addr, chain)
             if not token_info:
                 print(f"  Skipped {token_symbol}: cannot fetch market info", file=sys.stderr)
@@ -162,20 +176,6 @@ class StrategyEngine:
                     f"  Skipped {token_symbol}: liquidity ${liquidity:,.0f} < ${min_liquidity:,.0f}",
                     file=sys.stderr,
                 )
-                continue
-
-            sources = {s["source"] for s in sigs}
-
-            # Enforce real multi-source confirmation
-            if "smart_money" not in sources:
-                continue
-            if "twitter_kol" not in sources:
-                continue
-            if not ({"news", "onchain", "technical"} & sources):
-                continue
-
-            max_score = max(s["signal_score"] for s in sigs)
-            if max_score < 0.7:
                 continue
 
             risk_score = self.get_token_risk_score(token_addr, chain)

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import os
+import urllib.parse
 import urllib.request
 from typing import Any, Dict, List, Optional
 
@@ -61,7 +62,7 @@ def select(
     if limit:
         params["limit"] = str(limit)
 
-    qs = "&".join(f"{k}={v}" for k, v in params.items())
+    qs = urllib.parse.urlencode(params, safe="*,.()")
     url = f"{BASE_URL}/rest/v1/{table}?{qs}"
 
     req = urllib.request.Request(url, headers=_headers(), method="GET")
@@ -80,13 +81,15 @@ def insert(table: str, rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     if not rows:
         return []
 
-    # Ensure JSON serialization for complex columns
+    # Ensure JSON serialization for complex columns; convert Decimal/datetime
     sanitized = []
     for r in rows:
         s = {}
         for k, v in r.items():
             if isinstance(v, (dict, list)):
                 s[k] = json.dumps(v)
+            elif hasattr(v, "isoformat"):
+                s[k] = v.isoformat()
             else:
                 s[k] = v
         sanitized.append(s)
@@ -115,10 +118,10 @@ def update(
     if not is_available():
         raise RuntimeError("Supabase REST not configured")
 
-    params = {}
+    params: Dict[str, str] = {}
     params = _build_filters(params, filters)
 
-    qs = "&".join(f"{k}={v}" for k, v in params.items())
+    qs = urllib.parse.urlencode(params, safe="*,.()")
     url = f"{BASE_URL}/rest/v1/{table}?{qs}"
 
     # Ensure JSON serialization
@@ -126,6 +129,8 @@ def update(
     for k, v in updates.items():
         if isinstance(v, (dict, list)):
             payload[k] = json.dumps(v)
+        elif hasattr(v, "isoformat"):
+            payload[k] = v.isoformat()
         else:
             payload[k] = v
 
@@ -148,10 +153,10 @@ def delete(table: str, filters: Optional[Dict[str, str]] = None) -> None:
     if not is_available():
         raise RuntimeError("Supabase REST not configured")
 
-    params = {}
+    params: Dict[str, str] = {}
     params = _build_filters(params, filters)
 
-    qs = "&".join(f"{k}={v}" for k, v in params.items())
+    qs = urllib.parse.urlencode(params, safe="*,.()")
     url = f"{BASE_URL}/rest/v1/{table}?{qs}"
 
     req = urllib.request.Request(
