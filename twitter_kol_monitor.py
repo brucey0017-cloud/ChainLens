@@ -2,30 +2,34 @@
 """
 Twitter KOL Signal Monitor - Uses 6551 OpenTwitter API via TWITTER_TOKEN.
 Falls back gracefully when token is missing.
+
+Writes directly to Supabase REST (no local DB dependency).
 """
+
+from __future__ import annotations
 
 import json
 import os
 import re
 import sys
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List
 
-import db_patch  # noqa: F401, E402 — must import before psycopg2
-import psycopg2
 from dotenv import load_dotenv
+from supabase_client import insert, is_available
+from token_resolver import resolve_symbol
 
 load_dotenv()
 
-DB_URL = os.getenv("DATABASE_URL", "postgresql://localhost/chainlens")
 TWITTER_TOKEN = os.getenv("TWITTER_TOKEN", "")
 TWITTER_API_BASE = "https://ai.6551.io"
 
 
 class TwitterKOLMonitor:
     def __init__(self):
-        self.conn = psycopg2.connect(DB_URL)
+        if not is_available():
+            raise RuntimeError("Supabase REST not configured. Set SUPABASE_URL and SUPABASE_SERVICE_KEY")
 
         # Top crypto KOLs to monitor
         self.kols = [
@@ -136,16 +140,26 @@ class TwitterKOLMonitor:
                 sentiment = self.analyze_sentiment(text)
 
                 for token in tokens:
+                    ident = resolve_symbol(token)
+                    if not ident:
+                        continue
+
                     signal = {
                         "source": "twitter_kol",
-                        "token_symbol": token,
-                        "kol_username": username,
-                        "kol_weight": weight,
-                        "sentiment": sentiment,
-                        "tweet_text": text[:200],
-                        "tweet_url": f"https://x.com/{username}/status/{tweet.get('id', '')}",
+                        "token_symbol": ident["token_symbol"],
+                        "token_address": ident["token_address"],
+                        "chain": ident["chain"],
                         "signal_score": round(sentiment * weight, 3),
-                        "timestamp": datetime.now(),
+                        "raw_data": {
+                            "kol_username": username,
+                            "kol_weight": weight,
+                            "sentiment": sentiment,
+                            "tweet_text": text[:200],
+                            "tweet_url": f"https://x.com/{username}/status/{tweet.get('id', '')}",
+                            "resolved_from": token,
+                        },
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "processed": False,
                     }
                     all_signals.append(signal)
 
@@ -158,51 +172,27 @@ class TwitterKOLMonitor:
         if not signals:
             return
 
-        cur = self.conn.cursor()
-
-        for sig in signals:
-            raw_data = json.dumps(
-                {
-                    "kol_username": sig["kol_username"],
-                    "kol_weight": sig["kol_weight"],
-                    "sentiment": sig["sentiment"],
-                    "tweet_text": sig["tweet_text"],
-                    "tweet_url": sig["tweet_url"],
-                }
+        dedup = {}
+        for s in signals:
+            raw = s.get("raw_data", {})
+            key = (
+                s["source"],
+                s["token_address"],
+                s["chain"],
+                str(raw.get("kol_username", "")),
+                str(raw.get("tweet_url", ""))[:200],
             )
+            dedup[key] = s
 
-            cur.execute(
-                """
-                INSERT INTO signals (
-                    source, token_symbol, token_address, chain, signal_score, raw_data, timestamp
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s)
-            """,
-                (
-                    sig["source"],
-                    sig["token_symbol"],
-                    "",
-                    "unknown",
-                    sig["signal_score"],
-                    raw_data,
-                    sig["timestamp"],
-                ),
-            )
+        rows = list(dedup.values())
+        insert("signals", rows)
+        print(f"Saved {len(rows)} signals to Supabase")
 
-        self.conn.commit()
-        cur.close()
-
-        print(f"Saved {len(signals)} signals to database")
-
-    def close(self):
-        self.conn.close()
 
 
 def main():
     monitor = TwitterKOLMonitor()
-    try:
-        monitor.monitor_kols()
-    finally:
-        monitor.close()
+    monitor.monitor_kols()
 
 
 if __name__ == "__main__":

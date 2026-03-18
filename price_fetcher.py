@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-Price Fetcher - Uses CoinGecko free API (no key required).
-Rate limit: ~10-30 req/min on free tier. We batch where possible.
-Falls back to onchainos CLI for tokens not on CoinGecko.
+Price Fetcher
+
+Priority:
+1) OKX onchainos (address+chain, free)
+2) CoinGecko free API (symbol fallback)
 """
+
+from __future__ import annotations
 
 import json
 import subprocess
@@ -29,6 +33,13 @@ def _rate_limit():
     _LAST_FETCH_TIME = time.time()
 
 
+def _safe_float(v, default: float = 0.0) -> float:
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return default
+
+
 def _get(path: str, params: Optional[Dict[str, str]] = None) -> Optional[Any]:
     """GET from CoinGecko with rate limiting."""
     _rate_limit()
@@ -42,6 +53,17 @@ def _get(path: str, params: Optional[Dict[str, str]] = None) -> Optional[Any]:
             return json.loads(resp.read())
     except Exception as e:
         print(f"  CoinGecko error ({path}): {e}", file=sys.stderr)
+        return None
+
+
+def _run_onchainos(args: List[str], timeout: int = 20) -> Optional[Dict]:
+    try:
+        p = subprocess.run(args, capture_output=True, text=True, timeout=timeout)
+        if p.returncode != 0:
+            return None
+        payload = json.loads(p.stdout)
+        return payload if isinstance(payload, dict) else None
+    except Exception:
         return None
 
 
@@ -62,20 +84,54 @@ def resolve_coingecko_id(symbol: str) -> Optional[str]:
     return None
 
 
-def get_price(symbol: str) -> Optional[float]:
-    """Get current USD price for a token symbol."""
+def get_price(chain: str = "", token_address: str = "", symbol: str = "") -> Optional[float]:
+    """
+    Get current USD price.
+
+    Priority:
+    - onchainos by (chain, token_address)
+    - CoinGecko by symbol
+    """
+    if chain and token_address:
+        p = get_okx_price(chain, token_address)
+        if p and p > 0:
+            return p
+
+    if symbol:
+        return _coingecko_price(symbol)
+
+    return None
+
+
+def get_okx_price(chain: str, token_address: str) -> Optional[float]:
+    data = _run_onchainos(
+        ["onchainos", "market", "price", "--chain", chain, "--address", token_address],
+        timeout=20,
+    )
+    if not data or not data.get("ok"):
+        return None
+
+    rows = data.get("data", [])
+    if isinstance(rows, list) and rows:
+        return _safe_float(rows[0].get("price"), 0.0) or None
+    if isinstance(rows, dict):
+        return _safe_float(rows.get("price"), 0.0) or None
+    return None
+
+
+def _coingecko_price(symbol: str) -> Optional[float]:
     cg_id = resolve_coingecko_id(symbol)
     if not cg_id:
-        return _fallback_onchainos_price(symbol)
+        return None
 
     data = _get("/simple/price", {"ids": cg_id, "vs_currencies": "usd"})
     if data and cg_id in data:
         return data[cg_id].get("usd")
-    return _fallback_onchainos_price(symbol)
+    return None
 
 
 def get_prices_batch(symbols: List[str]) -> Dict[str, float]:
-    """Batch price fetch — resolves IDs then does one call."""
+    """Batch price fetch from CoinGecko (symbol fallback path)."""
     id_map = {}
     for sym in symbols:
         cg_id = resolve_coingecko_id(sym)
@@ -97,8 +153,34 @@ def get_prices_batch(symbols: List[str]) -> Dict[str, float]:
     return result
 
 
-def get_market_data(symbol: str) -> Optional[Dict]:
-    """Get detailed market data: price, market_cap, volume, 24h change."""
+def get_market_data(symbol: str = "", token_address: str = "", chain: str = "") -> Optional[Dict]:
+    """
+    Get detailed market data: price, market_cap, liquidity, volume, 24h change.
+
+    Priority:
+    - onchainos token price-info by (address, chain)
+    - CoinGecko by symbol
+    """
+    if chain and token_address:
+        okx = _run_onchainos(
+            ["onchainos", "token", "price-info", "--chain", chain, "--address", token_address],
+            timeout=25,
+        )
+        if okx and okx.get("ok"):
+            rows = okx.get("data", [])
+            row = rows[0] if isinstance(rows, list) and rows else (rows if isinstance(rows, dict) else None)
+            if isinstance(row, dict):
+                return {
+                    "price": _safe_float(row.get("price"), 0.0),
+                    "market_cap": _safe_float(row.get("marketCap"), 0.0),
+                    "liquidity": _safe_float(row.get("liquidity"), 0.0),
+                    "volume_24h": _safe_float(row.get("volume24H"), 0.0),
+                    "change_24h": _safe_float(row.get("priceChange24H"), 0.0),
+                }
+
+    if not symbol:
+        return None
+
     cg_id = resolve_coingecko_id(symbol)
     if not cg_id:
         return None
@@ -120,6 +202,7 @@ def get_market_data(symbol: str) -> Optional[Dict]:
     return {
         "price": d.get("usd", 0),
         "market_cap": d.get("usd_market_cap", 0),
+        "liquidity": d.get("usd_24h_vol", 0),
         "volume_24h": d.get("usd_24h_vol", 0),
         "change_24h": d.get("usd_24h_change", 0),
     }
@@ -142,28 +225,12 @@ def get_trending() -> List[Dict]:
     return coins
 
 
-def _fallback_onchainos_price(symbol: str) -> Optional[float]:
-    """Fallback: try onchainos CLI for price."""
-    try:
-        result = subprocess.run(
-            ["onchainos", "market", "price", "--symbol", symbol],
-            capture_output=True, text=True, timeout=15,
-        )
-        if result.returncode == 0:
-            data = json.loads(result.stdout)
-            return float(data.get("data", {}).get("price") or data.get("data", {}).get("priceUsd") or 0) or None
-    except Exception:
-        pass
-    return None
-
-
 if __name__ == "__main__":
     # Quick self-test
-    print("Testing CoinGecko price fetcher...")
-    for sym in ["SOL", "ETH", "BONK"]:
-        p = get_price(sym)
-        print(f"  {sym}: ${p}" if p else f"  {sym}: unavailable")
+    print("Testing price fetcher...")
+    p = get_price(chain="solana", token_address="So11111111111111111111111111111111111111112")
+    print(f"  wSOL(Solana): ${p}" if p else "  wSOL(Solana): unavailable")
 
-    print("\nTrending coins:")
-    for c in get_trending()[:5]:
-        print(f"  {c['symbol']:8s} rank={c['market_cap_rank']}")
+    for sym in ["SOL", "ETH", "BONK"]:
+        p = get_price(symbol=sym)
+        print(f"  {sym}: ${p}" if p else f"  {sym}: unavailable")

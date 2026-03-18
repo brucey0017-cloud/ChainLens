@@ -4,7 +4,11 @@ News Signal Monitor
 Priority:
 1) OpenNews 6551 API (if OPENNEWS_TOKEN exists)
 2) Free RSS fallback (CoinTelegraph/CoinDesk/Decrypt/TheBlock)
+
+Writes directly to Supabase REST (no local DB dependency).
 """
+
+from __future__ import annotations
 
 import json
 import os
@@ -12,16 +16,15 @@ import re
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List
 
-import db_patch  # noqa: F401, E402 — must import before psycopg2
-import psycopg2
 from dotenv import load_dotenv
+from supabase_client import insert, is_available
+from token_resolver import resolve_symbol
 
 load_dotenv()
 
-DB_URL = os.getenv("DATABASE_URL", "postgresql://localhost/chainlens")
 OPENNEWS_TOKEN = os.getenv("OPENNEWS_TOKEN", "")
 OPENNEWS_BASE = "https://ai.6551.io"
 
@@ -33,10 +36,10 @@ RSS_FEEDS = [
 ]
 
 FALSE_POSITIVES = {
-    "CEO", "SEC", "ETF", "IPO", "ICO", "NFT", "DAO", "DeFi", "TVL",
+    "CEO", "SEC", "ETF", "IPO", "ICO", "NFT", "DAO", "DEFI", "TVL",
     "API", "USD", "EUR", "GBP", "JPY", "CNY", "RWA", "DEX", "CEX",
     "AMM", "APR", "APY", "ATH", "ATL", "FUD", "FOMO", "KYC", "AML",
-    "OTC", "P2P", "PoS", "PoW", "TPS", "MEV", "EVM", "L1", "L2", "L3",
+    "OTC", "P2P", "POS", "POW", "TPS", "MEV", "EVM", "L1", "L2", "L3",
     "ZKP", "THE", "AND", "FOR", "WITH", "FROM", "THIS", "THAT", "WILL",
 }
 
@@ -55,7 +58,8 @@ NEGATIVE_WORDS = frozenset([
 
 class NewsMonitor:
     def __init__(self):
-        self.conn = psycopg2.connect(DB_URL)
+        if not is_available():
+            raise RuntimeError("Supabase REST not configured. Set SUPABASE_URL and SUPABASE_SERVICE_KEY")
 
     def post_opennews(self, payload: Dict) -> Dict:
         if not OPENNEWS_TOKEN:
@@ -127,7 +131,7 @@ class NewsMonitor:
         matches = set(re.findall(r"\$([A-Z]{2,10})\b", text))
         # add plain uppercase words as soft candidates
         matches |= set(re.findall(r"\b([A-Z]{2,6})\b", text.upper()))
-        return [t for t in matches if t not in FALSE_POSITIVES]
+        return [t for t in matches if t and t not in FALSE_POSITIVES]
 
     @staticmethod
     def analyze_sentiment(title: str, description: str) -> Dict:
@@ -144,7 +148,7 @@ class NewsMonitor:
     def monitor_news(self):
         """Collect news signals from OpenNews or RSS fallback."""
         print(f"=== News Monitor - {datetime.now().isoformat()} ===")
-        all_signals = []
+        all_signals: List[Dict] = []
 
         # 1) OpenNews primary
         opennews_articles = self.fetch_opennews_articles(limit=80)
@@ -162,8 +166,9 @@ class NewsMonitor:
                 if isinstance(coins, list):
                     for c in coins:
                         s = (c or {}).get("symbol")
+                        s = str(s).upper() if s else ""
                         if s and s not in FALSE_POSITIVES:
-                            symbols.append(str(s).upper())
+                            symbols.append(s)
 
                 if not symbols:
                     symbols = self.extract_tokens(text)
@@ -184,23 +189,26 @@ class NewsMonitor:
                 base_score = max(0.0, min(1.0, ai_score * sentiment_adjust))
 
                 for sym in set(symbols):
+                    ident = resolve_symbol(sym)
+                    if not ident:
+                        continue
                     all_signals.append(
                         {
                             "source": "news",
-                            "token_symbol": sym,
-                            "token_address": "",
-                            "chain": "unknown",
+                            "token_symbol": ident["token_symbol"],
+                            "token_address": ident["token_address"],
+                            "chain": ident["chain"],
                             "signal_score": round(base_score, 3),
-                            "raw_data": json.dumps(
-                                {
-                                    "title": title,
-                                    "url": link,
-                                    "news_source": source,
-                                    "ai_signal": signal,
-                                    "ai_score": ai_score,
-                                }
-                            ),
-                            "timestamp": datetime.now(),
+                            "raw_data": {
+                                "title": title,
+                                "url": link,
+                                "news_source": source,
+                                "ai_signal": signal,
+                                "ai_score": ai_score,
+                                "resolved_from": sym,
+                            },
+                            "timestamp": datetime.now(timezone.utc).isoformat(),
+                            "processed": False,
                         }
                     )
 
@@ -217,22 +225,25 @@ class NewsMonitor:
                     sentiment = self.analyze_sentiment(art["title"], art["description"])
                     score = sentiment["score"] * sentiment["confidence"] * feed["weight"]
                     for sym in set(tokens):
+                        ident = resolve_symbol(sym)
+                        if not ident:
+                            continue
                         all_signals.append(
                             {
                                 "source": "news",
-                                "token_symbol": sym,
-                                "token_address": "",
-                                "chain": "unknown",
+                                "token_symbol": ident["token_symbol"],
+                                "token_address": ident["token_address"],
+                                "chain": ident["chain"],
                                 "signal_score": round(max(0.0, min(1.0, score)), 3),
-                                "raw_data": json.dumps(
-                                    {
-                                        "title": art["title"][:200],
-                                        "url": art["url"],
-                                        "news_source": feed["source"],
-                                        "sentiment": sentiment["label"],
-                                    }
-                                ),
-                                "timestamp": datetime.now(),
+                                "raw_data": {
+                                    "title": art["title"][:200],
+                                    "url": art["url"],
+                                    "news_source": feed["source"],
+                                    "sentiment": sentiment["label"],
+                                    "resolved_from": sym,
+                                },
+                                "timestamp": datetime.now(timezone.utc).isoformat(),
+                                "processed": False,
                             }
                         )
 
@@ -243,39 +254,29 @@ class NewsMonitor:
     def save_signals(self, signals: List[Dict]):
         if not signals:
             return
-        cur = self.conn.cursor()
-        for sig in signals:
-            cur.execute(
-                """
-                INSERT INTO signals (source, token_symbol, token_address, chain,
-                                     signal_score, raw_data, timestamp, processed)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-            """,
-                (
-                    sig["source"],
-                    sig["token_symbol"],
-                    sig["token_address"],
-                    sig["chain"],
-                    sig["signal_score"],
-                    sig["raw_data"],
-                    sig["timestamp"],
-                    False,
-                ),
-            )
-        self.conn.commit()
-        cur.close()
-        print(f"Saved {len(signals)} news signals to database")
 
-    def close(self):
-        self.conn.close()
+        # Deduplicate in-memory by (source, token_address, chain, title/url hash-ish)
+        dedup = {}
+        for s in signals:
+            raw = s.get("raw_data", {})
+            key = (
+                s["source"],
+                s["token_address"],
+                s["chain"],
+                str(raw.get("url", ""))[:200],
+                str(raw.get("title", ""))[:120],
+            )
+            dedup[key] = s
+
+        rows = list(dedup.values())
+        insert("signals", rows)
+        print(f"Saved {len(rows)} news signals to Supabase")
+
 
 
 def main():
     monitor = NewsMonitor()
-    try:
-        monitor.monitor_news()
-    finally:
-        monitor.close()
+    monitor.monitor_news()
 
 
 if __name__ == "__main__":

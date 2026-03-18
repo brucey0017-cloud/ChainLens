@@ -1,33 +1,32 @@
 #!/usr/bin/env python3
 """
-Unified Supabase client for ChainLens.
+Supabase REST client (minimal).
 
-Routes all DB operations through the Supabase REST API (PostgREST),
-bypassing IPv6-only direct connections.
-
-Env vars:
-  SUPABASE_URL         – e.g. https://xxx.supabase.co
-  SUPABASE_SERVICE_KEY – service_role JWT (full access)
-  DATABASE_URL         – fallback: direct psycopg2 connection
+Requirements:
+- SUPABASE_URL
+- SUPABASE_SERVICE_KEY (service role, not anon)
 """
+
+from __future__ import annotations
 
 import json
 import os
-from datetime import datetime, timezone
+import urllib.request
 from typing import Any, Dict, List, Optional
 
-import requests
-
-SUPABASE_URL = os.getenv("SUPABASE_URL", "")
-SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY", "")
-
-_REST_AVAILABLE = bool(SUPABASE_URL and SUPABASE_KEY)
+BASE_URL = os.getenv("SUPABASE_URL", "")
+SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY", "")
 
 
-def _headers(*, prefer: str = "") -> dict:
+def is_available() -> bool:
+    """Check if Supabase REST credentials are configured."""
+    return bool(BASE_URL and SERVICE_KEY)
+
+
+def _headers(prefer: str = "") -> Dict[str, str]:
     h = {
-        "apikey": SUPABASE_KEY,
-        "Authorization": f"Bearer {SUPABASE_KEY}",
+        "apikey": SERVICE_KEY,
+        "Authorization": f"Bearer {SERVICE_KEY}",
         "Content-Type": "application/json",
     }
     if prefer:
@@ -35,141 +34,129 @@ def _headers(*, prefer: str = "") -> dict:
     return h
 
 
-def _base() -> str:
-    return f"{SUPABASE_URL.rstrip('/')}/rest/v1"
-
-
-# ── generic CRUD ──────────────────────────────────────────────
-
-def insert(table: str, rows: List[Dict[str, Any]], *, upsert: bool = False) -> List[Dict]:
-    """Insert rows via REST API. Returns inserted rows."""
-    if not _REST_AVAILABLE:
-        raise RuntimeError("SUPABASE_URL / SUPABASE_SERVICE_KEY not set")
-    prefer = "return=representation"
-    if upsert:
-        prefer += ",resolution=merge-duplicates"
-    resp = requests.post(
-        f"{_base()}/{table}",
-        headers=_headers(prefer=prefer),
-        json=rows,
-        timeout=15,
-    )
-    resp.raise_for_status()
-    return resp.json()
+def _build_filters(params: Dict[str, str], filters: Optional[Dict[str, str]]) -> Dict[str, str]:
+    if not filters:
+        return params
+    for k, v in filters.items():
+        # PostgREST filter syntax: key=eq.value / gte.value / in.(a,b)
+        params[k] = v
+    return params
 
 
 def select(
     table: str,
-    *,
     columns: str = "*",
     filters: Optional[Dict[str, str]] = None,
-    order: str = "",
-    limit: int = 0,
-) -> List[Dict]:
-    """Select rows via REST API."""
-    if not _REST_AVAILABLE:
-        raise RuntimeError("SUPABASE_URL / SUPABASE_SERVICE_KEY not set")
-    params: Dict[str, str] = {"select": columns}
-    if filters:
-        params.update(filters)
+    order: Optional[str] = None,
+    limit: Optional[int] = None,
+) -> List[Dict[str, Any]]:
+    """Perform a SELECT query via PostgREST."""
+    if not is_available():
+        raise RuntimeError("Supabase REST not configured")
+
+    params = {"select": columns}
+    params = _build_filters(params, filters)
     if order:
         params["order"] = order
     if limit:
         params["limit"] = str(limit)
-    resp = requests.get(
-        f"{_base()}/{table}",
-        headers=_headers(),
-        params=params,
-        timeout=15,
+
+    qs = "&".join(f"{k}={v}" for k, v in params.items())
+    url = f"{BASE_URL}/rest/v1/{table}?{qs}"
+
+    req = urllib.request.Request(url, headers=_headers(), method="GET")
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = json.loads(resp.read())
+    if not isinstance(data, list):
+        return []
+    return data
+
+
+def insert(table: str, rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Insert rows and return inserted records."""
+    if not is_available():
+        raise RuntimeError("Supabase REST not configured")
+
+    if not rows:
+        return []
+
+    # Ensure JSON serialization for complex columns
+    sanitized = []
+    for r in rows:
+        s = {}
+        for k, v in r.items():
+            if isinstance(v, (dict, list)):
+                s[k] = json.dumps(v)
+            else:
+                s[k] = v
+        sanitized.append(s)
+
+    url = f"{BASE_URL}/rest/v1/{table}"
+    body = json.dumps(sanitized).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=body,
+        headers=_headers(prefer="return=representation"),
+        method="POST",
     )
-    resp.raise_for_status()
-    return resp.json()
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = json.loads(resp.read())
+    if not isinstance(data, list):
+        return []
+    return data
 
 
 def update(
     table: str,
-    data: Dict[str, Any],
-    *,
-    filters: Dict[str, str],
-) -> List[Dict]:
-    """Update rows matching filters."""
-    if not _REST_AVAILABLE:
-        raise RuntimeError("SUPABASE_URL / SUPABASE_SERVICE_KEY not set")
-    resp = requests.patch(
-        f"{_base()}/{table}",
+    updates: Dict[str, Any],
+    filters: Optional[Dict[str, str]] = None,
+) -> List[Dict[str, Any]]:
+    """Update rows matching filters and return updated records."""
+    if not is_available():
+        raise RuntimeError("Supabase REST not configured")
+
+    params = {}
+    params = _build_filters(params, filters)
+
+    qs = "&".join(f"{k}={v}" for k, v in params.items())
+    url = f"{BASE_URL}/rest/v1/{table}?{qs}"
+
+    # Ensure JSON serialization
+    payload = {}
+    for k, v in updates.items():
+        if isinstance(v, (dict, list)):
+            payload[k] = json.dumps(v)
+        else:
+            payload[k] = v
+
+    body = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=body,
         headers=_headers(prefer="return=representation"),
-        params=filters,
-        json=data,
-        timeout=15,
+        method="PATCH",
     )
-    resp.raise_for_status()
-    return resp.json()
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = json.loads(resp.read())
+    if not isinstance(data, list):
+        return []
+    return data
 
 
-def rpc(fn: str, params: Optional[Dict[str, Any]] = None) -> Any:
-    """Call a Postgres function via RPC."""
-    if not _REST_AVAILABLE:
-        raise RuntimeError("SUPABASE_URL / SUPABASE_SERVICE_KEY not set")
-    resp = requests.post(
-        f"{_base()}/rpc/{fn}",
-        headers=_headers(),
-        json=params or {},
-        timeout=15,
+def delete(table: str, filters: Optional[Dict[str, str]] = None) -> None:
+    """Delete rows matching filters."""
+    if not is_available():
+        raise RuntimeError("Supabase REST not configured")
+
+    params = {}
+    params = _build_filters(params, filters)
+
+    qs = "&".join(f"{k}={v}" for k, v in params.items())
+    url = f"{BASE_URL}/rest/v1/{table}?{qs}"
+
+    req = urllib.request.Request(
+        url,
+        headers=_headers(prefer="return=representation"),
+        method="DELETE",
     )
-    resp.raise_for_status()
-    return resp.json()
-
-
-# ── convenience helpers ───────────────────────────────────────
-
-def insert_signal(
-    source: str,
-    token_symbol: str,
-    token_address: str,
-    chain: str,
-    signal_score: float,
-    raw_data: Any = None,
-) -> Dict:
-    """Insert a single signal row."""
-    row = {
-        "source": source,
-        "token_symbol": token_symbol,
-        "token_address": token_address,
-        "chain": chain,
-        "signal_score": round(signal_score, 2),
-        "raw_data": json.dumps(raw_data) if raw_data else "{}",
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-    }
-    result = insert("signals", [row])
-    return result[0] if result else row
-
-
-def get_recent_signals(hours: int = 2, source: Optional[str] = None) -> List[Dict]:
-    """Get signals from the last N hours."""
-    from datetime import timedelta
-    cutoff = (datetime.now(timezone.utc) - timedelta(hours=hours)).isoformat()
-    filters: Dict[str, str] = {"timestamp": f"gte.{cutoff}"}
-    if source:
-        filters["source"] = f"eq.{source}"
-    return select("signals", order="timestamp.desc", filters=filters, limit=500)
-
-
-def insert_trade(trade: Dict[str, Any]) -> Dict:
-    """Insert a trade row."""
-    result = insert("trades", [trade])
-    return result[0] if result else trade
-
-
-def get_open_trades() -> List[Dict]:
-    """Get all open trades."""
-    return select("trades", filters={"status": "eq.open"}, order="opened_at.desc")
-
-
-def update_trade(trade_id: int, data: Dict[str, Any]) -> List[Dict]:
-    """Update a trade by ID."""
-    return update("trades", data, filters={"id": f"eq.{trade_id}"})
-
-
-def is_available() -> bool:
-    """Check if Supabase REST API is configured."""
-    return _REST_AVAILABLE
+    urllib.request.urlopen(req, timeout=30)

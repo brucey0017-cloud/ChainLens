@@ -363,7 +363,7 @@ def build_report_filename(address: str, chain: str, timestamp: str | None = None
 
 
 def audit_token(address: str, chain: str) -> int:
-    """Run full audit on a token."""
+    """Run full audit on a token and write a report file. Returns exit code."""
     print(f"🔍 ChainLens Auditing: {address} on {chain.upper()}")
     print("   Fetching data from OKX OnchainOS...\n")
 
@@ -384,6 +384,45 @@ def audit_token(address: str, chain: str) -> int:
     filename.write_text(report, encoding="utf-8")
     print(f"\n📄 Report saved to: {filename}")
     return 0
+
+
+class TokenAuditor:
+    """
+    Programmatic auditor returning structured results.
+    Used by strategy_engine to get risk_score without printing a report.
+    """
+
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def _to_score_int(score):
+        try:
+            return int(score)
+        except Exception:
+            return 0
+
+    def audit_token(self, address: str, chain: str) -> dict:
+        """
+        Perform audit and return a dict including risk_score (0-100, higher is riskier).
+        Returns at least: {"risk_score": int, "factors": list[str]}
+        """
+        price_data = get_price_info(address, chain)
+        holders_data = get_holders(address, chain)
+        dev_data = get_dev_info(address, chain)
+        details_data = get_token_details(address, chain)
+        bundle_data = get_bundle_info(address, chain)
+
+        score, factors = calculate_risk_score(price_data, holders_data, dev_data, details_data, bundle_data)
+        return {
+            "risk_score": self._to_score_int(score),
+            "factors": factors,
+            "price_data": price_data,
+            "holders_data": holders_data,
+            "dev_data": dev_data,
+            "details_data": details_data,
+            "bundle_data": bundle_data,
+        }
 
 
 def build_parser() -> argparse.ArgumentParser:

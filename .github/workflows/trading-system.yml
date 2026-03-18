@@ -19,29 +19,16 @@ jobs:
   trading-system:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: chainlens
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-
     env:
-      # Supabase REST API (preferred — works everywhere, no IPv6 issues)
+      # Supabase REST (single data plane)
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-      # Direct DB fallback (local postgres service)
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+      # Optional: direct DB URL for admin scripts (not used by main path)
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
       # Signal source tokens
       OPENNEWS_TOKEN: ${{ secrets.OPENNEWS_TOKEN }}
       TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
+      TRADING_MODE: paper
 
     steps:
       - name: Checkout code
@@ -54,39 +41,37 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install psycopg2-binary python-dotenv web3 requests
+          python -m pip install --upgrade pip
+          pip install python-dotenv requests
 
-          # Install onchainos CLI (for Smart Money signals)
+          # Install onchainos CLI (OKX)
           curl -sSL https://raw.githubusercontent.com/okx/onchainos-skills/main/install.sh | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Initialize database
+      - name: Verify Supabase REST connectivity
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
-          echo "=== Database Setup ==="
-          python3 -c "from db_adapter import print_status; print_status()"
+          python3 << 'PYEOF'
+          import os, sys
+          sys.path.insert(0, '.')
+          from supabase_client import select, is_available
+          if not is_available():
+              print("::error::Supabase REST not configured. Set SUPABASE_URL and SUPABASE_SERVICE_KEY.")
+              sys.exit(1)
+          rows = select("trading_config", columns="config_key", limit=1)
+          print(f"Supabase REST: OK ({len(rows)} config rows)")
+          PYEOF
 
-          # Always init local postgres (for fallback)
-          psql "postgresql://postgres:postgres@localhost:5432/chainlens" -f schema.sql 2>/dev/null || true
-
-          # Verify Supabase REST connectivity
-          if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_SERVICE_KEY" ]; then
-            python3 -c "
-          from supabase_client import select
-          rows = select('trading_config', limit=1)
-          print(f'Supabase REST: OK ({len(rows)} config rows)')
-          " && echo "Using Supabase REST API" || echo "::warning::Supabase REST failed, using local postgres"
-          else
-            echo "No Supabase credentials, using local postgres"
-          fi
-
-      # ── Signal Collection ──────────────────────────────────────
+      # ── Signal Collection (non-critical sources may fail with warning) ───────
       - name: Collect Smart Money signals
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         run: python3 signal_monitor.py
 
       - name: Collect news signals (OpenNews + RSS fallback)
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        run: python3 news_monitor.py
+        run: python3 news_monitor.py || echo "::warning::News monitor failed"
 
       - name: Collect Twitter KOL signals (OpenTwitter)
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
@@ -104,51 +89,10 @@ jobs:
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         run: python3 multi_signal_scorer.py || echo "::warning::Multi-signal scorer failed"
 
-      # ── Health Check ───────────────────────────────────────────
-      - name: Signal health report
-        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        run: |
-          python3 << 'PYEOF'
-          import os, sys
-          sys.path.insert(0, '.')
-
-          try:
-              from supabase_client import select, is_available
-              if is_available():
-                  signals = select("signals", columns="source,signal_score",
-                                   filters={"timestamp": "gte.now()-interval '30 minutes'"})
-                  if not signals:
-                      # Try broader window
-                      signals = select("signals", columns="source,signal_score", limit=100,
-                                       order="timestamp.desc")
-
-                  from collections import Counter
-                  by_source = Counter(s["source"] for s in signals)
-                  nonzero = Counter(s["source"] for s in signals if (s.get("signal_score") or 0) > 0)
-
-                  for src in sorted(by_source):
-                      print(f"📊 {src}: {by_source[src]} signals ({nonzero.get(src, 0)} with score>0)")
-
-                  print(f"\nTotal signals: {len(signals)}")
-                  if len(signals) == 0:
-                      print("::warning::No signals collected!")
-                  sys.exit(0)
-          except Exception as e:
-              print(f"REST health check failed: {e}", file=sys.stderr)
-
-          # Fallback to psql
-          import subprocess
-          db = os.getenv("DATABASE_URL", "")
-          if db:
-              subprocess.run(["psql", db, "-t", "-A", "-c",
-                  "SELECT source, COUNT(*) FROM signals WHERE timestamp >= NOW() - INTERVAL '30 minutes' GROUP BY source"],
-                  check=False)
-          PYEOF
-
-      # ── Strategy & Risk ────────────────────────────────────────
+      # ── Strategy & Risk (critical - fail the job on error) ───────────────────
       - name: Check risk limits
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
-        run: python3 intelligent_risk_manager.py || echo "::warning::Risk manager failed"
+        run: python3 intelligent_risk_manager.py
 
       - name: Run strategy engine
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
@@ -158,7 +102,11 @@ jobs:
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         run: python3 position_monitor.py
 
-      # ── Dashboard ──────────────────────────────────────────────
+      - name: Manage live trading approvals
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        run: python3 live_trading_manager.py || echo "::warning::Live trading manager failed"
+
+      # ── Dashboard ─────────────────────────────────────────────────────────────
       - name: Generate dashboard data
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         run: |
@@ -166,11 +114,11 @@ jobs:
           mkdir -p docs
           [ -f index.html ] && mv index.html docs/
 
-      # ── Backtest / Report ──────────────────────────────────────
+      # ── Backtest / Report ──────────────────────────────────────────────────────
       - name: Run backtester
         if: github.event.inputs.task == 'backtest' || github.event.inputs.task == 'report'
         run: python3 auto_backtester.py || echo "::warning::Backtester failed"
 
       - name: Generate daily report
         if: github.event.inputs.task == 'report'
-        run: python3 daily_report.py
+        run: python3 daily_report.py || echo "::warning::Daily report failed"
