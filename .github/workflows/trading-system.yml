@@ -34,7 +34,10 @@ jobs:
           - 5432:5432
 
     env:
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/chainlens
+      # Prefer Supabase if configured, else fall back to local postgres service
+      DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/chainlens' }}
+      OPENNEWS_TOKEN: ${{ secrets.OPENNEWS_TOKEN }}
+      TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
 
     steps:
       - name: Checkout code
@@ -55,12 +58,18 @@ jobs:
 
       - name: Initialize database
         run: |
-          if psql $DATABASE_URL -c '\dt' 2>/dev/null | grep -q 'trades'; then
+          if echo "$DATABASE_URL" | grep -q "localhost:5432/chainlens"; then
+            echo "Using local PostgreSQL service"
+          else
+            echo "Using external database (Supabase/hosted)"
+          fi
+
+          if psql "$DATABASE_URL" -c '\dt' 2>/dev/null | grep -q 'trades'; then
             echo "Database exists, running migration..."
-            python3 migrate_db.py
+            python3 migrate_db.py || true
           else
             echo "Fresh database, creating schema..."
-            psql $DATABASE_URL -f schema.sql
+            psql "$DATABASE_URL" -f schema.sql
           fi
 
       # ── Signal Collection ──────────────────────────────────────
@@ -68,9 +77,13 @@ jobs:
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         run: python3 signal_monitor.py
 
-      - name: Collect news signals (RSS)
+      - name: Collect news signals (OpenNews + RSS fallback)
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
         run: python3 news_monitor.py
+
+      - name: Collect Twitter KOL signals (OpenTwitter)
+        if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
+        run: python3 twitter_kol_monitor.py || echo "::warning::Twitter KOL monitor failed"
 
       - name: Collect on-chain metrics
         if: github.event.inputs.task == 'monitor' || github.event_name == 'schedule'
