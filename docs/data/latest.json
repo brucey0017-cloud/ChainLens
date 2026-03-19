@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-19 10:29 UTC",
+  "updatedAt": "2026-03-19 11:08 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,7 +12,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 27.1366%"
+      "finding": "Top10 holders: 27.2303%"
     },
     {
       "token": "VAFR",
@@ -26,7 +26,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.2056%"
+      "finding": "Top10 holders: 21.4969%"
     },
     {
       "token": "COLLECTIBLE",
@@ -59,7 +59,7 @@
       "usd": "1,013",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 27.1366%"
+      "finding": "Top10 holders: 27.2303%"
     },
     {
       "t": "03:31 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,244",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.2056%"
+      "finding": "Top10 holders: 21.4969%"
     },
     {
       "t": "23:21 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,602",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.0975%"
+      "finding": "Top10 holders: 15.988%"
     },
     {
       "t": "17:02 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,567",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 42.349%"
+      "finding": "Top10 holders: 43.3961%"
     }
   ]
 }
