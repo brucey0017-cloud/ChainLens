@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-19 10:15 UTC",
+  "updatedAt": "2026-03-19 10:29 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,7 +12,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 26.9518%"
+      "finding": "Top10 holders: 27.1366%"
     },
     {
       "token": "VAFR",
@@ -59,7 +59,7 @@
       "usd": "1,013",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 26.9518%"
+      "finding": "Top10 holders: 27.1366%"
     },
     {
       "t": "03:31 UTC",
@@ -138,8 +138,8 @@
       "token": "ALIENS",
       "usd": "4,444",
       "wallets": 9,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.7461%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.2645%"
     },
     {
       "t": "16:36 UTC",
@@ -148,8 +148,8 @@
       "token": "ALIENS",
       "usd": "1,362",
       "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.7461%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.2645%"
     },
     {
       "t": "11:47 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,567",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 42.3861%"
+      "finding": "Top10 holders: 42.349%"
     }
   ]
 }
