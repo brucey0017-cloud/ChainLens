@@ -1,175 +1,175 @@
 {
-  "updatedAt": "2026-03-13 03:51 UTC",
+  "updatedAt": "2026-03-19 10:15 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 53.3,
-    "criticalAlerts": 2
+    "avgRisk": 50.0,
+    "criticalAlerts": 0
   },
   "audits": [
     {
-      "token": "XPD",
+      "token": "Chibify",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.0158%"
+      "finding": "Top10 holders: 26.9518%"
     },
     {
-      "token": "SOS",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 11.8264%"
-    },
-    {
-      "token": "WID",
+      "token": "VAFR",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 25.8712%"
+      "finding": "Top10 holders: 28.8323%"
     },
     {
-      "token": "LOS",
-      "chain": "solana",
-      "level": "high",
-      "score": 72,
-      "finding": "Top10 holders: 69.1679%"
-    },
-    {
-      "token": "LOS",
-      "chain": "solana",
-      "level": "high",
-      "score": 72,
-      "finding": "Top10 holders: 69.1679%"
-    },
-    {
-      "token": "HeavyPulp",
+      "token": "SQUIRE",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.1995%"
+      "finding": "Top10 holders: 22.2056%"
+    },
+    {
+      "token": "COLLECTIBLE",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 22.4738%"
+    },
+    {
+      "token": "ZEROCLAW",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 25.8974%"
+    },
+    {
+      "token": "ZEROCLAW",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 25.8974%"
     }
   ],
   "signals": [
     {
-      "t": "02:19 UTC",
+      "t": "08:24 UTC",
       "chain": "solana",
       "type": "Smart Money",
-      "token": "XPD",
-      "usd": "1,281",
-      "wallets": 3,
+      "token": "Chibify",
+      "usd": "1,013",
+      "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.0158%"
+      "finding": "Top10 holders: 26.9518%"
     },
     {
-      "t": "01:56 UTC",
+      "t": "03:31 UTC",
       "chain": "solana",
       "type": "Smart Money",
-      "token": "SOS",
-      "usd": "1,184",
-      "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 11.8264%"
+      "token": "VAFR",
+      "usd": "1,551",
+      "wallets": 8,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 28.8323%"
     },
     {
-      "t": "01:15 UTC",
+      "t": "23:22 UTC",
       "chain": "solana",
       "type": "Smart Money",
-      "token": "WID",
+      "token": "SQUIRE",
       "usd": "1,244",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 25.8712%"
+      "finding": "Top10 holders: 22.2056%"
     },
     {
-      "t": "00:27 UTC",
+      "t": "23:21 UTC",
       "chain": "solana",
       "type": "Smart Money",
-      "token": "LOS",
-      "usd": "2,981",
-      "wallets": 5,
-      "riskLevel": "high",
-      "finding": "Top10 holders: 69.1679%"
-    },
-    {
-      "t": "00:27 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "LOS",
-      "usd": "1,531",
-      "wallets": 3,
-      "riskLevel": "high",
-      "finding": "Top10 holders: 69.1679%"
-    },
-    {
-      "t": "23:33 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "HeavyPulp",
-      "usd": "1,085",
+      "token": "COLLECTIBLE",
+      "usd": "1,023",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.1995%"
+      "finding": "Top10 holders: 22.4738%"
     },
     {
-      "t": "23:18 UTC",
+      "t": "21:07 UTC",
       "chain": "solana",
       "type": "Smart Money",
-      "token": "Distorted",
-      "usd": "1,296",
-      "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 14.2496%"
+      "token": "ZEROCLAW",
+      "usd": "3,251",
+      "wallets": 7,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 25.8974%"
     },
     {
-      "t": "22:43 UTC",
+      "t": "20:44 UTC",
       "chain": "solana",
       "type": "Smart Money",
-      "token": "90S",
-      "usd": "1,623",
-      "wallets": 6,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.4898%"
-    },
-    {
-      "t": "22:19 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "Hachimi",
-      "usd": "2,384",
+      "token": "ZEROCLAW",
+      "usd": "1,442",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 25.1181%"
+      "finding": "Top10 holders: 25.8974%"
     },
     {
-      "t": "22:10 UTC",
+      "t": "17:56 UTC",
       "chain": "solana",
       "type": "Smart Money",
-      "token": "Hachimi",
-      "usd": "1,374",
-      "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 25.1181%"
+      "token": "abcdefg",
+      "usd": "1,411",
+      "wallets": 5,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 17.3299%"
     },
     {
-      "t": "21:51 UTC",
+      "t": "17:10 UTC",
       "chain": "solana",
       "type": "Smart Money",
-      "token": "Snorp",
-      "usd": "1,054",
-      "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 27.9738%"
+      "token": "Aliens",
+      "usd": "1,602",
+      "wallets": 8,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 15.0975%"
     },
     {
-      "t": "21:17 UTC",
+      "t": "17:02 UTC",
       "chain": "solana",
       "type": "Smart Money",
-      "token": "shitcoin",
-      "usd": "3,279",
+      "token": "ALIENS",
+      "usd": "4,444",
+      "wallets": 9,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.7461%"
+    },
+    {
+      "t": "16:36 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "ALIENS",
+      "usd": "1,362",
+      "wallets": 3,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.7461%"
+    },
+    {
+      "t": "11:47 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "CLAWAPI",
+      "usd": "1,283",
+      "wallets": 4,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 27.21%"
+    },
+    {
+      "t": "23:40 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "BARRON",
+      "usd": "1,567",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.5385%"
+      "finding": "Top10 holders: 42.3861%"
     }
   ]
 }
