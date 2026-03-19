@@ -12,6 +12,7 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from typing import Dict, List
@@ -62,7 +63,21 @@ class TwitterKOLMonitor:
 
         try:
             with urllib.request.urlopen(req, timeout=20) as resp:
-                return json.loads(resp.read())
+                data = json.loads(resp.read())
+                if isinstance(data, dict) and data.get("success") is False:
+                    print(
+                        f"Twitter API logical failure ({endpoint}): {data.get('message') or data.get('error') or data}",
+                        file=sys.stderr,
+                    )
+                    return {}
+                return data
+        except urllib.error.HTTPError as e:
+            try:
+                body = e.read().decode("utf-8", errors="ignore")[:300]
+            except Exception:
+                body = ""
+            print(f"Twitter API HTTP {e.code} ({endpoint}): {body or e.reason}", file=sys.stderr)
+            return {}
         except Exception as e:
             print(f"Twitter API call failed ({endpoint}): {e}", file=sys.stderr)
             return {}

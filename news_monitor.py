@@ -127,10 +127,14 @@ class NewsMonitor:
         return child.text.strip() if child is not None and child.text else None
 
     def extract_tokens(self, text: str) -> List[str]:
-        """Extract token symbols from text."""
+        """Extract token symbols from text.
+
+        Only trust explicit ticker-like patterns already present in the source
+        text. Do not uppercase the whole article body, or normal words like
+        "bank" / "order" / "ready" become fake token candidates.
+        """
         matches = set(re.findall(r"\$([A-Z]{2,10})\b", text))
-        # add plain uppercase words as soft candidates
-        matches |= set(re.findall(r"\b([A-Z]{2,6})\b", text.upper()))
+        matches |= set(re.findall(r"\b([A-Z]{2,6})\b", text))
         return [t for t in matches if t and t not in FALSE_POSITIVES]
 
     @staticmethod

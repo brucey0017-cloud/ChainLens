@@ -29,7 +29,9 @@ def run_json(cmd: str):
 
 
 def chain_signals(chain: str, wallet_type: str = "1", min_usd: int = 1000):
-    data = run_json(f"onchainos market signal-list {chain} --wallet-type {wallet_type} --min-amount-usd {min_usd}")
+    data = run_json(
+        f"onchainos signal list --chain {chain} --wallet-type {wallet_type} --min-amount-usd {min_usd}"
+    )
     if not data or not data.get("ok"):
         return []
     return data.get("data", [])[:12]
