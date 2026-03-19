@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-19 21:25 UTC",
+  "updatedAt": "2026-03-19 21:52 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,21 +19,21 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.8262%"
+      "finding": "Top10 holders: 18.4125%"
     },
     {
       "token": "Alien",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.176%"
+      "finding": "Top10 holders: 21.313%"
     },
     {
       "token": "Chibify",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 25.0899%"
+      "finding": "Top10 holders: 24.6169%"
     },
     {
       "token": "VAFR",
@@ -69,7 +69,7 @@
       "usd": "1,180",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.8262%"
+      "finding": "Top10 holders: 18.4125%"
     },
     {
       "t": "16:24 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,129",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.176%"
+      "finding": "Top10 holders: 21.313%"
     },
     {
       "t": "08:24 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,013",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 25.0899%"
+      "finding": "Top10 holders: 24.6169%"
     },
     {
       "t": "03:31 UTC",
@@ -118,8 +118,8 @@
       "token": "COLLECTIBLE",
       "usd": "1,023",
       "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.9581%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.5413%"
     },
     {
       "t": "21:07 UTC",
@@ -169,7 +169,7 @@
       "usd": "4,444",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.9739%"
+      "finding": "Top10 holders: 19.9171%"
     }
   ]
 }
