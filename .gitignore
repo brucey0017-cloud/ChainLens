@@ -21,3 +21,15 @@ Thumbs.db
 .vscode/
 .idea/
 chainlens.db
+
+# Local accidental scratch files (empty, untracked)
+dashboard_generator
+intelligent_risk_manager
+live_trading_manager
+multi_signal_scorer
+news_monitor
+onchain_monitor
+position_monitor
+strategy_engine
+technical_indicators
+twitter_kol_monitor
