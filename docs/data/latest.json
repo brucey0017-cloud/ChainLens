@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-19 19:25 UTC",
+  "updatedAt": "2026-03-19 19:58 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -8,11 +8,25 @@
   },
   "audits": [
     {
-      "token": "Alien",
+      "token": "PMPR",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.0538%"
+      "finding": "Top10 holders: 27.8073%"
+    },
+    {
+      "token": "OIIA",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 20.3388%"
+    },
+    {
+      "token": "Alien",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 19.6039%"
     },
     {
       "token": "Chibify",
@@ -33,24 +47,30 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 21.9692%"
-    },
-    {
-      "token": "COLLECTIBLE",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 19.0192%"
-    },
-    {
-      "token": "ZEROCLAW",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 24.9287%"
+      "finding": "Top10 holders: 21.6228%"
     }
   ],
   "signals": [
+    {
+      "t": "19:56 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "PMPR",
+      "usd": "1,178",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 27.8073%"
+    },
+    {
+      "t": "19:43 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "OIIA",
+      "usd": "1,180",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.3388%"
+    },
     {
       "t": "16:24 UTC",
       "chain": "solana",
@@ -58,8 +78,8 @@
       "token": "Alien",
       "usd": "1,129",
       "wallets": 4,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 22.0538%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.6039%"
     },
     {
       "t": "08:24 UTC",
@@ -89,7 +109,7 @@
       "usd": "1,244",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.9692%"
+      "finding": "Top10 holders: 21.6228%"
     },
     {
       "t": "23:21 UTC",
@@ -99,7 +119,7 @@
       "usd": "1,023",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.0192%"
+      "finding": "Top10 holders: 18.2359%"
     },
     {
       "t": "21:07 UTC",
@@ -139,7 +159,7 @@
       "usd": "1,602",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.2067%"
+      "finding": "Top10 holders: 18.1761%"
     },
     {
       "t": "17:02 UTC",
@@ -150,26 +170,6 @@
       "wallets": 9,
       "riskLevel": "low",
       "finding": "Top10 holders: 18.9729%"
-    },
-    {
-      "t": "16:36 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "ALIENS",
-      "usd": "1,362",
-      "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 18.9729%"
-    },
-    {
-      "t": "11:47 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "CLAWAPI",
-      "usd": "1,283",
-      "wallets": 4,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 27.1173%"
     }
   ]
 }
