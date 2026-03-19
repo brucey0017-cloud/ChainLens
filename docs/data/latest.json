@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-03-19 21:52 UTC",
+  "updatedAt": "2026-03-19 22:17 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 42.0,
+    "avgRisk": 46.0,
     "criticalAlerts": 0
   },
   "audits": [
@@ -19,7 +19,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.4125%"
+      "finding": "Top10 holders: 19.7122%"
     },
     {
       "token": "Alien",
@@ -33,7 +33,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.6169%"
+      "finding": "Top10 holders: 24.617%"
     },
     {
       "token": "VAFR",
@@ -45,9 +45,9 @@
     {
       "token": "SQUIRE",
       "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 19.7532%"
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 21.2493%"
     }
   ],
   "signals": [
@@ -69,7 +69,7 @@
       "usd": "1,180",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.4125%"
+      "finding": "Top10 holders: 19.7122%"
     },
     {
       "t": "16:24 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,013",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.6169%"
+      "finding": "Top10 holders: 24.617%"
     },
     {
       "t": "03:31 UTC",
@@ -108,8 +108,8 @@
       "token": "SQUIRE",
       "usd": "1,244",
       "wallets": 7,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.7532%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 21.2493%"
     },
     {
       "t": "23:21 UTC",
