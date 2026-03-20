@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-20 07:27 UTC",
+  "updatedAt": "2026-03-20 08:00 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,28 +12,28 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.8378%"
+      "finding": "Top10 holders: 23.4141%"
     },
     {
       "token": "Pixel",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.749%"
+      "finding": "Top10 holders: 19.1743%"
     },
     {
       "token": "Dryer",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.8378%"
+      "finding": "Top10 holders: 23.4141%"
     },
     {
       "token": "LIBERTY",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.8877%"
+      "finding": "Top10 holders: 23.8962%"
     },
     {
       "token": "PMPR",
@@ -47,7 +47,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.0716%"
+      "finding": "Top10 holders: 24.2786%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "1,750",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.8378%"
+      "finding": "Top10 holders: 23.4141%"
     },
     {
       "t": "05:59 UTC",
@@ -69,7 +69,7 @@
       "usd": "1,006",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.749%"
+      "finding": "Top10 holders: 19.1743%"
     },
     {
       "t": "05:44 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,062",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.8378%"
+      "finding": "Top10 holders: 23.4141%"
     },
     {
       "t": "23:50 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,132",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.8877%"
+      "finding": "Top10 holders: 23.8962%"
     },
     {
       "t": "19:56 UTC",
@@ -109,7 +109,7 @@
       "usd": "1,180",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.0716%"
+      "finding": "Top10 holders: 24.2786%"
     },
     {
       "t": "16:24 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,013",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.7402%"
+      "finding": "Top10 holders: 20.1001%"
     },
     {
       "t": "03:31 UTC",
@@ -148,8 +148,8 @@
       "token": "SQUIRE",
       "usd": "1,244",
       "wallets": 7,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.7339%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.1237%"
     },
     {
       "t": "23:21 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,023",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.3315%"
+      "finding": "Top10 holders: 24.3075%"
     },
     {
       "t": "21:07 UTC",
