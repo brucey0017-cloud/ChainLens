@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-21 15:16 UTC",
+  "updatedAt": "2026-03-21 15:45 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,14 +12,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 21.443%"
+      "finding": "Top10 holders: 21.7903%"
     },
     {
       "token": "W",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 21.2719%"
+      "finding": "Top10 holders: 20.4524%"
     },
     {
       "token": "PISSCOIN",
@@ -40,7 +40,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 16.9465%"
+      "finding": "Top10 holders: 16.9586%"
     },
     {
       "token": "Pete",
@@ -59,7 +59,7 @@
       "usd": "1,133",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.443%"
+      "finding": "Top10 holders: 21.7903%"
     },
     {
       "t": "09:42 UTC",
@@ -69,7 +69,7 @@
       "usd": "1,297",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.2719%"
+      "finding": "Top10 holders: 20.4524%"
     },
     {
       "t": "01:21 UTC",
@@ -99,7 +99,7 @@
       "usd": "1,129",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 16.9465%"
+      "finding": "Top10 holders: 16.9586%"
     },
     {
       "t": "17:14 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,128",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.4539%"
+      "finding": "Top10 holders: 22.4538%"
     },
     {
       "t": "06:00 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,006",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 26.3443%"
+      "finding": "Top10 holders: 26.6635%"
     },
     {
       "t": "05:44 UTC",
