@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-21 19:21 UTC",
+  "updatedAt": "2026-03-21 19:43 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,14 +12,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.6657%"
+      "finding": "Top10 holders: 20.3106%"
     },
     {
       "token": "Tsuki",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 21.7611%"
+      "finding": "Top10 holders: 22.1173%"
     },
     {
       "token": "CHIBI",
@@ -33,7 +33,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.1445%"
+      "finding": "Top10 holders: 24.2413%"
     },
     {
       "token": "W",
@@ -47,7 +47,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.8815%"
+      "finding": "Top10 holders: 23.9893%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "1,399",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.6657%"
+      "finding": "Top10 holders: 20.3106%"
     },
     {
       "t": "17:13 UTC",
@@ -69,7 +69,7 @@
       "usd": "2,452",
       "wallets": 9,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.7611%"
+      "finding": "Top10 holders: 22.1173%"
     },
     {
       "t": "16:07 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,133",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.1445%"
+      "finding": "Top10 holders: 24.2413%"
     },
     {
       "t": "09:42 UTC",
@@ -109,7 +109,7 @@
       "usd": "1,544",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.8815%"
+      "finding": "Top10 holders: 23.9893%"
     },
     {
       "t": "20:52 UTC",
@@ -118,8 +118,8 @@
       "token": "balanced",
       "usd": "1,277",
       "wallets": 9,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 21.084%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 18.9742%"
     },
     {
       "t": "18:07 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,143",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.6657%"
+      "finding": "Top10 holders: 20.3106%"
     },
     {
       "t": "15:32 UTC",
@@ -158,8 +158,8 @@
       "token": "Chuck",
       "usd": "2,556",
       "wallets": 10,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.9214%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.2928%"
     },
     {
       "t": "10:57 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,128",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.457%"
+      "finding": "Top10 holders: 24.8452%"
     }
   ]
 }
