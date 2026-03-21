@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-21 21:15 UTC",
+  "updatedAt": "2026-03-21 21:44 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,21 +19,21 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.0303%"
+      "finding": "Top10 holders: 22.0304%"
     },
     {
       "token": "CHIBI",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.0108%"
+      "finding": "Top10 holders: 18.0314%"
     },
     {
       "token": "BioReason",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.1481%"
+      "finding": "Top10 holders: 24.2129%"
     },
     {
       "token": "W",
@@ -47,7 +47,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.325%"
+      "finding": "Top10 holders: 22.5296%"
     }
   ],
   "signals": [
@@ -69,7 +69,7 @@
       "usd": "2,452",
       "wallets": 9,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.0303%"
+      "finding": "Top10 holders: 22.0304%"
     },
     {
       "t": "16:07 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,327",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.0108%"
+      "finding": "Top10 holders: 18.0314%"
     },
     {
       "t": "15:15 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,133",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.1481%"
+      "finding": "Top10 holders: 24.2129%"
     },
     {
       "t": "09:42 UTC",
@@ -109,7 +109,7 @@
       "usd": "1,544",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.325%"
+      "finding": "Top10 holders: 22.5296%"
     },
     {
       "t": "20:52 UTC",
