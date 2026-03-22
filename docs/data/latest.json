@@ -1,18 +1,25 @@
 {
-  "updatedAt": "2026-03-22 21:46 UTC",
+  "updatedAt": "2026-03-22 22:15 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 26.0,
+    "avgRisk": 30.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "higher",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 23.5986%"
+    },
     {
       "token": "unc",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 17.2138%"
+      "finding": "Top10 holders: 18.9129%"
     },
     {
       "token": "CHIBI",
@@ -26,14 +33,14 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.5377%"
+      "finding": "Top10 holders: 11.7867%"
     },
     {
       "token": "Aspen",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 12.3101%"
+      "finding": "Top10 holders: 14.2882%"
     },
     {
       "token": "CHIBI",
@@ -41,16 +48,19 @@
       "level": "low",
       "score": 26,
       "finding": "Top10 holders: 18.6105%"
-    },
-    {
-      "token": "Aspen",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 12.3101%"
     }
   ],
   "signals": [
+    {
+      "t": "21:55 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "higher",
+      "usd": "2,862",
+      "wallets": 8,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 23.5986%"
+    },
     {
       "t": "21:22 UTC",
       "chain": "solana",
@@ -59,7 +69,7 @@
       "usd": "1,668",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.2138%"
+      "finding": "Top10 holders: 18.9129%"
     },
     {
       "t": "20:23 UTC",
@@ -79,7 +89,7 @@
       "usd": "1,092",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.5377%"
+      "finding": "Top10 holders: 11.7867%"
     },
     {
       "t": "12:09 UTC",
@@ -89,7 +99,7 @@
       "usd": "1,501",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 12.3101%"
+      "finding": "Top10 holders: 14.2882%"
     },
     {
       "t": "06:50 UTC",
@@ -109,7 +119,7 @@
       "usd": "1,869",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 12.3101%"
+      "finding": "Top10 holders: 14.2882%"
     },
     {
       "t": "22:08 UTC",
@@ -149,7 +159,7 @@
       "usd": "2,452",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.2351%"
+      "finding": "Top10 holders: 19.235%"
     },
     {
       "t": "16:07 UTC",
@@ -160,16 +170,6 @@
       "wallets": 5,
       "riskLevel": "low",
       "finding": "Top10 holders: 18.6105%"
-    },
-    {
-      "t": "15:15 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "BioReason",
-      "usd": "1,133",
-      "wallets": 4,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.6988%"
     }
   ]
 }
