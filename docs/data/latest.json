@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-22 20:15 UTC",
+  "updatedAt": "2026-03-22 20:48 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -8,18 +8,25 @@
   },
   "audits": [
     {
+      "token": "CHIBI",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 18.6105%"
+    },
+    {
       "token": "one",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.2075%"
+      "finding": "Top10 holders: 11.1905%"
     },
     {
       "token": "Aspen",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 13.2035%"
+      "finding": "Top10 holders: 13.5101%"
     },
     {
       "token": "CHIBI",
@@ -33,7 +40,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 13.2035%"
+      "finding": "Top10 holders: 13.5101%"
     },
     {
       "token": "Bani",
@@ -41,16 +48,19 @@
       "level": "low",
       "score": 26,
       "finding": "Top10 holders: 9.6526%"
-    },
-    {
-      "token": "CHIBI",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 18.6105%"
     }
   ],
   "signals": [
+    {
+      "t": "20:23 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "CHIBI",
+      "usd": "1,733",
+      "wallets": 3,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 18.6105%"
+    },
     {
       "t": "14:51 UTC",
       "chain": "solana",
@@ -59,7 +69,7 @@
       "usd": "1,092",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.2075%"
+      "finding": "Top10 holders: 11.1905%"
     },
     {
       "t": "12:09 UTC",
@@ -69,7 +79,7 @@
       "usd": "1,501",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.2035%"
+      "finding": "Top10 holders: 13.5101%"
     },
     {
       "t": "06:50 UTC",
@@ -89,7 +99,7 @@
       "usd": "1,869",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.2035%"
+      "finding": "Top10 holders: 13.5101%"
     },
     {
       "t": "22:08 UTC",
@@ -129,7 +139,7 @@
       "usd": "2,452",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.0838%"
+      "finding": "Top10 holders: 19.238%"
     },
     {
       "t": "16:07 UTC",
@@ -160,16 +170,6 @@
       "wallets": 8,
       "riskLevel": "low",
       "finding": "Top10 holders: 18.0037%"
-    },
-    {
-      "t": "01:21 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "PISSCOIN",
-      "usd": "1,544",
-      "wallets": 8,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 14.6107%"
     }
   ]
 }
