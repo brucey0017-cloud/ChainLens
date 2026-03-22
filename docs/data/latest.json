@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-22 10:50 UTC",
+  "updatedAt": "2026-03-22 11:15 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,14 +19,14 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 12.413%"
+      "finding": "Top10 holders: 12.4792%"
     },
     {
       "token": "Bani",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 7.9003%"
+      "finding": "Top10 holders: 8.3564%"
     },
     {
       "token": "CHIBI",
@@ -47,7 +47,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.0542%"
+      "finding": "Top10 holders: 23.9976%"
     }
   ],
   "signals": [
@@ -69,7 +69,7 @@
       "usd": "1,869",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 12.413%"
+      "finding": "Top10 holders: 12.4792%"
     },
     {
       "t": "22:08 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,292",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 7.9003%"
+      "finding": "Top10 holders: 8.3564%"
     },
     {
       "t": "22:03 UTC",
@@ -109,7 +109,7 @@
       "usd": "2,452",
       "wallets": 9,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.0542%"
+      "finding": "Top10 holders: 23.9976%"
     },
     {
       "t": "16:07 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,277",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.1939%"
+      "finding": "Top10 holders: 18.4919%"
     },
     {
       "t": "18:07 UTC",
