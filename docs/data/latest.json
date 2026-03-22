@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-22 20:48 UTC",
+  "updatedAt": "2026-03-22 21:16 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,7 +19,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.1905%"
+      "finding": "Top10 holders: 11.4004%"
     },
     {
       "token": "Aspen",
@@ -69,7 +69,7 @@
       "usd": "1,092",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.1905%"
+      "finding": "Top10 holders: 11.4004%"
     },
     {
       "t": "12:09 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,399",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.201%"
+      "finding": "Top10 holders: 22.3629%"
     },
     {
       "t": "17:13 UTC",
@@ -139,7 +139,7 @@
       "usd": "2,452",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.238%"
+      "finding": "Top10 holders: 19.2351%"
     },
     {
       "t": "16:07 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,297",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.0037%"
+      "finding": "Top10 holders: 16.1036%"
     }
   ]
 }
