@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-22 18:22 UTC",
+  "updatedAt": "2026-03-22 18:59 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,14 +12,14 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.3842%"
+      "finding": "Top10 holders: 11.0156%"
     },
     {
       "token": "Aspen",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.3697%"
+      "finding": "Top10 holders: 11.1422%"
     },
     {
       "token": "CHIBI",
@@ -33,7 +33,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.3697%"
+      "finding": "Top10 holders: 11.1422%"
     },
     {
       "token": "Bani",
@@ -59,7 +59,7 @@
       "usd": "1,092",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.3842%"
+      "finding": "Top10 holders: 11.0156%"
     },
     {
       "t": "12:09 UTC",
@@ -69,7 +69,7 @@
       "usd": "1,501",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.3697%"
+      "finding": "Top10 holders: 11.1422%"
     },
     {
       "t": "06:50 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,869",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.3697%"
+      "finding": "Top10 holders: 11.1422%"
     },
     {
       "t": "22:08 UTC",
@@ -129,7 +129,7 @@
       "usd": "2,452",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.1708%"
+      "finding": "Top10 holders: 18.084%"
     },
     {
       "t": "16:07 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,297",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.7968%"
+      "finding": "Top10 holders: 16.7265%"
     },
     {
       "t": "01:21 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,544",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.3755%"
+      "finding": "Top10 holders: 18.1375%"
     }
   ]
 }
