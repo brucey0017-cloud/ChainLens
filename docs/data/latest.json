@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-22 07:11 UTC",
+  "updatedAt": "2026-03-22 07:53 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,7 +19,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 13.4386%"
+      "finding": "Top10 holders: 13.4692%"
     },
     {
       "token": "Bani",
@@ -40,14 +40,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.2512%"
+      "finding": "Top10 holders: 20.7965%"
     },
     {
       "token": "Tsuki",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.3216%"
+      "finding": "Top10 holders: 24.3873%"
     }
   ],
   "signals": [
@@ -69,7 +69,7 @@
       "usd": "1,869",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.4386%"
+      "finding": "Top10 holders: 13.4692%"
     },
     {
       "t": "22:08 UTC",
@@ -99,7 +99,7 @@
       "usd": "1,399",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.2512%"
+      "finding": "Top10 holders: 20.7965%"
     },
     {
       "t": "17:13 UTC",
@@ -109,7 +109,7 @@
       "usd": "2,452",
       "wallets": 9,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.3216%"
+      "finding": "Top10 holders: 24.3873%"
     },
     {
       "t": "16:07 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,133",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.8364%"
+      "finding": "Top10 holders: 24.5049%"
     },
     {
       "t": "09:42 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,544",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.5782%"
+      "finding": "Top10 holders: 21.6839%"
     },
     {
       "t": "20:52 UTC",
@@ -168,8 +168,8 @@
       "token": "XCAT",
       "usd": "1,129",
       "wallets": 9,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.5864%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.0592%"
     }
   ]
 }
