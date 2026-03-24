@@ -1,18 +1,25 @@
 {
-  "updatedAt": "2026-03-24 01:06 UTC",
+  "updatedAt": "2026-03-24 03:44 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 42.0,
+    "avgRisk": 46.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "Memes",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 23.6777%"
+    },
     {
       "token": "GEMXBT",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 35.7608%"
+      "finding": "Top10 holders: 31.7619%"
     },
     {
       "token": "MAD",
@@ -26,14 +33,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.6646%"
+      "finding": "Top10 holders: 26.4408%"
     },
     {
       "token": "AGI",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 28.0582%"
+      "finding": "Top10 holders: 28.6937%"
     },
     {
       "token": "AIFRUITS",
@@ -41,16 +48,19 @@
       "level": "low",
       "score": 26,
       "finding": "Top10 holders: 17.9483%"
-    },
-    {
-      "token": "dapang",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 15.3292%"
     }
   ],
   "signals": [
+    {
+      "t": "02:00 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Memes",
+      "usd": "1,851",
+      "wallets": 7,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 23.6777%"
+    },
     {
       "t": "01:00 UTC",
       "chain": "solana",
@@ -59,7 +69,7 @@
       "usd": "1,151",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 35.7608%"
+      "finding": "Top10 holders: 31.7619%"
     },
     {
       "t": "22:39 UTC",
@@ -79,7 +89,7 @@
       "usd": "4,112",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.6646%"
+      "finding": "Top10 holders: 26.4408%"
     },
     {
       "t": "22:04 UTC",
@@ -89,7 +99,7 @@
       "usd": "1,206",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 28.0582%"
+      "finding": "Top10 holders: 28.6937%"
     },
     {
       "t": "20:44 UTC",
@@ -109,7 +119,7 @@
       "usd": "1,593",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.3292%"
+      "finding": "Top10 holders: 15.6941%"
     },
     {
       "t": "19:48 UTC",
@@ -119,7 +129,7 @@
       "usd": "2,476",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.6646%"
+      "finding": "Top10 holders: 26.4408%"
     },
     {
       "t": "16:00 UTC",
@@ -139,7 +149,7 @@
       "usd": "2,123",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.9595%"
+      "finding": "Top10 holders: 11.0928%"
     },
     {
       "t": "13:12 UTC",
@@ -149,7 +159,7 @@
       "usd": "1,070",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 27.0775%"
+      "finding": "Top10 holders: 27.6314%"
     },
     {
       "t": "12:15 UTC",
@@ -160,16 +170,6 @@
       "wallets": 10,
       "riskLevel": "low",
       "finding": "Top10 holders: 16.5792%"
-    },
-    {
-      "t": "22:48 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "Lost",
-      "usd": "2,040",
-      "wallets": 16,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 22.2328%"
     }
   ]
 }
