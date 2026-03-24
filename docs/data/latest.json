@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-24 21:59 UTC",
+  "updatedAt": "2026-03-24 22:34 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -8,32 +8,39 @@
   },
   "audits": [
     {
+      "token": "Samba",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 23.8682%"
+    },
+    {
       "token": "moon",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 16.9381%"
+      "finding": "Top10 holders: 15.7363%"
     },
     {
       "token": "PP",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 19.4979%"
+      "finding": "Top10 holders: 19.2246%"
     },
     {
       "token": "ALONE",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 12.6339%"
+      "finding": "Top10 holders: 11.5147%"
     },
     {
       "token": "TOGETHER",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 26.8409%"
+      "finding": "Top10 holders: 28.0099%"
     },
     {
       "token": "FOM",
@@ -41,16 +48,19 @@
       "level": "low",
       "score": 26,
       "finding": "Top10 holders: 7.0216%"
-    },
-    {
-      "token": "BOB",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 22.7458%"
     }
   ],
   "signals": [
+    {
+      "t": "22:34 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Samba",
+      "usd": "1,168",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 23.8682%"
+    },
     {
       "t": "21:58 UTC",
       "chain": "solana",
@@ -59,7 +69,7 @@
       "usd": "1,243",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 16.9381%"
+      "finding": "Top10 holders: 15.7363%"
     },
     {
       "t": "17:40 UTC",
@@ -69,7 +79,7 @@
       "usd": "1,198",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.4979%"
+      "finding": "Top10 holders: 19.2246%"
     },
     {
       "t": "17:10 UTC",
@@ -79,7 +89,7 @@
       "usd": "1,109",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 12.6339%"
+      "finding": "Top10 holders: 11.5147%"
     },
     {
       "t": "16:49 UTC",
@@ -89,7 +99,7 @@
       "usd": "2,064",
       "wallets": 13,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 26.8409%"
+      "finding": "Top10 holders: 28.0099%"
     },
     {
       "t": "06:27 UTC",
@@ -109,7 +119,7 @@
       "usd": "1,058",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.7458%"
+      "finding": "Top10 holders: 23.7475%"
     },
     {
       "t": "02:00 UTC",
@@ -119,7 +129,7 @@
       "usd": "1,851",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.3332%"
+      "finding": "Top10 holders: 19.3943%"
     },
     {
       "t": "01:00 UTC",
@@ -129,7 +139,7 @@
       "usd": "1,151",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 44.8373%"
+      "finding": "Top10 holders: 44.819%"
     },
     {
       "t": "22:39 UTC",
@@ -139,7 +149,7 @@
       "usd": "1,535",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.0968%"
+      "finding": "Top10 holders: 23.6815%"
     },
     {
       "t": "22:31 UTC",
@@ -149,7 +159,7 @@
       "usd": "4,112",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.7458%"
+      "finding": "Top10 holders: 23.7475%"
     },
     {
       "t": "22:04 UTC",
@@ -160,16 +170,6 @@
       "wallets": 7,
       "riskLevel": "medium",
       "finding": "Top10 holders: 29.577%"
-    },
-    {
-      "t": "20:44 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "AIFRUITS",
-      "usd": "1,040",
-      "wallets": 4,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 18.0787%"
     }
   ]
 }
