@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-24 23:21 UTC",
+  "updatedAt": "2026-03-24 23:51 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,21 +19,21 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 16.0671%"
+      "finding": "Top10 holders: 17.1462%"
     },
     {
       "token": "PP",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.775%"
+      "finding": "Top10 holders: 21.2571%"
     },
     {
       "token": "ALONE",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 12.2893%"
+      "finding": "Top10 holders: 10.9379%"
     },
     {
       "token": "TOGETHER",
@@ -69,7 +69,7 @@
       "usd": "1,243",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 16.0671%"
+      "finding": "Top10 holders: 17.1462%"
     },
     {
       "t": "17:40 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,198",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.775%"
+      "finding": "Top10 holders: 21.2571%"
     },
     {
       "t": "17:10 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,109",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 12.2893%"
+      "finding": "Top10 holders: 10.9379%"
     },
     {
       "t": "16:49 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,851",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.0683%"
+      "finding": "Top10 holders: 15.3852%"
     },
     {
       "t": "01:00 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,151",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 44.548%"
+      "finding": "Top10 holders: 46.3226%"
     },
     {
       "t": "22:39 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,206",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 29.577%"
+      "finding": "Top10 holders: 29.2991%"
     }
   ]
 }
