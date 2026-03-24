@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-24 07:47 UTC",
+  "updatedAt": "2026-03-24 08:39 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,14 +12,14 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.2349%"
+      "finding": "Top10 holders: 18.7685%"
     },
     {
       "token": "BOB",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.0872%"
+      "finding": "Top10 holders: 22.0914%"
     },
     {
       "token": "Memes",
@@ -33,7 +33,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 41.2535%"
+      "finding": "Top10 holders: 41.665%"
     },
     {
       "token": "MAD",
@@ -47,7 +47,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.0872%"
+      "finding": "Top10 holders: 22.0914%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "2,255",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.2349%"
+      "finding": "Top10 holders: 18.7685%"
     },
     {
       "t": "06:08 UTC",
@@ -69,7 +69,7 @@
       "usd": "1,058",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.0872%"
+      "finding": "Top10 holders: 22.0914%"
     },
     {
       "t": "02:00 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,151",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 41.2535%"
+      "finding": "Top10 holders: 41.665%"
     },
     {
       "t": "22:39 UTC",
@@ -109,7 +109,7 @@
       "usd": "4,112",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.0872%"
+      "finding": "Top10 holders: 22.0914%"
     },
     {
       "t": "22:04 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,593",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 14.6814%"
+      "finding": "Top10 holders: 14.8843%"
     },
     {
       "t": "19:48 UTC",
@@ -149,7 +149,7 @@
       "usd": "2,476",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.0872%"
+      "finding": "Top10 holders: 22.0914%"
     },
     {
       "t": "16:00 UTC",
