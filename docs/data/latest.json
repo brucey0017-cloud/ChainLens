@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-26 07:57 UTC",
+  "updatedAt": "2026-03-26 08:51 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -26,7 +26,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.0992%"
+      "finding": "Top10 holders: 23.2961%"
     },
     {
       "token": "ALLIN",
@@ -79,7 +79,7 @@
       "usd": "1,179",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.0992%"
+      "finding": "Top10 holders: 23.2961%"
     },
     {
       "t": "18:58 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,447",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 12.631%"
+      "finding": "Top10 holders: 12.6309%"
     },
     {
       "t": "14:13 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,050",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 3.8972%"
+      "finding": "Top10 holders: 4.6625%"
     },
     {
       "t": "13:28 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,756",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.3562%"
+      "finding": "Top10 holders: 13.3205%"
     }
   ]
 }
