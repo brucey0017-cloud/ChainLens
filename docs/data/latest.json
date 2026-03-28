@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-28 06:14 UTC",
+  "updatedAt": "2026-03-28 07:27 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,7 +19,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.386%"
+      "finding": "Top10 holders: 18.7502%"
     },
     {
       "token": "FARM",
@@ -33,14 +33,14 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.386%"
+      "finding": "Top10 holders: 18.7502%"
     },
     {
       "token": "umi",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.386%"
+      "finding": "Top10 holders: 18.7502%"
     },
     {
       "token": "Orca",
@@ -69,7 +69,7 @@
       "usd": "2,531",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.386%"
+      "finding": "Top10 holders: 18.7502%"
     },
     {
       "t": "21:32 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,780",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.386%"
+      "finding": "Top10 holders: 18.7502%"
     },
     {
       "t": "21:04 UTC",
@@ -99,7 +99,7 @@
       "usd": "1,033",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.386%"
+      "finding": "Top10 holders: 18.7502%"
     },
     {
       "t": "20:12 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,247",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.6951%"
+      "finding": "Top10 holders: 13.7097%"
     },
     {
       "t": "08:53 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,252",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.8828%"
+      "finding": "Top10 holders: 19.853%"
     },
     {
       "t": "05:04 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,356",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.0144%"
+      "finding": "Top10 holders: 19.0219%"
     },
     {
       "t": "04:25 UTC",
