@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-28 07:27 UTC",
+  "updatedAt": "2026-03-28 07:59 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -128,8 +128,8 @@
       "token": "SWING",
       "usd": "2,841",
       "wallets": 11,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.0353%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.8891%"
     },
     {
       "t": "10:43 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,252",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.853%"
+      "finding": "Top10 holders: 19.4554%"
     },
     {
       "t": "05:04 UTC",
