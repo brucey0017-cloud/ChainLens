@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-28 09:58 UTC",
+  "updatedAt": "2026-03-28 10:32 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -26,7 +26,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.4023%"
+      "finding": "Top10 holders: 18.8598%"
     },
     {
       "token": "umi",
@@ -79,7 +79,7 @@
       "usd": "1,311",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.4023%"
+      "finding": "Top10 holders: 18.8598%"
     },
     {
       "t": "21:25 UTC",
@@ -129,7 +129,7 @@
       "usd": "2,841",
       "wallets": 11,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.7545%"
+      "finding": "Top10 holders: 19.8079%"
     },
     {
       "t": "10:43 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,252",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.8916%"
+      "finding": "Top10 holders: 17.5615%"
     },
     {
       "t": "05:04 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,356",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.0395%"
+      "finding": "Top10 holders: 21.1772%"
     },
     {
       "t": "04:25 UTC",
