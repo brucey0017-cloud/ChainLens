@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-28 20:52 UTC",
+  "updatedAt": "2026-03-28 21:20 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,14 +19,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 27.2999%"
+      "finding": "Top10 holders: 28.3611%"
     },
     {
       "token": "BBQ",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 19.6862%"
+      "finding": "Top10 holders: 19.5682%"
     },
     {
       "token": "GROKCHAIN",
@@ -69,7 +69,7 @@
       "usd": "1,637",
       "wallets": 10,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 27.2999%"
+      "finding": "Top10 holders: 28.3611%"
     },
     {
       "t": "18:27 UTC",
@@ -79,7 +79,7 @@
       "usd": "2,611",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.6862%"
+      "finding": "Top10 holders: 19.5682%"
     },
     {
       "t": "13:57 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,973",
       "wallets": 5,
       "riskLevel": "high",
-      "finding": "Top10 holders: 66.6301%"
+      "finding": "Top10 holders: 66.5836%"
     },
     {
       "t": "15:01 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,351",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 25.3001%"
+      "finding": "Top10 holders: 24.9768%"
     },
     {
       "t": "12:37 UTC",
