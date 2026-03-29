@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-29 19:07 UTC",
+  "updatedAt": "2026-03-29 19:51 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -40,14 +40,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 27.0804%"
+      "finding": "Top10 holders: 26.7631%"
     },
     {
       "token": "BBQ",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.5284%"
+      "finding": "Top10 holders: 22.6633%"
     }
   ],
   "signals": [
@@ -99,7 +99,7 @@
       "usd": "1,637",
       "wallets": 10,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 27.0804%"
+      "finding": "Top10 holders: 26.7631%"
     },
     {
       "t": "18:27 UTC",
@@ -109,7 +109,7 @@
       "usd": "2,611",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.5284%"
+      "finding": "Top10 holders: 22.6633%"
     },
     {
       "t": "13:57 UTC",
@@ -119,7 +119,7 @@
       "usd": "3,156",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 27.4436%"
+      "finding": "Top10 holders: 27.4446%"
     },
     {
       "t": "22:33 UTC",
@@ -139,7 +139,7 @@
       "usd": "2,531",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.1966%"
+      "finding": "Top10 holders: 13.2537%"
     },
     {
       "t": "21:32 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,311",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.4043%"
+      "finding": "Top10 holders: 13.4042%"
     },
     {
       "t": "21:25 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,780",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.1966%"
+      "finding": "Top10 holders: 13.2537%"
     },
     {
       "t": "21:04 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,033",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.1966%"
+      "finding": "Top10 holders: 13.2537%"
     }
   ]
 }
