@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-29 23:23 UTC",
+  "updatedAt": "2026-03-29 23:54 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,7 +12,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 25.6392%"
+      "finding": "Top10 holders: 25.5847%"
     },
     {
       "token": "Skin",
@@ -47,7 +47,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 33.7787%"
+      "finding": "Top10 holders: 32.6246%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "8,159",
       "wallets": 10,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 25.6392%"
+      "finding": "Top10 holders: 25.5847%"
     },
     {
       "t": "00:37 UTC",
@@ -109,7 +109,7 @@
       "usd": "1,637",
       "wallets": 10,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 33.7787%"
+      "finding": "Top10 holders: 32.6246%"
     },
     {
       "t": "18:27 UTC",
@@ -149,7 +149,7 @@
       "usd": "2,531",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 14.4615%"
+      "finding": "Top10 holders: 14.2903%"
     },
     {
       "t": "21:32 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,780",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 14.4615%"
+      "finding": "Top10 holders: 14.2903%"
     }
   ]
 }
