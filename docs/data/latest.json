@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-29 08:28 UTC",
+  "updatedAt": "2026-03-29 09:04 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -40,7 +40,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 28.4929%"
+      "finding": "Top10 holders: 26.5511%"
     },
     {
       "token": "BBQ",
@@ -99,7 +99,7 @@
       "usd": "1,637",
       "wallets": 10,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 28.4929%"
+      "finding": "Top10 holders: 26.5511%"
     },
     {
       "t": "18:27 UTC",
