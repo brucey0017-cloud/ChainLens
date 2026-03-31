@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-31 15:43 UTC",
+  "updatedAt": "2026-03-31 16:47 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -26,14 +26,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.0566%"
+      "finding": "Top10 holders: 23.1557%"
     },
     {
       "token": "PQC",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 15.1954%"
+      "finding": "Top10 holders: 13.6487%"
     },
     {
       "token": "SUKI",
@@ -79,7 +79,7 @@
       "usd": "1,846",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.0566%"
+      "finding": "Top10 holders: 23.1557%"
     },
     {
       "t": "05:04 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,248",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.1954%"
+      "finding": "Top10 holders: 13.6487%"
     },
     {
       "t": "04:35 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,145",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.0566%"
+      "finding": "Top10 holders: 23.1557%"
     },
     {
       "t": "15:47 UTC",
@@ -138,8 +138,8 @@
       "token": "POOR",
       "usd": "1,301",
       "wallets": 8,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 23.9805%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.1664%"
     },
     {
       "t": "15:20 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,834",
       "wallets": 11,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.9994%"
+      "finding": "Top10 holders: 23.2696%"
     },
     {
       "t": "13:36 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,085",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 2.9756%"
+      "finding": "Top10 holders: 0.7802%"
     }
   ]
 }
