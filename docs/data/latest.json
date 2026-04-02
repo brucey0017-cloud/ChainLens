@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-02 20:24 UTC",
+  "updatedAt": "2026-04-02 20:59 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,21 +12,21 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 16.288%"
+      "finding": "Top10 holders: 18.219%"
     },
     {
       "token": "Rapunzel",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.6652%"
+      "finding": "Top10 holders: 23.2596%"
     },
     {
       "token": "MOON",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 16.4538%"
+      "finding": "Top10 holders: 15.674%"
     },
     {
       "token": "Shiva",
@@ -40,7 +40,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 15.0447%"
+      "finding": "Top10 holders: 14.4667%"
     },
     {
       "token": "ARTEMIS",
@@ -59,7 +59,7 @@
       "usd": "3,441",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 16.288%"
+      "finding": "Top10 holders: 18.219%"
     },
     {
       "t": "18:41 UTC",
@@ -69,7 +69,7 @@
       "usd": "1,032",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.6652%"
+      "finding": "Top10 holders: 23.2596%"
     },
     {
       "t": "07:21 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,507",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 16.4538%"
+      "finding": "Top10 holders: 15.674%"
     },
     {
       "t": "04:09 UTC",
@@ -99,7 +99,7 @@
       "usd": "2,047",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.0447%"
+      "finding": "Top10 holders: 14.4667%"
     },
     {
       "t": "17:02 UTC",
@@ -148,8 +148,8 @@
       "token": "Chicky",
       "usd": "1,818",
       "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.9516%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.2115%"
     },
     {
       "t": "08:38 UTC",
