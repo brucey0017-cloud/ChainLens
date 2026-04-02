@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-02 20:59 UTC",
+  "updatedAt": "2026-04-02 21:39 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 30.0,
+    "avgRisk": 34.0,
     "criticalAlerts": 0
   },
   "audits": [
@@ -12,21 +12,21 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.219%"
+      "finding": "Top10 holders: 19.9242%"
     },
     {
       "token": "Rapunzel",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.2596%"
+      "finding": "Top10 holders: 24.752%"
     },
     {
       "token": "MOON",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 15.674%"
+      "finding": "Top10 holders: 15.6741%"
     },
     {
       "token": "Shiva",
@@ -40,14 +40,14 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 14.4667%"
+      "finding": "Top10 holders: 16.1599%"
     },
     {
       "token": "ARTEMIS",
       "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 19.4181%"
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 20.0964%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "3,441",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.219%"
+      "finding": "Top10 holders: 19.9242%"
     },
     {
       "t": "18:41 UTC",
@@ -69,7 +69,7 @@
       "usd": "1,032",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.2596%"
+      "finding": "Top10 holders: 24.752%"
     },
     {
       "t": "07:21 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,507",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.674%"
+      "finding": "Top10 holders: 15.6741%"
     },
     {
       "t": "04:09 UTC",
@@ -99,7 +99,7 @@
       "usd": "2,047",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 14.4667%"
+      "finding": "Top10 holders: 16.1599%"
     },
     {
       "t": "17:02 UTC",
@@ -108,8 +108,8 @@
       "token": "ARTEMIS",
       "usd": "1,493",
       "wallets": 6,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.4181%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.0964%"
     },
     {
       "t": "17:00 UTC",
@@ -148,8 +148,8 @@
       "token": "Chicky",
       "usd": "1,818",
       "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.2115%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.5049%"
     },
     {
       "t": "08:38 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,822",
       "wallets": 10,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.5248%"
+      "finding": "Top10 holders: 22.7974%"
     },
     {
       "t": "08:30 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,323",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.5248%"
+      "finding": "Top10 holders: 22.7974%"
     }
   ]
 }
