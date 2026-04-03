@@ -1,18 +1,25 @@
 {
-  "updatedAt": "2026-04-03 06:56 UTC",
+  "updatedAt": "2026-04-03 07:58 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 38.0,
+    "avgRisk": 34.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "QUALITY",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 18.0097%"
+    },
     {
       "token": "RPU",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.6404%"
+      "finding": "Top10 holders: 21.2589%"
     },
     {
       "token": "Rapunzel",
@@ -41,16 +48,19 @@
       "level": "low",
       "score": 26,
       "finding": "Top10 holders: 9.3845%"
-    },
-    {
-      "token": "ARTEMIS",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 20.7298%"
     }
   ],
   "signals": [
+    {
+      "t": "07:38 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "QUALITY",
+      "usd": "1,132",
+      "wallets": 9,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 18.0097%"
+    },
     {
       "t": "19:06 UTC",
       "chain": "solana",
@@ -59,7 +69,7 @@
       "usd": "3,441",
       "wallets": 9,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.6404%"
+      "finding": "Top10 holders: 21.2589%"
     },
     {
       "t": "18:41 UTC",
@@ -149,7 +159,7 @@
       "usd": "1,818",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.0046%"
+      "finding": "Top10 holders: 19.4292%"
     },
     {
       "t": "08:38 UTC",
@@ -158,16 +168,6 @@
       "token": "GAJAE",
       "usd": "1,822",
       "wallets": 10,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 23.9447%"
-    },
-    {
-      "t": "08:30 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "GAJAE",
-      "usd": "1,323",
-      "wallets": 7,
       "riskLevel": "medium",
       "finding": "Top10 holders: 23.9447%"
     }
