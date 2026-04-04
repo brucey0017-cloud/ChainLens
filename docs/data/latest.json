@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-04 16:22 UTC",
+  "updatedAt": "2026-04-04 16:59 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,7 +12,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.2544%"
+      "finding": "Top10 holders: 18.2576%"
     },
     {
       "token": "DUMPTRUCK",
@@ -59,7 +59,7 @@
       "usd": "1,013",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.2544%"
+      "finding": "Top10 holders: 18.2576%"
     },
     {
       "t": "08:38 UTC",
@@ -139,7 +139,7 @@
       "usd": "3,441",
       "wallets": 9,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.8772%"
+      "finding": "Top10 holders: 17.8771%"
     },
     {
       "t": "18:41 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,032",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.3568%"
+      "finding": "Top10 holders: 18.3569%"
     },
     {
       "t": "07:21 UTC",
@@ -169,7 +169,7 @@
       "usd": "2,445",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 10.3719%"
+      "finding": "Top10 holders: 9.8629%"
     }
   ]
 }
