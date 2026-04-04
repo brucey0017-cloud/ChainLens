@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-04 21:52 UTC",
+  "updatedAt": "2026-04-04 22:18 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,14 +12,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.4175%"
+      "finding": "Top10 holders: 22.5331%"
     },
     {
       "token": "fluide",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 36.2984%"
+      "finding": "Top10 holders: 34.9292%"
     },
     {
       "token": "BARRUN",
@@ -59,7 +59,7 @@
       "usd": "1,323",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.4175%"
+      "finding": "Top10 holders: 22.5331%"
     },
     {
       "t": "18:22 UTC",
@@ -69,7 +69,7 @@
       "usd": "1,249",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 36.2984%"
+      "finding": "Top10 holders: 34.9292%"
     },
     {
       "t": "09:24 UTC",
