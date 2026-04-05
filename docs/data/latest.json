@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-05 12:33 UTC",
+  "updatedAt": "2026-04-05 13:45 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 38.0,
+    "avgRisk": 42.0,
     "criticalAlerts": 0
   },
   "audits": [
@@ -12,7 +12,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 45.3212%"
+      "finding": "Top10 holders: 45.6351%"
     },
     {
       "token": "crowneck",
@@ -26,14 +26,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.6937%"
+      "finding": "Top10 holders: 24.6825%"
     },
     {
       "token": "BARRUN",
       "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 17.3629%"
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 20.6568%"
     },
     {
       "token": "DUMPTRUCK",
@@ -59,7 +59,7 @@
       "usd": "9,291",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 45.3212%"
+      "finding": "Top10 holders: 45.6351%"
     },
     {
       "t": "21:16 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,249",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.6937%"
+      "finding": "Top10 holders: 24.6825%"
     },
     {
       "t": "09:24 UTC",
@@ -88,8 +88,8 @@
       "token": "BARRUN",
       "usd": "1,013",
       "wallets": 4,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 17.3629%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.6568%"
     },
     {
       "t": "08:38 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,132",
       "wallets": 9,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.2123%"
+      "finding": "Top10 holders: 24.8985%"
     },
     {
       "t": "19:06 UTC",
