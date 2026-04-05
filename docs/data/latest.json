@@ -1,46 +1,46 @@
 {
-  "updatedAt": "2026-04-05 15:34 UTC",
+  "updatedAt": "2026-04-05 16:24 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 42.0,
+    "avgRisk": 46.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "PANDA8",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 24.9731%"
+    },
     {
       "token": "LLM",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 42.1886%"
+      "finding": "Top10 holders: 43.2731%"
     },
     {
       "token": "crowneck",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.7964%"
+      "finding": "Top10 holders: 20.1026%"
     },
     {
       "token": "fluide",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.6825%"
+      "finding": "Top10 holders: 24.8249%"
     },
     {
       "token": "BARRUN",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 21.396%"
-    },
-    {
-      "token": "DUMPTRUCK",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 12.143%"
+      "finding": "Top10 holders: 23.398%"
     },
     {
       "token": "DUMPTRUCK",
@@ -52,6 +52,16 @@
   ],
   "signals": [
     {
+      "t": "16:03 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "PANDA8",
+      "usd": "1,656",
+      "wallets": 5,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 24.9731%"
+    },
+    {
       "t": "10:52 UTC",
       "chain": "solana",
       "type": "Smart Money",
@@ -59,7 +69,7 @@
       "usd": "9,291",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 42.1886%"
+      "finding": "Top10 holders: 43.2731%"
     },
     {
       "t": "21:16 UTC",
@@ -69,7 +79,7 @@
       "usd": "1,323",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.7964%"
+      "finding": "Top10 holders: 20.1026%"
     },
     {
       "t": "18:22 UTC",
@@ -79,7 +89,7 @@
       "usd": "1,249",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.6825%"
+      "finding": "Top10 holders: 24.8249%"
     },
     {
       "t": "09:24 UTC",
@@ -89,7 +99,7 @@
       "usd": "1,013",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.396%"
+      "finding": "Top10 holders: 23.398%"
     },
     {
       "t": "08:38 UTC",
@@ -160,16 +170,6 @@
       "wallets": 9,
       "riskLevel": "medium",
       "finding": "Top10 holders: 24.8985%"
-    },
-    {
-      "t": "19:06 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "RPU",
-      "usd": "3,441",
-      "wallets": 9,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.0568%"
     }
   ]
 }
