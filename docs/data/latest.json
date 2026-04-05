@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-05 22:19 UTC",
+  "updatedAt": "2026-04-05 22:55 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 42.0,
+    "avgRisk": 38.0,
     "criticalAlerts": 0
   },
   "audits": [
@@ -12,7 +12,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 15.6419%"
+      "finding": "Top10 holders: 15.9336%"
     },
     {
       "token": "PANDA8",
@@ -26,7 +26,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 45.13%"
+      "finding": "Top10 holders: 45.6519%"
     },
     {
       "token": "crowneck",
@@ -45,9 +45,9 @@
     {
       "token": "BARRUN",
       "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 20.4543%"
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 19.1924%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "1,313",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.6419%"
+      "finding": "Top10 holders: 15.9336%"
     },
     {
       "t": "16:03 UTC",
@@ -79,7 +79,7 @@
       "usd": "9,291",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 45.13%"
+      "finding": "Top10 holders: 45.6519%"
     },
     {
       "t": "21:16 UTC",
@@ -108,8 +108,8 @@
       "token": "BARRUN",
       "usd": "1,013",
       "wallets": 4,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.4543%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.1924%"
     },
     {
       "t": "08:38 UTC",
