@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-05 19:09 UTC",
+  "updatedAt": "2026-04-05 19:53 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,21 +12,21 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 32.8237%"
+      "finding": "Top10 holders: 29.2204%"
     },
     {
       "token": "LLM",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 44.6831%"
+      "finding": "Top10 holders: 43.9882%"
     },
     {
       "token": "crowneck",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 15.1215%"
+      "finding": "Top10 holders: 15.4392%"
     },
     {
       "token": "fluide",
@@ -40,7 +40,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 19.7391%"
+      "finding": "Top10 holders: 19.2022%"
     },
     {
       "token": "DUMPTRUCK",
@@ -59,7 +59,7 @@
       "usd": "1,656",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 32.8237%"
+      "finding": "Top10 holders: 29.2204%"
     },
     {
       "t": "10:52 UTC",
@@ -69,7 +69,7 @@
       "usd": "9,291",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 44.6831%"
+      "finding": "Top10 holders: 43.9882%"
     },
     {
       "t": "21:16 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,323",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.1215%"
+      "finding": "Top10 holders: 15.4392%"
     },
     {
       "t": "18:22 UTC",
@@ -99,7 +99,7 @@
       "usd": "1,013",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.7391%"
+      "finding": "Top10 holders: 19.2022%"
     },
     {
       "t": "08:38 UTC",
