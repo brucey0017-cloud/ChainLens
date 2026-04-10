@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-10 15:11 UTC",
+  "updatedAt": "2026-04-10 16:11 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 41.7,
+    "avgRisk": 37.7,
     "criticalAlerts": 1
   },
   "audits": [
@@ -19,7 +19,7 @@
       "chain": "solana",
       "level": "high",
       "score": 72,
-      "finding": "Top10 holders: 88.6354%"
+      "finding": "Top10 holders: 89.5016%"
     },
     {
       "token": "BURNIE",
@@ -31,9 +31,9 @@
     {
       "token": "RUNNER",
       "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 20.9455%"
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 15.6893%"
     },
     {
       "token": "Loot",
@@ -69,7 +69,7 @@
       "usd": "1,807",
       "wallets": 3,
       "riskLevel": "high",
-      "finding": "Top10 holders: 88.6354%"
+      "finding": "Top10 holders: 89.5016%"
     },
     {
       "t": "11:32 UTC",
@@ -88,8 +88,8 @@
       "token": "RUNNER",
       "usd": "1,307",
       "wallets": 7,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.9455%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 15.6893%"
     },
     {
       "t": "09:59 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,330",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 16.1843%"
+      "finding": "Top10 holders: 14.1231%"
     },
     {
       "t": "01:12 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,065",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.5365%"
+      "finding": "Top10 holders: 23.5364%"
     },
     {
       "t": "16:05 UTC",
