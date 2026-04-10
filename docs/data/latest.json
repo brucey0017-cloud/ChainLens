@@ -1,56 +1,86 @@
 {
-  "updatedAt": "2026-04-10 00:02 UTC",
+  "updatedAt": "2026-04-10 03:44 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 38.0,
+    "avgRisk": 34.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "Daisy",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 34.1807%"
+    },
+    {
+      "token": "Groucho",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 17.6972%"
+    },
+    {
+      "token": "GENZ",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 14.9897%"
+    },
     {
       "token": "Pepecoin",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.1857%"
+      "finding": "Top10 holders: 21.8609%"
     },
     {
       "token": "GENZ",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 14.57%"
+      "finding": "Top10 holders: 14.9897%"
     },
     {
       "token": "GENZ",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 14.57%"
-    },
-    {
-      "token": "MOODUANG",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 18.9173%"
-    },
-    {
-      "token": "EGG",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 21.7856%"
-    },
-    {
-      "token": "フロキ",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 21.9975%"
+      "finding": "Top10 holders: 14.9897%"
     }
   ],
   "signals": [
+    {
+      "t": "02:35 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Daisy",
+      "usd": "1,392",
+      "wallets": 5,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 34.1807%"
+    },
+    {
+      "t": "01:50 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Groucho",
+      "usd": "1,330",
+      "wallets": 6,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 17.6972%"
+    },
+    {
+      "t": "01:12 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "GENZ",
+      "usd": "1,063",
+      "wallets": 5,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 14.9897%"
+    },
     {
       "t": "22:13 UTC",
       "chain": "solana",
@@ -59,7 +89,7 @@
       "usd": "1,065",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.1857%"
+      "finding": "Top10 holders: 21.8609%"
     },
     {
       "t": "16:05 UTC",
@@ -69,7 +99,7 @@
       "usd": "1,883",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 14.57%"
+      "finding": "Top10 holders: 14.9897%"
     },
     {
       "t": "15:49 UTC",
@@ -79,7 +109,7 @@
       "usd": "1,014",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 14.57%"
+      "finding": "Top10 holders: 14.9897%"
     },
     {
       "t": "13:11 UTC",
@@ -88,8 +118,8 @@
       "token": "MOODUANG",
       "usd": "1,354",
       "wallets": 9,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 18.9173%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.8768%"
     },
     {
       "t": "12:59 UTC",
@@ -98,8 +128,8 @@
       "token": "EGG",
       "usd": "1,066",
       "wallets": 4,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 21.7856%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 17.5315%"
     },
     {
       "t": "07:10 UTC",
@@ -109,7 +139,7 @@
       "usd": "1,113",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.9975%"
+      "finding": "Top10 holders: 23.4878%"
     },
     {
       "t": "02:03 UTC",
@@ -119,7 +149,7 @@
       "usd": "1,412",
       "wallets": 8,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.7202%"
+      "finding": "Top10 holders: 16.4889%"
     },
     {
       "t": "21:46 UTC",
@@ -129,7 +159,7 @@
       "usd": "1,433",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 8.2887%"
+      "finding": "Top10 holders: 8.2054%"
     },
     {
       "t": "21:26 UTC",
@@ -140,36 +170,6 @@
       "wallets": 4,
       "riskLevel": "low",
       "finding": "Top10 holders: 11.3774%"
-    },
-    {
-      "t": "20:40 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "PIXEL",
-      "usd": "2,512",
-      "wallets": 9,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 14.3366%"
-    },
-    {
-      "t": "19:01 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "NEU",
-      "usd": "2,433",
-      "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 16.9899%"
-    },
-    {
-      "t": "16:57 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "ASTRA",
-      "usd": "1,016",
-      "wallets": 7,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 29.321%"
     }
   ]
 }
