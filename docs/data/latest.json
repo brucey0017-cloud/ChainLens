@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-11 10:59 UTC",
+  "updatedAt": "2026-04-11 11:33 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -26,7 +26,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 17.6456%"
+      "finding": "Top10 holders: 17.6457%"
     },
     {
       "token": "Dog",
@@ -40,7 +40,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 19.766%"
+      "finding": "Top10 holders: 19.8699%"
     },
     {
       "token": "Peepa",
@@ -79,7 +79,7 @@
       "usd": "1,184",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.6456%"
+      "finding": "Top10 holders: 17.6457%"
     },
     {
       "t": "01:26 UTC",
@@ -99,7 +99,7 @@
       "usd": "1,142",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.766%"
+      "finding": "Top10 holders: 19.8699%"
     },
     {
       "t": "20:07 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,599",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.8623%"
+      "finding": "Top10 holders: 19.7688%"
     },
     {
       "t": "14:50 UTC",
@@ -159,7 +159,7 @@
       "usd": "10,976",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.3394%"
+      "finding": "Top10 holders: 18.3395%"
     },
     {
       "t": "12:07 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,807",
       "wallets": 3,
       "riskLevel": "high",
-      "finding": "Top10 holders: 89.4983%"
+      "finding": "Top10 holders: 89.1495%"
     }
   ]
 }
