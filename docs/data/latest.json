@@ -1,56 +1,66 @@
 {
-  "updatedAt": "2026-04-14 05:54 UTC",
+  "updatedAt": "2026-04-14 07:16 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 26.0,
+    "avgRisk": 30.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "SUBSTRATE",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 17.4602%"
+    },
     {
       "token": "SOMETHING",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 17.3876%"
+      "finding": "Top10 holders: 14.2967%"
     },
     {
       "token": "Son",
       "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 18.7881%"
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 21.7301%"
     },
     {
       "token": "GNWR",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.3923%"
+      "finding": "Top10 holders: 11.391%"
     },
     {
       "token": "RIZO",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 19.88%"
+      "finding": "Top10 holders: 19.8055%"
     },
     {
       "token": "DUMBMONEY",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 9.3374%"
-    },
-    {
-      "token": "SOUL",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 12.2474%"
+      "finding": "Top10 holders: 9.5954%"
     }
   ],
   "signals": [
+    {
+      "t": "06:07 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "SUBSTRATE",
+      "usd": "1,541",
+      "wallets": 7,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 17.4602%"
+    },
     {
       "t": "04:15 UTC",
       "chain": "solana",
@@ -59,7 +69,7 @@
       "usd": "1,038",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.3876%"
+      "finding": "Top10 holders: 14.2967%"
     },
     {
       "t": "03:31 UTC",
@@ -68,8 +78,8 @@
       "token": "Son",
       "usd": "1,590",
       "wallets": 7,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 18.7881%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 21.7301%"
     },
     {
       "t": "00:14 UTC",
@@ -79,7 +89,7 @@
       "usd": "1,461",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.3923%"
+      "finding": "Top10 holders: 11.391%"
     },
     {
       "t": "23:22 UTC",
@@ -89,7 +99,7 @@
       "usd": "1,150",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 19.88%"
+      "finding": "Top10 holders: 19.8055%"
     },
     {
       "t": "23:22 UTC",
@@ -99,7 +109,7 @@
       "usd": "1,835",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 9.3374%"
+      "finding": "Top10 holders: 9.5954%"
     },
     {
       "t": "23:22 UTC",
@@ -129,7 +139,7 @@
       "usd": "1,913",
       "wallets": 11,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 32.3325%"
+      "finding": "Top10 holders: 32.8828%"
     },
     {
       "t": "20:10 UTC",
@@ -139,7 +149,7 @@
       "usd": "1,093",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 4.5426%"
+      "finding": "Top10 holders: 4.5427%"
     },
     {
       "t": "19:38 UTC",
@@ -159,17 +169,7 @@
       "usd": "1,056",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 10.3624%"
-    },
-    {
-      "t": "15:46 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "GTOR",
-      "usd": "2,607",
-      "wallets": 4,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 10.515%"
+      "finding": "Top10 holders: 10.3594%"
     }
   ]
 }
