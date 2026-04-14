@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-14 00:03 UTC",
+  "updatedAt": "2026-04-14 03:46 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -8,49 +8,69 @@
   },
   "audits": [
     {
+      "token": "Son",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 23.3552%"
+    },
+    {
+      "token": "GNWR",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 11.4865%"
+    },
+    {
       "token": "RIZO",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 16.3897%"
+      "finding": "Top10 holders: 19.1789%"
     },
     {
       "token": "DUMBMONEY",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.2251%"
+      "finding": "Top10 holders: 9.5832%"
     },
     {
       "token": "SOUL",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 14.5196%"
+      "finding": "Top10 holders: 11.3885%"
     },
     {
       "token": "RUNNER",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 9.0702%"
-    },
-    {
-      "token": "Patapim",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 24.0527%"
-    },
-    {
-      "token": "PETE",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 6.656%"
+      "finding": "Top10 holders: 6.6697%"
     }
   ],
   "signals": [
+    {
+      "t": "03:31 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Son",
+      "usd": "1,590",
+      "wallets": 7,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 23.3552%"
+    },
+    {
+      "t": "00:14 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "GNWR",
+      "usd": "1,461",
+      "wallets": 3,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 11.4865%"
+    },
     {
       "t": "23:22 UTC",
       "chain": "solana",
@@ -59,7 +79,7 @@
       "usd": "1,150",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 16.3897%"
+      "finding": "Top10 holders: 19.1789%"
     },
     {
       "t": "23:22 UTC",
@@ -69,7 +89,7 @@
       "usd": "1,835",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.2251%"
+      "finding": "Top10 holders: 9.5832%"
     },
     {
       "t": "23:22 UTC",
@@ -79,7 +99,7 @@
       "usd": "1,588",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 14.5196%"
+      "finding": "Top10 holders: 11.3885%"
     },
     {
       "t": "22:52 UTC",
@@ -89,7 +109,7 @@
       "usd": "1,713",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 9.0702%"
+      "finding": "Top10 holders: 6.6697%"
     },
     {
       "t": "21:04 UTC",
@@ -99,7 +119,7 @@
       "usd": "1,913",
       "wallets": 11,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.0527%"
+      "finding": "Top10 holders: 27.911%"
     },
     {
       "t": "20:10 UTC",
@@ -119,7 +139,7 @@
       "usd": "1,685",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 25.2415%"
+      "finding": "Top10 holders: 25.4809%"
     },
     {
       "t": "18:42 UTC",
@@ -149,27 +169,7 @@
       "usd": "1,478",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.3694%"
-    },
-    {
-      "t": "15:21 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "Goku",
-      "usd": "1,683",
-      "wallets": 4,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.918%"
-    },
-    {
-      "t": "14:57 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "sudo",
-      "usd": "2,137",
-      "wallets": 7,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 23.9595%"
+      "finding": "Top10 holders: 18.4784%"
     }
   ]
 }
