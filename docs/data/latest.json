@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-14 07:16 UTC",
+  "updatedAt": "2026-04-14 08:58 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 30.0,
+    "avgRisk": 34.0,
     "criticalAlerts": 0
   },
   "audits": [
@@ -12,42 +12,42 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 17.4602%"
+      "finding": "Top10 holders: 18.9827%"
     },
     {
       "token": "SOMETHING",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 14.2967%"
+      "finding": "Top10 holders: 15.6347%"
     },
     {
       "token": "Son",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 21.7301%"
+      "finding": "Top10 holders: 21.1824%"
     },
     {
       "token": "GNWR",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.391%"
+      "finding": "Top10 holders: 11.3787%"
     },
     {
       "token": "RIZO",
       "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 19.8055%"
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 21.16%"
     },
     {
       "token": "DUMBMONEY",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 9.5954%"
+      "finding": "Top10 holders: 10.6512%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "1,541",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.4602%"
+      "finding": "Top10 holders: 18.9827%"
     },
     {
       "t": "04:15 UTC",
@@ -69,7 +69,7 @@
       "usd": "1,038",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 14.2967%"
+      "finding": "Top10 holders: 15.6347%"
     },
     {
       "t": "03:31 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,590",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.7301%"
+      "finding": "Top10 holders: 21.1824%"
     },
     {
       "t": "00:14 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,461",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.391%"
+      "finding": "Top10 holders: 11.3787%"
     },
     {
       "t": "23:22 UTC",
@@ -98,8 +98,8 @@
       "token": "RIZO",
       "usd": "1,150",
       "wallets": 5,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.8055%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 21.16%"
     },
     {
       "t": "23:22 UTC",
@@ -109,7 +109,7 @@
       "usd": "1,835",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 9.5954%"
+      "finding": "Top10 holders: 10.6512%"
     },
     {
       "t": "23:22 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,913",
       "wallets": 11,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 32.8828%"
+      "finding": "Top10 holders: 32.2289%"
     },
     {
       "t": "20:10 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,093",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 4.5427%"
+      "finding": "Top10 holders: 4.5426%"
     },
     {
       "t": "19:38 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,685",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.8989%"
+      "finding": "Top10 holders: 23.9697%"
     },
     {
       "t": "18:42 UTC",
