@@ -1,12 +1,19 @@
 {
-  "updatedAt": "2026-04-15 21:11 UTC",
+  "updatedAt": "2026-04-15 22:07 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 34.0,
+    "avgRisk": 30.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "Pigeon",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 18.8005%"
+    },
     {
       "token": "PEACE",
       "chain": "solana",
@@ -33,7 +40,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 5.53%"
+      "finding": "Top10 holders: 4.8259%"
     },
     {
       "token": "MWOXJB",
@@ -41,16 +48,19 @@
       "level": "medium",
       "score": 50,
       "finding": "Top10 holders: 25.2112%"
-    },
-    {
-      "token": "QUEST",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 27.6383%"
     }
   ],
   "signals": [
+    {
+      "t": "21:20 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Pigeon",
+      "usd": "1,874",
+      "wallets": 6,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 18.8005%"
+    },
     {
       "t": "19:30 UTC",
       "chain": "solana",
@@ -89,7 +99,7 @@
       "usd": "2,208",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 5.53%"
+      "finding": "Top10 holders: 4.8259%"
     },
     {
       "t": "18:26 UTC",
@@ -129,7 +139,7 @@
       "usd": "1,347",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 25.2179%"
+      "finding": "Top10 holders: 25.284%"
     },
     {
       "t": "23:39 UTC",
@@ -160,16 +170,6 @@
       "wallets": 3,
       "riskLevel": "low",
       "finding": "Top10 holders: 8.5955%"
-    },
-    {
-      "t": "22:59 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "Cashtags",
-      "usd": "2,191",
-      "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 21.2147%"
     }
   ]
 }
