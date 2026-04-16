@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-16 10:16 UTC",
+  "updatedAt": "2026-04-16 11:35 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,7 +12,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 9.5386%"
+      "finding": "Top10 holders: 9.6034%"
     },
     {
       "token": "Pigeon",
@@ -40,14 +40,14 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 8.0065%"
+      "finding": "Top10 holders: 8.571%"
     },
     {
       "token": "BFH",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 3.5629%"
+      "finding": "Top10 holders: 3.5999%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "1,115",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 9.5386%"
+      "finding": "Top10 holders: 9.6034%"
     },
     {
       "t": "21:20 UTC",
@@ -99,7 +99,7 @@
       "usd": "1,474",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 8.0065%"
+      "finding": "Top10 holders: 8.571%"
     },
     {
       "t": "18:35 UTC",
@@ -109,7 +109,7 @@
       "usd": "2,208",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 3.5629%"
+      "finding": "Top10 holders: 3.5999%"
     },
     {
       "t": "18:26 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,347",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 25.3533%"
+      "finding": "Top10 holders: 25.3536%"
     },
     {
       "t": "23:39 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,899",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 28.6664%"
+      "finding": "Top10 holders: 27.4761%"
     }
   ]
 }
