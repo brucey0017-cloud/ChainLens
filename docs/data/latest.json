@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-17 19:51 UTC",
+  "updatedAt": "2026-04-17 20:34 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 33.7,
+    "avgRisk": 41.7,
     "criticalAlerts": 1
   },
   "audits": [
@@ -12,7 +12,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 5.3401%"
+      "finding": "Top10 holders: 5.3271%"
     },
     {
       "token": "WhiteWhale",
@@ -26,28 +26,28 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 17.9118%"
+      "finding": "Top10 holders: 17.826%"
     },
     {
       "token": "ELONMUSK",
       "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 18.3103%"
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 21.2665%"
     },
     {
       "token": "ELEPHANT",
       "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 16.2193%"
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 20.7434%"
     },
     {
       "token": "unc",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 10.9497%"
+      "finding": "Top10 holders: 10.9417%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "1,059",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 5.3401%"
+      "finding": "Top10 holders: 5.3271%"
     },
     {
       "t": "16:59 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,727",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.9118%"
+      "finding": "Top10 holders: 17.826%"
     },
     {
       "t": "16:11 UTC",
@@ -88,8 +88,8 @@
       "token": "ELONMUSK",
       "usd": "1,702",
       "wallets": 13,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 18.3103%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 21.2665%"
     },
     {
       "t": "15:40 UTC",
@@ -98,8 +98,8 @@
       "token": "ELEPHANT",
       "usd": "1,260",
       "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 16.2193%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.7434%"
     },
     {
       "t": "11:56 UTC",
@@ -109,7 +109,7 @@
       "usd": "2,685",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 10.9497%"
+      "finding": "Top10 holders: 10.9417%"
     },
     {
       "t": "09:00 UTC",
@@ -149,7 +149,7 @@
       "usd": "2,719",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.1741%"
+      "finding": "Top10 holders: 21.2711%"
     },
     {
       "t": "04:11 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,256",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 27.6353%"
+      "finding": "Top10 holders: 27.7451%"
     },
     {
       "t": "04:01 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,087",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 37.5847%"
+      "finding": "Top10 holders: 37.5944%"
     }
   ]
 }
