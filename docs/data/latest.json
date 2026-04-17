@@ -1,56 +1,66 @@
 {
-  "updatedAt": "2026-04-17 05:57 UTC",
+  "updatedAt": "2026-04-17 07:28 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 38.0,
+    "avgRisk": 34.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "ASTEROID",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 13.9406%"
+    },
     {
       "token": "aun",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 6.2937%"
+      "finding": "Top10 holders: 11.6968%"
     },
     {
       "token": "ASTEROID",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 18.7881%"
+      "finding": "Top10 holders: 19.7418%"
     },
     {
       "token": "ASTROID",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.1732%"
+      "finding": "Top10 holders: 22.4686%"
     },
     {
       "token": "unt",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 36.9458%"
+      "finding": "Top10 holders: 37.2197%"
     },
     {
       "token": "ASTEROID",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 13.2628%"
-    },
-    {
-      "token": "GAY",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 20.1352%"
+      "finding": "Top10 holders: 13.9406%"
     }
   ],
   "signals": [
+    {
+      "t": "06:57 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "ASTEROID",
+      "usd": "1,234",
+      "wallets": 3,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 13.9406%"
+    },
     {
       "t": "05:23 UTC",
       "chain": "solana",
@@ -59,7 +69,7 @@
       "usd": "1,247",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 6.2937%"
+      "finding": "Top10 holders: 11.6968%"
     },
     {
       "t": "04:28 UTC",
@@ -69,7 +79,7 @@
       "usd": "2,719",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.7881%"
+      "finding": "Top10 holders: 19.7418%"
     },
     {
       "t": "04:11 UTC",
@@ -79,7 +89,7 @@
       "usd": "1,256",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.1732%"
+      "finding": "Top10 holders: 22.4686%"
     },
     {
       "t": "04:01 UTC",
@@ -89,7 +99,7 @@
       "usd": "1,087",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 36.9458%"
+      "finding": "Top10 holders: 37.2197%"
     },
     {
       "t": "03:53 UTC",
@@ -99,7 +109,7 @@
       "usd": "1,284",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.2628%"
+      "finding": "Top10 holders: 13.9406%"
     },
     {
       "t": "03:23 UTC",
@@ -108,8 +118,8 @@
       "token": "GAY",
       "usd": "2,117",
       "wallets": 4,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.1352%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 16.8173%"
     },
     {
       "t": "03:22 UTC",
@@ -118,8 +128,8 @@
       "token": "GAY",
       "usd": "1,086",
       "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.1352%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 16.8173%"
     },
     {
       "t": "21:37 UTC",
@@ -129,7 +139,7 @@
       "usd": "1,613",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.2496%"
+      "finding": "Top10 holders: 13.1865%"
     },
     {
       "t": "20:41 UTC",
@@ -139,7 +149,7 @@
       "usd": "1,500",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.641%"
+      "finding": "Top10 holders: 22.3592%"
     },
     {
       "t": "20:28 UTC",
@@ -149,7 +159,7 @@
       "usd": "1,466",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 46.1854%"
+      "finding": "Top10 holders: 43.7985%"
     },
     {
       "t": "19:48 UTC",
@@ -159,17 +169,7 @@
       "usd": "1,231",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.6354%"
-    },
-    {
-      "t": "18:52 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "unc",
-      "usd": "2,428",
-      "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 10.8781%"
+      "finding": "Top10 holders: 16.2534%"
     }
   ]
 }
