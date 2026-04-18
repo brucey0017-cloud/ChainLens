@@ -1,12 +1,26 @@
 {
-  "updatedAt": "2026-04-18 20:59 UTC",
+  "updatedAt": "2026-04-18 21:37 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 34.0,
+    "avgRisk": 38.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "skals",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 22.24%"
+    },
+    {
+      "token": "Asteroid",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 22.5787%"
+    },
     {
       "token": "afk",
       "chain": "solana",
@@ -19,28 +33,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.7628%"
+      "finding": "Top10 holders: 21.1635%"
     },
     {
       "token": "ASTEROID",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 11.7146%"
-    },
-    {
-      "token": "XERO",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 9.8976%"
-    },
-    {
-      "token": "ASTEROID",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 24.1377%"
+      "finding": "Top10 holders: 11.5684%"
     },
     {
       "token": "XERO",
@@ -51,6 +51,26 @@
     }
   ],
   "signals": [
+    {
+      "t": "21:36 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "skals",
+      "usd": "1,315",
+      "wallets": 5,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 22.24%"
+    },
+    {
+      "t": "21:30 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "Asteroid",
+      "usd": "1,610",
+      "wallets": 4,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 22.5787%"
+    },
     {
       "t": "20:44 UTC",
       "chain": "solana",
@@ -69,7 +89,7 @@
       "usd": "1,790",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.7628%"
+      "finding": "Top10 holders: 21.1635%"
     },
     {
       "t": "20:04 UTC",
@@ -79,7 +99,7 @@
       "usd": "1,496",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.7146%"
+      "finding": "Top10 holders: 11.5684%"
     },
     {
       "t": "19:45 UTC",
@@ -99,7 +119,7 @@
       "usd": "3,387",
       "wallets": 12,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.1377%"
+      "finding": "Top10 holders: 22.7668%"
     },
     {
       "t": "19:21 UTC",
@@ -119,7 +139,7 @@
       "usd": "1,383",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.2458%"
+      "finding": "Top10 holders: 11.2068%"
     },
     {
       "t": "16:54 UTC",
@@ -129,7 +149,7 @@
       "usd": "1,829",
       "wallets": 10,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 25.3919%"
+      "finding": "Top10 holders: 24.7791%"
     },
     {
       "t": "15:19 UTC",
@@ -139,7 +159,7 @@
       "usd": "3,104",
       "wallets": 10,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.8571%"
+      "finding": "Top10 holders: 18.4249%"
     },
     {
       "t": "14:38 UTC",
@@ -148,28 +168,8 @@
       "token": "CALL",
       "usd": "1,648",
       "wallets": 10,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.1075%"
-    },
-    {
-      "t": "04:00 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "SOULANA",
-      "usd": "4,876",
-      "wallets": 7,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 28.8761%"
-    },
-    {
-      "t": "03:35 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "SOULANA",
-      "usd": "3,258",
-      "wallets": 6,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 28.8761%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 18.7763%"
     }
   ]
 }
