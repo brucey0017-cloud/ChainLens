@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-18 05:00 UTC",
+  "updatedAt": "2026-04-18 06:42 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,21 +12,21 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 29.5017%"
+      "finding": "Top10 holders: 30.732%"
     },
     {
       "token": "SOULANA",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 29.5017%"
+      "finding": "Top10 holders: 30.732%"
     },
     {
       "token": "Aliens",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 34.0887%"
+      "finding": "Top10 holders: 34.4505%"
     },
     {
       "token": "MAGA",
@@ -59,7 +59,7 @@
       "usd": "4,876",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 29.5017%"
+      "finding": "Top10 holders: 30.732%"
     },
     {
       "t": "03:35 UTC",
@@ -69,7 +69,7 @@
       "usd": "3,258",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 29.5017%"
+      "finding": "Top10 holders: 30.732%"
     },
     {
       "t": "00:06 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,375",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 34.0887%"
+      "finding": "Top10 holders: 34.4505%"
     },
     {
       "t": "23:59 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,458",
       "wallets": 9,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.8357%"
+      "finding": "Top10 holders: 23.134%"
     },
     {
       "t": "21:23 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,074",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.8357%"
+      "finding": "Top10 holders: 23.134%"
     },
     {
       "t": "20:52 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,059",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 8.0429%"
+      "finding": "Top10 holders: 8.0604%"
     }
   ]
 }
