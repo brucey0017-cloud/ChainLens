@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-19 13:52 UTC",
+  "updatedAt": "2026-04-19 14:33 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,7 +19,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 16.5911%"
+      "finding": "Top10 holders: 17.9099%"
     },
     {
       "token": "Sharon",
@@ -33,7 +33,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 9.9352%"
+      "finding": "Top10 holders: 10.0614%"
     },
     {
       "token": "Sob",
@@ -69,7 +69,7 @@
       "usd": "1,185",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 16.5911%"
+      "finding": "Top10 holders: 17.9099%"
     },
     {
       "t": "00:09 UTC",
@@ -89,7 +89,7 @@
       "usd": "2,057",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 9.9352%"
+      "finding": "Top10 holders: 10.0614%"
     },
     {
       "t": "23:08 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,496",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 12.8503%"
+      "finding": "Top10 holders: 12.8504%"
     },
     {
       "t": "19:45 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,588",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 9.8976%"
+      "finding": "Top10 holders: 9.6942%"
     },
     {
       "t": "19:36 UTC",
