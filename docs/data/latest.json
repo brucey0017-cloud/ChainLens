@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-19 17:58 UTC",
+  "updatedAt": "2026-04-19 18:45 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -26,21 +26,21 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.7496%"
+      "finding": "Top10 holders: 21.2461%"
     },
     {
       "token": "DUMBMONEY",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 10.385%"
+      "finding": "Top10 holders: 9.8182%"
     },
     {
       "token": "Sob",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 24.3539%"
+      "finding": "Top10 holders: 24.3544%"
     },
     {
       "token": "skals",
@@ -79,7 +79,7 @@
       "usd": "1,499",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.7496%"
+      "finding": "Top10 holders: 21.2461%"
     },
     {
       "t": "23:52 UTC",
@@ -89,7 +89,7 @@
       "usd": "2,057",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 10.385%"
+      "finding": "Top10 holders: 9.8182%"
     },
     {
       "t": "23:08 UTC",
@@ -99,7 +99,7 @@
       "usd": "1,190",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.3539%"
+      "finding": "Top10 holders: 24.3544%"
     },
     {
       "t": "21:36 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,496",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.2627%"
+      "finding": "Top10 holders: 13.2194%"
     },
     {
       "t": "19:45 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,588",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 9.2781%"
+      "finding": "Top10 holders: 9.2463%"
     },
     {
       "t": "19:36 UTC",
@@ -169,7 +169,7 @@
       "usd": "3,387",
       "wallets": 12,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 27.3189%"
+      "finding": "Top10 holders: 28.4773%"
     }
   ]
 }
