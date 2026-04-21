@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-21 10:59 UTC",
+  "updatedAt": "2026-04-21 12:00 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,7 +12,7 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 15.6371%"
+      "finding": "Top10 holders: 15.5415%"
     },
     {
       "token": "SCHIZO",
@@ -26,28 +26,28 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.1488%"
+      "finding": "Top10 holders: 22.1489%"
     },
     {
       "token": "COMEBACK",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 35.5823%"
+      "finding": "Top10 holders: 38.3595%"
     },
     {
       "token": "NORMIE",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.0391%"
+      "finding": "Top10 holders: 20.0458%"
     },
     {
       "token": "Inked",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 40.9746%"
+      "finding": "Top10 holders: 40.9586%"
     }
   ],
   "signals": [
@@ -59,7 +59,7 @@
       "usd": "9,666",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.6371%"
+      "finding": "Top10 holders: 15.5415%"
     },
     {
       "t": "05:25 UTC",
@@ -79,7 +79,7 @@
       "usd": "2,094",
       "wallets": 9,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.1488%"
+      "finding": "Top10 holders: 22.1489%"
     },
     {
       "t": "00:07 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,323",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 35.5823%"
+      "finding": "Top10 holders: 38.3595%"
     },
     {
       "t": "21:22 UTC",
@@ -99,7 +99,7 @@
       "usd": "1,222",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.0391%"
+      "finding": "Top10 holders: 20.0458%"
     },
     {
       "t": "21:08 UTC",
@@ -109,7 +109,7 @@
       "usd": "1,283",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 40.9746%"
+      "finding": "Top10 holders: 40.9586%"
     },
     {
       "t": "20:55 UTC",
@@ -118,8 +118,8 @@
       "token": "trust",
       "usd": "1,662",
       "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.6591%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.6928%"
     },
     {
       "t": "19:20 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,181",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.013%"
+      "finding": "Top10 holders: 22.412%"
     },
     {
       "t": "14:44 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,177",
       "wallets": 8,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 27.9973%"
+      "finding": "Top10 holders: 27.2502%"
     },
     {
       "t": "14:17 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,010",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 18.4219%"
+      "finding": "Top10 holders: 18.5243%"
     },
     {
       "t": "05:13 UTC",
@@ -169,7 +169,7 @@
       "usd": "1,416",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.2656%"
+      "finding": "Top10 holders: 23.346%"
     }
   ]
 }
