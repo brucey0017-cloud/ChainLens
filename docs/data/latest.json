@@ -1,56 +1,96 @@
 {
-  "updatedAt": "2026-04-22 10:44 UTC",
+  "updatedAt": "2026-04-22 12:59 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 38.0,
+    "avgRisk": 30.0,
     "criticalAlerts": 0
   },
   "audits": [
+    {
+      "token": "DUMBMONEY",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 11.3241%"
+    },
+    {
+      "token": "RACPEEN",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 9.0241%"
+    },
+    {
+      "token": "HONESTRUG",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 18.0843%"
+    },
+    {
+      "token": "HONESTRUG",
+      "chain": "solana",
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 18.0843%"
+    },
     {
       "token": "FLORK",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 4.5438%"
+      "finding": "Top10 holders: 5.0124%"
     },
     {
       "token": "RCSC",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 32.8779%"
-    },
-    {
-      "token": "Ghibli",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 26.033%"
-    },
-    {
-      "token": "BILLI ",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 29.3707%"
-    },
-    {
-      "token": "QC",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 9.8207%"
-    },
-    {
-      "token": "SSA",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 1.2255%"
+      "finding": "Top10 holders: 32.8897%"
     }
   ],
   "signals": [
+    {
+      "t": "12:48 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "DUMBMONEY",
+      "usd": "1,151",
+      "wallets": 3,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 11.3241%"
+    },
+    {
+      "t": "12:12 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "RACPEEN",
+      "usd": "1,746",
+      "wallets": 6,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 9.0241%"
+    },
+    {
+      "t": "11:00 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "HONESTRUG",
+      "usd": "2,245",
+      "wallets": 6,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 18.0843%"
+    },
+    {
+      "t": "10:49 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "HONESTRUG",
+      "usd": "1,585",
+      "wallets": 5,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 18.0843%"
+    },
     {
       "t": "09:17 UTC",
       "chain": "solana",
@@ -59,7 +99,7 @@
       "usd": "1,619",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 4.5438%"
+      "finding": "Top10 holders: 5.0124%"
     },
     {
       "t": "06:11 UTC",
@@ -69,7 +109,7 @@
       "usd": "1,404",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 32.8779%"
+      "finding": "Top10 holders: 32.8897%"
     },
     {
       "t": "05:38 UTC",
@@ -79,7 +119,7 @@
       "usd": "1,188",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 26.033%"
+      "finding": "Top10 holders: 26.0247%"
     },
     {
       "t": "05:13 UTC",
@@ -89,7 +129,7 @@
       "usd": "1,295",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 29.3707%"
+      "finding": "Top10 holders: 29.5007%"
     },
     {
       "t": "04:13 UTC",
@@ -129,47 +169,7 @@
       "usd": "1,425",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.3827%"
-    },
-    {
-      "t": "00:06 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "Flork",
-      "usd": "3,303",
-      "wallets": 10,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 21.0427%"
-    },
-    {
-      "t": "23:46 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "Flork",
-      "usd": "1,415",
-      "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 21.0427%"
-    },
-    {
-      "t": "23:38 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "BRRR",
-      "usd": "1,233",
-      "wallets": 4,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.705%"
-    },
-    {
-      "t": "21:39 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "THIQ",
-      "usd": "1,086",
-      "wallets": 3,
-      "riskLevel": "high",
-      "finding": "Top10 holders: 80.1367%"
+      "finding": "Top10 holders: 21.9618%"
     }
   ]
 }
