@@ -1,39 +1,46 @@
 {
-  "updatedAt": "2026-04-22 22:37 UTC",
+  "updatedAt": "2026-04-22 23:37 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 38.0,
-    "criticalAlerts": 0
+    "avgRisk": 49.7,
+    "criticalAlerts": 1
   },
   "audits": [
     {
+      "token": "AIRPUMP",
+      "chain": "solana",
+      "level": "high",
+      "score": 72,
+      "finding": "Top10 holders: 60.2888%"
+    },
+    {
       "token": "Pasterneck",
       "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 19.3829%"
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 21.6046%"
     },
     {
       "token": "UBI",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 26.0925%"
+      "finding": "Top10 holders: 23.6937%"
     },
     {
       "token": "MTGA",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.4135%"
+      "finding": "Top10 holders: 21.3198%"
     },
     {
       "token": "NUMBER",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 50.4546%"
+      "finding": "Top10 holders: 51.3167%"
     },
     {
       "token": "DAD",
@@ -41,16 +48,19 @@
       "level": "low",
       "score": 26,
       "finding": "Top10 holders: 2.0987%"
-    },
-    {
-      "token": "XBT",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 12.0519%"
     }
   ],
   "signals": [
+    {
+      "t": "23:13 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "AIRPUMP",
+      "usd": "1,818",
+      "wallets": 5,
+      "riskLevel": "high",
+      "finding": "Top10 holders: 60.2888%"
+    },
     {
       "t": "22:17 UTC",
       "chain": "solana",
@@ -58,8 +68,8 @@
       "token": "Pasterneck",
       "usd": "1,142",
       "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.3829%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 21.6046%"
     },
     {
       "t": "21:51 UTC",
@@ -69,7 +79,7 @@
       "usd": "1,317",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 26.0925%"
+      "finding": "Top10 holders: 23.6937%"
     },
     {
       "t": "19:35 UTC",
@@ -79,7 +89,7 @@
       "usd": "1,899",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.4135%"
+      "finding": "Top10 holders: 21.3198%"
     },
     {
       "t": "18:08 UTC",
@@ -89,7 +99,7 @@
       "usd": "1,780",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 50.4546%"
+      "finding": "Top10 holders: 51.3167%"
     },
     {
       "t": "15:43 UTC",
@@ -109,7 +119,7 @@
       "usd": "12,895",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 12.0519%"
+      "finding": "Top10 holders: 12.052%"
     },
     {
       "t": "14:57 UTC",
@@ -119,7 +129,7 @@
       "usd": "3,032",
       "wallets": 3,
       "riskLevel": "high",
-      "finding": "Top10 holders: 88.795%"
+      "finding": "Top10 holders: 88.689%"
     },
     {
       "t": "13:40 UTC",
@@ -129,7 +139,7 @@
       "usd": "1,484",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 27.4996%"
+      "finding": "Top10 holders: 28.0304%"
     },
     {
       "t": "12:48 UTC",
@@ -139,7 +149,7 @@
       "usd": "1,151",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 10.7369%"
+      "finding": "Top10 holders: 10.7485%"
     },
     {
       "t": "12:12 UTC",
@@ -149,7 +159,7 @@
       "usd": "1,746",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 7.6898%"
+      "finding": "Top10 holders: 7.2461%"
     },
     {
       "t": "11:00 UTC",
@@ -158,16 +168,6 @@
       "token": "HONESTRUG",
       "usd": "2,245",
       "wallets": 6,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 27.8114%"
-    },
-    {
-      "t": "10:49 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "HONESTRUG",
-      "usd": "1,585",
-      "wallets": 5,
       "riskLevel": "medium",
       "finding": "Top10 holders: 27.8114%"
     }
