@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-23 21:36 UTC",
+  "updatedAt": "2026-04-23 22:33 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -7,6 +7,13 @@
     "criticalAlerts": 1
   },
   "audits": [
+    {
+      "token": "AINI",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 34.4675%"
+    },
     {
       "token": "MAGA",
       "chain": "solana",
@@ -17,23 +24,23 @@
     {
       "token": "VESPR",
       "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 28.7282%"
+      "level": "low",
+      "score": 26,
+      "finding": "Top10 holders: 19.0796%"
     },
     {
       "token": "TripleP",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 21.5467%"
+      "finding": "Top10 holders: 21.9511%"
     },
     {
       "token": "POB500",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 39.1934%"
+      "finding": "Top10 holders: 40.9021%"
     },
     {
       "token": "M2M",
@@ -41,16 +48,19 @@
       "level": "high",
       "score": 72,
       "finding": "Top10 holders: 94.6857%"
-    },
-    {
-      "token": "ELIEN",
-      "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 13.7306%"
     }
   ],
   "signals": [
+    {
+      "t": "22:24 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "AINI",
+      "usd": "1,590",
+      "wallets": 7,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 34.4675%"
+    },
     {
       "t": "21:26 UTC",
       "chain": "solana",
@@ -68,8 +78,8 @@
       "token": "VESPR",
       "usd": "1,172",
       "wallets": 7,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 28.7282%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.0796%"
     },
     {
       "t": "16:12 UTC",
@@ -79,7 +89,7 @@
       "usd": "1,235",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.5467%"
+      "finding": "Top10 holders: 21.9511%"
     },
     {
       "t": "16:09 UTC",
@@ -89,7 +99,7 @@
       "usd": "1,292",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 39.1934%"
+      "finding": "Top10 holders: 40.9021%"
     },
     {
       "t": "11:57 UTC",
@@ -109,7 +119,7 @@
       "usd": "1,253",
       "wallets": 6,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.7306%"
+      "finding": "Top10 holders: 13.3264%"
     },
     {
       "t": "07:10 UTC",
@@ -128,8 +138,8 @@
       "token": "CULT",
       "usd": "1,502",
       "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.4271%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.3244%"
     },
     {
       "t": "02:23 UTC",
@@ -148,8 +158,8 @@
       "token": "SAM",
       "usd": "2,907",
       "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.044%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.7559%"
     },
     {
       "t": "23:13 UTC",
@@ -159,17 +169,7 @@
       "usd": "1,818",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 57.0752%"
-    },
-    {
-      "t": "22:17 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "Pasterneck",
-      "usd": "1,142",
-      "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 17.149%"
+      "finding": "Top10 holders: 56.9747%"
     }
   ]
 }
