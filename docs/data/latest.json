@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-24 12:57 UTC",
+  "updatedAt": "2026-04-24 14:43 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -8,11 +8,18 @@
   },
   "audits": [
     {
+      "token": "ASTEROID",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 20.0123%"
+    },
+    {
       "token": "SHIBAG",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 4.1834%"
+      "finding": "Top10 holders: 4.1836%"
     },
     {
       "token": "M2M",
@@ -26,14 +33,14 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.0401%"
+      "finding": "Top10 holders: 22.6444%"
     },
     {
       "token": "chloe",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 14.8694%"
+      "finding": "Top10 holders: 15.0375%"
     },
     {
       "token": "BOAR",
@@ -41,16 +48,19 @@
       "level": "medium",
       "score": 50,
       "finding": "Top10 holders: 20.6854%"
-    },
-    {
-      "token": "AIB",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 20.929%"
     }
   ],
   "signals": [
+    {
+      "t": "13:58 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "ASTEROID",
+      "usd": "1,821",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.0123%"
+    },
     {
       "t": "11:00 UTC",
       "chain": "solana",
@@ -59,7 +69,7 @@
       "usd": "1,088",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 4.1834%"
+      "finding": "Top10 holders: 4.1836%"
     },
     {
       "t": "10:54 UTC",
@@ -79,7 +89,7 @@
       "usd": "2,405",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.0401%"
+      "finding": "Top10 holders: 22.6444%"
     },
     {
       "t": "03:13 UTC",
@@ -89,7 +99,7 @@
       "usd": "1,990",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 14.8694%"
+      "finding": "Top10 holders: 15.0375%"
     },
     {
       "t": "03:12 UTC",
@@ -108,8 +118,8 @@
       "token": "AIB",
       "usd": "2,408",
       "wallets": 14,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.929%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.9447%"
     },
     {
       "t": "22:24 UTC",
@@ -139,7 +149,7 @@
       "usd": "1,172",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 11.9025%"
+      "finding": "Top10 holders: 11.8412%"
     },
     {
       "t": "16:12 UTC",
@@ -159,17 +169,7 @@
       "usd": "1,292",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 46.1569%"
-    },
-    {
-      "t": "11:57 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "M2M",
-      "usd": "1,587",
-      "wallets": 3,
-      "riskLevel": "high",
-      "finding": "Top10 holders: 94.7402%"
+      "finding": "Top10 holders: 45.4316%"
     }
   ]
 }
