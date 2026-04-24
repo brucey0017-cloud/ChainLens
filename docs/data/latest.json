@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-24 20:35 UTC",
+  "updatedAt": "2026-04-24 21:38 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -19,14 +19,14 @@
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 10.1195%"
+      "finding": "Top10 holders: 9.7561%"
     },
     {
       "token": "RCSC",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 6.2526%"
+      "finding": "Top10 holders: 6.1582%"
     },
     {
       "token": "ROTUS",
@@ -47,7 +47,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.1047%"
+      "finding": "Top10 holders: 20.2274%"
     }
   ],
   "signals": [
@@ -69,7 +69,7 @@
       "usd": "1,164",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 10.1195%"
+      "finding": "Top10 holders: 9.7561%"
     },
     {
       "t": "18:00 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,204",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 6.2526%"
+      "finding": "Top10 holders: 6.1582%"
     },
     {
       "t": "17:55 UTC",
@@ -109,7 +109,7 @@
       "usd": "1,821",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.1047%"
+      "finding": "Top10 holders: 20.2274%"
     },
     {
       "t": "11:00 UTC",
@@ -129,7 +129,7 @@
       "usd": "1,425",
       "wallets": 3,
       "riskLevel": "high",
-      "finding": "Top10 holders: 95.29%"
+      "finding": "Top10 holders: 95.55%"
     },
     {
       "t": "10:40 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,990",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 13.4204%"
+      "finding": "Top10 holders: 14.3463%"
     },
     {
       "t": "03:12 UTC",
@@ -159,7 +159,7 @@
       "usd": "2,291",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.7252%"
+      "finding": "Top10 holders: 20.8674%"
     },
     {
       "t": "22:50 UTC",
@@ -168,8 +168,8 @@
       "token": "AIB",
       "usd": "2,408",
       "wallets": 14,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 20.6744%"
+      "riskLevel": "low",
+      "finding": "Top10 holders: 17.9357%"
     }
   ]
 }
