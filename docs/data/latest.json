@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-24 11:37 UTC",
+  "updatedAt": "2026-04-24 12:57 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -26,21 +26,21 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 22.9442%"
+      "finding": "Top10 holders: 22.0401%"
     },
     {
       "token": "chloe",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 15.4164%"
+      "finding": "Top10 holders: 14.8694%"
     },
     {
       "token": "BOAR",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.6944%"
+      "finding": "Top10 holders: 20.6854%"
     },
     {
       "token": "AIB",
@@ -79,7 +79,7 @@
       "usd": "2,405",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 22.9442%"
+      "finding": "Top10 holders: 22.0401%"
     },
     {
       "t": "03:13 UTC",
@@ -89,7 +89,7 @@
       "usd": "1,990",
       "wallets": 5,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.4164%"
+      "finding": "Top10 holders: 14.8694%"
     },
     {
       "t": "03:12 UTC",
@@ -99,7 +99,7 @@
       "usd": "2,291",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.6944%"
+      "finding": "Top10 holders: 20.6854%"
     },
     {
       "t": "22:50 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,235",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.8882%"
+      "finding": "Top10 holders: 23.8886%"
     },
     {
       "t": "16:09 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,292",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 44.6749%"
+      "finding": "Top10 holders: 46.1569%"
     },
     {
       "t": "11:57 UTC",
