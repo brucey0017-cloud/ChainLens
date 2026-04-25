@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-25 13:57 UTC",
+  "updatedAt": "2026-04-25 14:38 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -12,21 +12,21 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.1845%"
+      "finding": "Top10 holders: 23.1207%"
     },
     {
       "token": "GUM",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 41.4513%"
+      "finding": "Top10 holders: 41.8814%"
     },
     {
       "token": "QUEST",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 26.1793%"
+      "finding": "Top10 holders: 26.1792%"
     },
     {
       "token": "MLP",
@@ -59,7 +59,7 @@
       "usd": "1,381",
       "wallets": 7,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.1845%"
+      "finding": "Top10 holders: 23.1207%"
     },
     {
       "t": "08:07 UTC",
@@ -69,7 +69,7 @@
       "usd": "1,478",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 41.4513%"
+      "finding": "Top10 holders: 41.8814%"
     },
     {
       "t": "06:46 UTC",
@@ -79,7 +79,7 @@
       "usd": "1,485",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 26.1793%"
+      "finding": "Top10 holders: 26.1792%"
     },
     {
       "t": "04:39 UTC",
@@ -139,7 +139,7 @@
       "usd": "1,060",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.3228%"
+      "finding": "Top10 holders: 22.9533%"
     },
     {
       "t": "00:01 UTC",
@@ -149,7 +149,7 @@
       "usd": "2,119",
       "wallets": 3,
       "riskLevel": "low",
-      "finding": "Top10 holders: 17.619%"
+      "finding": "Top10 holders: 17.6395%"
     },
     {
       "t": "20:10 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,122",
       "wallets": 5,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 28.6038%"
+      "finding": "Top10 holders: 25.2217%"
     },
     {
       "t": "20:04 UTC",
