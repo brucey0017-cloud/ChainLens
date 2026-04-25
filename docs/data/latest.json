@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-25 19:13 UTC",
+  "updatedAt": "2026-04-25 19:58 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
-    "avgRisk": 34.0,
+    "avgRisk": 38.0,
     "criticalAlerts": 0
   },
   "audits": [
@@ -17,9 +17,9 @@
     {
       "token": "HowlingMutant",
       "chain": "solana",
-      "level": "low",
-      "score": 26,
-      "finding": "Top10 holders: 19.7513%"
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 20.2292%"
     },
     {
       "token": "Skibidi",
@@ -40,7 +40,7 @@
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 23.0696%"
+      "finding": "Top10 holders: 24.2682%"
     },
     {
       "token": "MLP",
@@ -68,8 +68,8 @@
       "token": "HowlingMutant",
       "usd": "1,608",
       "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.7513%"
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.2292%"
     },
     {
       "t": "08:09 UTC",
@@ -99,7 +99,7 @@
       "usd": "1,485",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 23.0696%"
+      "finding": "Top10 holders: 24.2682%"
     },
     {
       "t": "04:39 UTC",
@@ -149,7 +149,7 @@
       "usd": "1,005",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 15.8451%"
+      "finding": "Top10 holders: 15.7497%"
     },
     {
       "t": "00:03 UTC",
@@ -159,7 +159,7 @@
       "usd": "1,060",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 21.5655%"
+      "finding": "Top10 holders: 22.3189%"
     },
     {
       "t": "00:01 UTC",
