@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-27 00:04 UTC",
+  "updatedAt": "2026-04-27 04:03 UTC",
   "stats": {
     "signals24h": 12,
     "topChain": "Solana",
@@ -8,49 +8,109 @@
   },
   "audits": [
     {
+      "token": "BELKA",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 25.8743%"
+    },
+    {
+      "token": "stfu",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 21.7021%"
+    },
+    {
+      "token": "shitcoin",
+      "chain": "solana",
+      "level": "medium",
+      "score": 50,
+      "finding": "Top10 holders: 23.9576%"
+    },
+    {
       "token": "BURNIE",
       "chain": "solana",
       "level": "medium",
       "score": 50,
-      "finding": "Top10 holders: 20.1913%"
+      "finding": "Top10 holders: 20.0307%"
     },
     {
-      "token": "Ratcade",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 24.8299%"
-    },
-    {
-      "token": "BURNIE",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 20.1913%"
-    },
-    {
-      "token": "CHUD",
-      "chain": "solana",
-      "level": "medium",
-      "score": 50,
-      "finding": "Top10 holders: 35.158%"
-    },
-    {
-      "token": "BASED",
+      "token": "SPEEDRUN",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 16.3491%"
+      "finding": "Top10 holders: 18.5868%"
     },
     {
-      "token": "AMERICA",
+      "token": "UP",
       "chain": "solana",
       "level": "low",
       "score": 26,
-      "finding": "Top10 holders: 10.9665%"
+      "finding": "Top10 holders: 19.7641%"
     }
   ],
   "signals": [
+    {
+      "t": "03:56 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "BELKA",
+      "usd": "1,012",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 25.8743%"
+    },
+    {
+      "t": "03:30 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "stfu",
+      "usd": "2,529",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 21.7021%"
+    },
+    {
+      "t": "03:07 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "shitcoin",
+      "usd": "1,485",
+      "wallets": 3,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 23.9576%"
+    },
+    {
+      "t": "02:30 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "BURNIE",
+      "usd": "1,871",
+      "wallets": 4,
+      "riskLevel": "medium",
+      "finding": "Top10 holders: 20.0307%"
+    },
+    {
+      "t": "01:16 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "SPEEDRUN",
+      "usd": "1,021",
+      "wallets": 3,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 18.5868%"
+    },
+    {
+      "t": "00:04 UTC",
+      "chain": "solana",
+      "type": "Smart Money",
+      "token": "UP",
+      "usd": "2,275",
+      "wallets": 3,
+      "riskLevel": "low",
+      "finding": "Top10 holders: 19.7641%"
+    },
     {
       "t": "23:09 UTC",
       "chain": "solana",
@@ -59,7 +119,7 @@
       "usd": "2,681",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.1913%"
+      "finding": "Top10 holders: 20.0307%"
     },
     {
       "t": "21:56 UTC",
@@ -69,7 +129,7 @@
       "usd": "1,283",
       "wallets": 6,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 24.8299%"
+      "finding": "Top10 holders: 25.7905%"
     },
     {
       "t": "21:07 UTC",
@@ -79,7 +139,7 @@
       "usd": "4,382",
       "wallets": 3,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 20.1913%"
+      "finding": "Top10 holders: 20.0307%"
     },
     {
       "t": "20:33 UTC",
@@ -89,7 +149,7 @@
       "usd": "1,197",
       "wallets": 4,
       "riskLevel": "medium",
-      "finding": "Top10 holders: 35.158%"
+      "finding": "Top10 holders: 36.1507%"
     },
     {
       "t": "20:21 UTC",
@@ -99,7 +159,7 @@
       "usd": "1,182",
       "wallets": 4,
       "riskLevel": "low",
-      "finding": "Top10 holders: 16.3491%"
+      "finding": "Top10 holders: 15.3009%"
     },
     {
       "t": "19:53 UTC",
@@ -109,67 +169,7 @@
       "usd": "1,393",
       "wallets": 7,
       "riskLevel": "low",
-      "finding": "Top10 holders: 10.9665%"
-    },
-    {
-      "t": "18:21 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "GOR",
-      "usd": "1,182",
-      "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 31.1866%"
-    },
-    {
-      "t": "12:48 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "LASTMAN",
-      "usd": "1,015",
-      "wallets": 3,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 23.0632%"
-    },
-    {
-      "t": "12:21 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "ELO",
-      "usd": "1,336",
-      "wallets": 5,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 22.9113%"
-    },
-    {
-      "t": "08:42 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "BLICKY",
-      "usd": "6,094",
-      "wallets": 18,
-      "riskLevel": "medium",
-      "finding": "Top10 holders: 25.0527%"
-    },
-    {
-      "t": "08:00 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "HENRY",
-      "usd": "1,009",
-      "wallets": 4,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 13.5936%"
-    },
-    {
-      "t": "07:12 UTC",
-      "chain": "solana",
-      "type": "Smart Money",
-      "token": "BLIMP",
-      "usd": "1,112",
-      "wallets": 3,
-      "riskLevel": "low",
-      "finding": "Top10 holders: 19.1452%"
+      "finding": "Top10 holders: 10.8685%"
     }
   ]
 }
